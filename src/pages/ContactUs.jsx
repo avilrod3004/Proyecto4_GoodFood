@@ -50,6 +50,7 @@ const ContactUs = () => {
         return regex.test(phoneNumber);
     }
 
+
     const send = event => {
         event.preventDefault();
         console.log(validateMessage ? "hay campos vacios" : "ok")
