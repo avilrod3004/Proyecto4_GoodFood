@@ -53,12 +53,12 @@ const ContactUs = () => {
 
     const send = event => {
         event.preventDefault();
-        console.log(validateMessage ? "hay campos vacios" : "ok")
+        console.log(validateMessage() ? "hay campos vacios" : "ok")
     }
 
     const validateMessage = () => {
-        console.log(message)
-        console.log(Object.values(message))
+        console.log(message) // no se ejecuta
+        console.log(Object.values(message)) // no se ejecuta
         return Object.values(message).includes("")
     }
 
