@@ -3,7 +3,11 @@ import React, { useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
+/**
+ * Componente que muestra el formulario de contacto
+ */
 const ContactUs = () => {
+    // Estados iniciales
     const initialValues = {
         name: "",
         phone: "",
@@ -22,10 +26,16 @@ const ContactUs = () => {
         accept: ""
     }
 
+    // Estados
     const [message, setMessage] = useState(initialValues);
     const [errorMessages, setErrorMessages] = useState(errorMessagesInitial);
     const [disabledSubmit, setDisabledSubmit] = useState(true);
 
+    // Funciones
+    /**
+     * Valida los campos del formulario
+     * @param event {Event} - Evento ocurrido en el formulario
+     */
     const validateInput = event => {
         const {name, value, checked, type} = event.target
 
@@ -33,7 +43,6 @@ const ContactUs = () => {
             ...errorMessages,
             [name]: ""
         })
-
 
         if (!value.trim() && name !== "phone") {
             setErrorMessages({
@@ -79,40 +88,71 @@ const ContactUs = () => {
         validateMessage();
     }
 
+    /**
+     * Valida los campos del formulario cuando el campo pierde el foco
+     * @param event {Event} - Evento ocurrido en el formulario
+     */
     const handleBlur = event => {
         validateInput(event);
     };
 
+    /**
+     * Valida si el email del formulario tiene un formato válido
+     * @param email {String} Email dado por el usuario
+     * @returns {boolean} True si es válido // False si no es válido
+     */
     const validateEmail = email => {
         const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
         return regex.test(email);
     }
 
+    /**
+     * Valida si el número de teléfono del formulario tiene un formato válido
+     * @param phoneNumber {String} Teléfono dado por el usuario
+     * @returns {boolean} True si es válido // False si no es válido
+     */
     const validatePhoneNumber = phoneNumber => {
         const regex = /^(\d{3}\s?\d{3}\s?\d{3}|\d{9})$/;
         return regex.test(phoneNumber);
     }
 
+    /**
+     * Valida si el formulario ha sido completado correctamente y si no hay mensajes de error en los campos
+     */
     const validateMessage = () => {
-        const { phone, ...fieldsToValidate } = message;
-        const completedInputs = Object.values(fieldsToValidate).every(value => value !== "" || value === true); // true si todos los campos estan completos (excepto phone)
-        const noErrors = Object.values(errorMessages).every(value => value === ""); // true si no hay errores
+        const { phone, ...fieldsToValidate } = message; // el campo del número de teléfono es opcional
+
+        // true si todos los campos estan completos (excepto phone)
+        const completedInputs = Object.values(fieldsToValidate).every(value => value !== "" || value === true);
+
+        // true si no hay errores
+        const noErrors = Object.values(errorMessages).every(value => value === "");
 
         setDisabledSubmit(!(completedInputs && noErrors));
     }
 
+    /**
+     * Envía el mensaje
+     * @param event {Event} - Evento ocurrido en el formulario
+     */
     const send = event => {
         event.preventDefault();
         notify();
         reset();
     }
 
+    /**
+     * Notifica al usuario de que se ha enviado correctamente
+     */
     const notify = () => {
         toast.success("Message sent!", {
             position: "top-right",
         });
     };
 
+    /**
+     * Resetea el contenido del formulario
+     */
     const reset = () => {
         setMessage(initialValues);
         setErrorMessages(errorMessagesInitial)
