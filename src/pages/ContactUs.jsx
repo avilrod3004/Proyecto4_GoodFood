@@ -25,6 +25,12 @@ const ContactUs = () => {
     const validateInput = event => {
         const {name, value, checked, type} = event.target
 
+        setErrorMessages({
+            ...errorMessages,
+            [name]: ""
+        })
+
+
         if (!value.trim() && name !== "phone") {
             setErrorMessages({
                 ...errorMessages,
@@ -42,7 +48,7 @@ const ContactUs = () => {
             }
         }
 
-        if (name === "phone") {
+        if (value.trim() && name === "phone") {
             const valido = validatePhoneNumber(value)
             if (!valido) {
                 setErrorMessages({
@@ -87,7 +93,6 @@ const ContactUs = () => {
     }
 
     const validateMessage = () => {
-        console.log(Object.entries(message))
         return Object.values(message).some(value => value === "" || value === false);
     }
 
