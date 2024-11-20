@@ -89,11 +89,13 @@ const ContactUs = () => {
 
     const send = event => {
         event.preventDefault();
-        console.log(validateMessage() ? "hay campos vacios" : "ok")
+        console.log(validateMessage() ? "ok" : "hay campos vacios")
     }
 
     const validateMessage = () => {
-        return Object.values(message).some(value => value === "" || value === false);
+        const { phone, ...fieldsToValidate } = message;
+        return Object.values(fieldsToValidate).every(value => value !== "" || value === true)
+            && Object.values(errorMessages).every(value => value === "");
     }
 
     return (
