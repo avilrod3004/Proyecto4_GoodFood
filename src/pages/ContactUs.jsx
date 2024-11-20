@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 const ContactUs = () => {
     const initialValues = {
@@ -10,27 +10,47 @@ const ContactUs = () => {
         accept: false
     }
 
+    const errorMessagesInitial = {
+        name: "",
+        phone: "",
+        email: "",
+        subject: "",
+        body: "",
+        accept: ""
+    }
+
     const [message, setMessage] = useState(initialValues);
+    const [errorMessages, setErrorMessages] = useState(errorMessagesInitial);
 
     const validateInput = event => {
         const {name, value, checked, type} = event.target
 
         if (!value.trim() && name !== "phone") {
-            // mostrar error "El campo ${campo} es obligatorio"
-            console.log(`el campo ${name} esta vacio`);
+            setErrorMessages({
+                ...errorMessages,
+                [name]: `El campo ${name} es obligatorio`
+            })
         }
 
         if (name === "email") {
             const valido = validateEmail(value);
             if (!valido) {
-                console.log("email no es valido")
+                setErrorMessages({
+                    ...errorMessages,
+                    [name]: "El email no tiene un formato válido"
+                })
+                //errorMessages[name] = "El email no tiene un formato válido"
             }
         }
 
         if (name === "phone") {
             const valido = validatePhoneNumber(value)
             if (!valido) {
-                console.log("phonez no es valido")
+                setErrorMessages({
+                    ...errorMessages,
+                    [name]: "El número de telefono no tiene un formato"
+                })
+                // errorMessages[name] = "El número de telefono no tiene un formato"
             }
         }
 
@@ -39,6 +59,10 @@ const ContactUs = () => {
             [name]: type === "checkbox" ? checked : value
         })
     }
+
+    const handleBlur = event => {
+        validateInput(event);
+    };
 
     const validateEmail = email => {
         const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
@@ -50,16 +74,14 @@ const ContactUs = () => {
         return regex.test(phoneNumber);
     }
 
-
     const send = event => {
         event.preventDefault();
         console.log(validateMessage() ? "hay campos vacios" : "ok")
     }
 
     const validateMessage = () => {
-        console.log(message) // no se ejecuta
-        console.log(Object.values(message)) // no se ejecuta
-        return Object.values(message).includes("")
+        console.log(Object.entries(message))
+        return Object.values(message).some(value => value === "" || value === false);
     }
 
     return (
@@ -71,7 +93,9 @@ const ContactUs = () => {
                         type="text"
                         name="name"
                         value={message.name}
+                        onBlur={handleBlur}
                         onChange={validateInput}/>
+                    {errorMessages.name !== "" ? <p>{errorMessages.name}</p> : null}
                 </label>
 
                 <label htmlFor="phone">
@@ -80,7 +104,9 @@ const ContactUs = () => {
                         type="tel"
                         name="phone"
                         value={message.phone}
+                        onBlur={handleBlur}
                         onChange={validateInput}/>
+                    {errorMessages.phone !== "" ? <p>{errorMessages.phone}</p> : null}
                 </label>
 
                 <label htmlFor="email">
@@ -89,7 +115,10 @@ const ContactUs = () => {
                         type="email"
                         name="email"
                         value={message.email}
+                        onBlur={handleBlur}
                         onChange={validateInput}/>
+                    {errorMessages.email !== "" ? <p>{errorMessages.email}</p> : null}
+
                 </label>
 
                 <label htmlFor="subject">
@@ -98,7 +127,10 @@ const ContactUs = () => {
                         type="text"
                         name="subject"
                         value={message.subject}
+                        onBlur={handleBlur}
                         onChange={validateInput}/>
+                    {errorMessages.subject !== "" ? <p>{errorMessages.subject}</p> : null}
+
                 </label>
 
                 <label htmlFor="body">
@@ -109,14 +141,22 @@ const ContactUs = () => {
                         cols="60"
                         rows="10"
                         value={message.body}
+                        onBlur={handleBlur}
                         onChange={validateInput}/>
+                    {errorMessages.body !== "" ? <p>{errorMessages.body}</p> : null}
+
                 </label>
 
-                <input
-                    type="checkbox"
-                    name="accept"
-                    checked={message.accept}
-                    onChange={validateInput}/>I accept the legal terms, the privacy policy, and the conditions od this website.
+                <label htmlFor="accept">
+                    <input
+                        type="checkbox"
+                        name="accept"
+                        checked={message.accept}
+                        onBlur={handleBlur}
+                        onChange={validateInput}/>I accept the legal terms, the privacy policy, and the conditions od this website.
+                    {errorMessages.accept !== "" ? <p>{errorMessages.accept}</p> : null}
+                </label>
+
 
                 <button type="submit">Send</button>
                 <button type="reset">Reset</button>
