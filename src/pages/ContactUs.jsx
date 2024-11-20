@@ -21,6 +21,7 @@ const ContactUs = () => {
 
     const [message, setMessage] = useState(initialValues);
     const [errorMessages, setErrorMessages] = useState(errorMessagesInitial);
+    const [disabledSubmit, setDisabledSubmit] = useState(true);
 
     const validateInput = event => {
         const {name, value, checked, type} = event.target
@@ -71,6 +72,8 @@ const ContactUs = () => {
             ...message,
             [name]: type === "checkbox" ? checked : value
         })
+
+        validateMessage();
     }
 
     const handleBlur = event => {
@@ -87,20 +90,29 @@ const ContactUs = () => {
         return regex.test(phoneNumber);
     }
 
-    const send = event => {
-        event.preventDefault();
-        console.log(validateMessage() ? "ok" : "hay campos vacios")
-    }
-
     const validateMessage = () => {
         const { phone, ...fieldsToValidate } = message;
-        return Object.values(fieldsToValidate).every(value => value !== "" || value === true)
-            && Object.values(errorMessages).every(value => value === "");
+        const completedInputs = Object.values(fieldsToValidate).every(value => value !== "" || value === true); // true si todos los campos estan completos (excepto phone)
+        const noErrors = Object.values(errorMessages).every(value => value === ""); // true si no hay errores
+
+        setDisabledSubmit(!(completedInputs && noErrors));
+    }
+
+    const send = event => {
+        event.preventDefault();
+        console.log("enviadoooooo")
+        reset();
+
+    }
+
+    const reset = () => {
+        setMessage(initialValues);
+        setErrorMessages(errorMessagesInitial)
     }
 
     return (
         <>
-            <form action="" onSubmit={send}>
+            <form action="" onSubmit={send} onReset={reset}>
                 <label htmlFor="name">
                     Your name:
                     <input
@@ -171,8 +183,7 @@ const ContactUs = () => {
                     {errorMessages.accept !== "" ? <p>{errorMessages.accept}</p> : null}
                 </label>
 
-
-                <button type="submit">Send</button>
+                <button disabled={disabledSubmit} type="submit">Send</button>
                 <button type="reset">Reset</button>
             </form>
         </>
