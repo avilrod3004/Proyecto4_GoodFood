@@ -39,7 +39,6 @@ const ContactUs = () => {
                     ...errorMessages,
                     [name]: "El email no tiene un formato válido"
                 })
-                //errorMessages[name] = "El email no tiene un formato válido"
             }
         }
 
@@ -50,7 +49,15 @@ const ContactUs = () => {
                     ...errorMessages,
                     [name]: "El número de telefono no tiene un formato"
                 })
-                // errorMessages[name] = "El número de telefono no tiene un formato"
+            }
+        }
+
+        if (name === "accept") {
+            if (!checked) {
+                setErrorMessages({
+                    ...errorMessages,
+                    [name]: "Debes aceptar los terminos y condiciones"
+                })
             }
         }
 
