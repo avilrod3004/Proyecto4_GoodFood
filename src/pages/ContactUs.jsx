@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+// import {Bounce, toast, ToastContainer} from "react-toastify";
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const ContactUs = () => {
     const initialValues = {
@@ -100,10 +103,15 @@ const ContactUs = () => {
 
     const send = event => {
         event.preventDefault();
-        console.log("enviadoooooo")
+        notify();
         reset();
-
     }
+
+    const notify = () => {
+        toast.success("Message sent!", {
+            position: "top-right",
+        });
+    };
 
     const reset = () => {
         setMessage(initialValues);
@@ -186,6 +194,8 @@ const ContactUs = () => {
                 <button disabled={disabledSubmit} type="submit">Send</button>
                 <button type="reset">Reset</button>
             </form>
+
+            <ToastContainer />
         </>
     );
 };
