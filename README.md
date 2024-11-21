@@ -2,6 +2,13 @@
 
 ## Segunda entrega. Estructura y funcionalidad básica
 Estructura base:
+Los ficheros estan ordenados entre las siguientes carpetas:
+- `components` -> Contiene los componentes generales.
+- `layouts` -> Componentes que definen las estruturas básicas de las páginas (públicas y privadas).
+  - `components` -> Los componentes que forman los layouts.
+- `pages` -> Representan las páginas principales de la web.
+- `router` -> Enrutamiento de las páginas con React Router.
+
 ```plaintext
 src/
 ├── assets/
