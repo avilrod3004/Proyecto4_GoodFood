@@ -13,7 +13,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
-// Login function
+// Función de login
 export const login = ({email, password}) => {
     return signInWithEmailAndPassword(auth, email, password)
 }
