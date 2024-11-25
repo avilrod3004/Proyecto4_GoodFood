@@ -14,9 +14,12 @@ const Login = () => {
         password: ""
     }
 
+    const errorLoginInitial = "";
+
     // Estados
     const [userAccount, setUserAccount] = useState(initialState)
     const [errorMessages, setErrorMessages] = useState(errorMessagesInitial)
+    const [errorLogin, setErrorLogin] = useState(errorLoginInitial)
     const [disabledSubmit, setDisabledSubmit] = useState(true);
 
 
@@ -91,8 +94,9 @@ const Login = () => {
             await login({email: userAccount.email, password: userAccount.password})
             navigate("/profile");
         } catch (error) {
-            console.log(error.code)
-            console.log(error.message)
+            if (error.code === "auth/invalid-credential") {
+                setErrorLogin("Credenciales inválidas")
+            }
         }
     }
 
@@ -126,6 +130,7 @@ const Login = () => {
                     {errorMessages.password !== "" ? <p>{errorMessages.password}</p> : null}
                 </label>
                 <button disabled={disabledSubmit} type="submit">Login</button>
+                {errorLogin && <p>{errorLogin}</p>}
             </form>
         </>
     );
