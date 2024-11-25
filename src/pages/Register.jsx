@@ -5,13 +5,17 @@ import {useNavigate} from "react-router-dom";
 const Register = () => {
     // Estados inciales
     const initialState = {
+        name: "",
         email: "",
-        password: ""
+        password: "",
+        repeatPassword: ""
     }
 
     const errorMessagesInitial = {
+        name: "",
         email: "",
-        password: ""
+        password: "",
+        repeatPassword: ""
     }
 
     const errorRegisterInitial = "";
@@ -45,6 +49,25 @@ const Register = () => {
                 setErrorMessages({
                     ...errorMessages,
                     [name]: "El email no tiene un formato válido"
+                })
+            }
+        }
+
+        if (name === "password") {
+            const valido = validatePassword(value)
+            if (!valido) {
+                setErrorMessages({
+                    ...errorMessages,
+                    [name]: "El formato de la contraseña no es válido, como mínimo debe contener: 8 caracteres, una letra en mayúscula y un caracter especial"
+                })
+            }
+        }
+
+        if (name === "repeatPassword") {
+            if (userAccount.password !== value) {
+                setErrorMessages({
+                    ...errorMessages,
+                    [name]: "Las contraseñas no coinciden"
                 })
             }
         }
@@ -121,6 +144,18 @@ const Register = () => {
             <h1>Create account</h1>
 
             <form onSubmit={handleSubmit}>
+                <label htmlFor="name">
+                    User name:
+                    <input
+                        type="text"
+                        name="name"
+                        value={userAccount.name}
+                        onBlur={handleBlur}
+                        onChange={validateInput}
+                    />
+                    {errorMessages.name !== "" ? <p>{errorMessages.name}</p> : null}
+                </label>
+
                 <label htmlFor="email">
                     Email:
                     <input
@@ -133,7 +168,8 @@ const Register = () => {
                     />
                     {errorMessages.email !== "" ? <p>{errorMessages.email}</p> : null}
                 </label>
-                <label htmlFor="">
+
+                <label htmlFor="password">
                     Password:
                     <input
                         type="password"
@@ -144,6 +180,19 @@ const Register = () => {
                     />
                     {errorMessages.password !== "" ? <p>{errorMessages.password}</p> : null}
                 </label>
+
+                <label htmlFor="repearPassword">
+                    Repear password:
+                    <input
+                        type="password"
+                        name="repeatPassword"
+                        value={userAccount.repeatPassword}
+                        onBlur={handleBlur}
+                        onChange={validateInput}
+                    />
+                    {errorMessages.repeatPassword !== "" ? <p>{errorMessages.repeatPassword}</p> : null}
+                </label>
+
                 <button disabled={disabledSubmit} type="submit">Login</button>
                 {errorRegister && <p>{errorRegister}</p>}
             </form>
