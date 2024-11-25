@@ -6,6 +6,8 @@ import QuickRecipes from "../pages/QuickRecipes.jsx";
 import Breakfast from "../pages/Breakfast.jsx";
 import LunchDinner from "../pages/LunchDinner.jsx";
 import ContactUs from "../pages/ContactUs.jsx";
+import Login from "../pages/Login.jsx";
+import Register from "../pages/Register.jsx";
 
 export const router = createBrowserRouter([
 
@@ -21,6 +23,14 @@ export const router = createBrowserRouter([
                         // path: "/",
                         index: true,
                         element: <Home/>
+                    },
+                    {
+                        path: "/login",
+                        element: <Login/>
+                    },
+                    {
+                        path: "/register",
+                        element: <Register/>
                     },
                     {
                         path: "/quickrecipes",

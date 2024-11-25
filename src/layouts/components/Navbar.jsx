@@ -9,6 +9,8 @@ const Navbar = () => {
             <NavLink to="breakfast">Breakfast</NavLink>
             <NavLink to="lunchdinner">Lunch/dinner</NavLink>
             <NavLink to="contactus">Contact us</NavLink>
+            <NavLink to="/login">Login</NavLink>
+            <NavLink to="/register">Sign up</NavLink>
         </nav>
     );
 }
