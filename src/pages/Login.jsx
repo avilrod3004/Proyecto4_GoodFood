@@ -76,10 +76,7 @@ const Login = () => {
      * Valida si el formulario ha sido completado correctamente y si no hay mensajes de error en los campos
      */
     const validateMessage = () => {
-        // true si todos los campos estan completos (excepto phone)
         const completedInputs = Object.values(userAccount).every(value => value !== "" || value === true);
-
-        // true si no hay errores
         const noErrors = Object.values(errorMessages).every(value => value === "");
 
         setDisabledSubmit(!(completedInputs && noErrors));
