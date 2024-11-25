@@ -14,12 +14,12 @@ const Register = () => {
         password: ""
     }
 
-    const errorLoginInitial = "";
+    const errorRegisterInitial = "";
 
     // Estados
     const [userAccount, setUserAccount] = useState(initialState)
     const [errorMessages, setErrorMessages] = useState(errorMessagesInitial)
-    const [errorLogin, setErrorLogin] = useState(errorLoginInitial)
+    const [errorRegister, setErrorRegister] = useState(errorRegisterInitial)
     const [disabledSubmit, setDisabledSubmit] = useState(true);
 
 
@@ -95,7 +95,7 @@ const Register = () => {
             navigate("/profile");
         } catch (error) {
             if (error.code === "auth/invalid-credential") {
-                setErrorLogin("Credenciales inválidas")
+                setErrorRegister("Credenciales inválidas")
             }
             console.error(error.code);
             console.log(error.message);
@@ -132,7 +132,7 @@ const Register = () => {
                     {errorMessages.password !== "" ? <p>{errorMessages.password}</p> : null}
                 </label>
                 <button disabled={disabledSubmit} type="submit">Login</button>
-                {errorLogin && <p>{errorLogin}</p>}
+                {errorRegister && <p>{errorRegister}</p>}
             </form>
         </>
     );
