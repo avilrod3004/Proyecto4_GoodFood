@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-// import {Bounce, toast, ToastContainer} from "react-toastify";
+import React from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import {Formik} from "formik";
@@ -10,16 +9,22 @@ import * as Yup from "yup"
  */
 const ContactUs = () => {
 
-
+    // Valida los campos del formulario
     const validationSchema = Yup.object().shape({
         name: Yup.string().trim().required("El campo nombre es obligatorio"),
         phone: Yup.string().trim().matches(/^(\d{3}\s?\d{3}\s?\d{3}|\d{9})$/, "El telefono debe contener 9 dígitos"), //corregir
-        email: Yup.string().trim().email("Formato inválido").required("El campo email es obligatorio"),
+        email: Yup.string().trim().matches(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/, "El formato del email no es válido").required("El campo email es obligatorio"),
         subject: Yup.string().trim().required("El campo subject es obligatorio"),
         body: Yup.string().trim().required("El campo body es obligatorio"),
         accept: Yup.boolean().oneOf([true], "Debes aceptar los términos y condiciones").required("Debes aceptar los términos y condiciones"),
     })
 
+    /**
+     * Enviar el mensaje
+     * @param values
+     * @param setSubmitting
+     * @param resetForm
+     */
     const onSubmit = (values, { setSubmitting, resetForm }) => {
         console.log("Formulario enviado:", values);
         notify();
@@ -39,12 +44,18 @@ const ContactUs = () => {
     return (
         <>
             <Formik
-                initialValues={{name: "", phone: "", email: "", subject: "", body: "", accept: false}}
+                initialValues={{
+                    name: "",
+                    phone: "",
+                    email: "",
+                    subject: "",
+                    body: "",
+                    accept: false}}
                 onSubmit={onSubmit}
                 validationSchema={validationSchema}
             >
                 {
-                    ({values, handleChange, handleBlur, handleSubmit, isSubmitting, errors, touched}) => (
+                    ({values, handleChange, handleBlur, handleSubmit, resetForm, isSubmitting, errors, touched}) => (
                         <form onSubmit={handleSubmit}>
                             <label htmlFor="name">
                                 Your name:
@@ -127,7 +138,7 @@ const ContactUs = () => {
                             </label>
 
                             <button disabled={isSubmitting} type="submit">Send</button>
-                            <button type="reset">Reset</button>
+                            <button type="button" onClick={() => resetForm()}>Reset</button>
                         </form>
                     )
                 }
