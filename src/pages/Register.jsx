@@ -76,6 +76,19 @@ const Register = () => {
     }
 
     /**
+     * Valida si la contraseña tiene un formato válido:
+     * - 8 caracteres como mínimo,
+     * - al menos una letra en mayúscula
+     * - al menos un caracter especial entre !@#$%^&*)
+     * @param password Contraseña ingresada por el usuario
+     * @returns {boolean} True si es válida // False si no es válida
+     */
+    const validatePassword = password => {
+        const regex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{8,})/;
+        return regex.test(password);
+    }
+
+    /**
      * Valida si el formulario ha sido completado correctamente y si no hay mensajes de error en los campos
      */
     const validateMessage = () => {
