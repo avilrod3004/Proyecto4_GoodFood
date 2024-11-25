@@ -8,6 +8,7 @@ import LunchDinner from "../pages/LunchDinner.jsx";
 import ContactUs from "../pages/ContactUs.jsx";
 import Login from "../pages/Login.jsx";
 import Register from "../pages/Register.jsx";
+import UserProfile from "../pages/UserProfile.jsx";
 
 export const router = createBrowserRouter([
 
@@ -47,6 +48,10 @@ export const router = createBrowserRouter([
                     {
                         path: "/contactus",
                         element: <ContactUs/>
+                    },
+                    {
+                        path: "/profile",
+                        element: <UserProfile/>
                     }
                 ]
             }

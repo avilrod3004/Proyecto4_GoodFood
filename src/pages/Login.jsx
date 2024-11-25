@@ -1,4 +1,6 @@
 import React, {useState} from 'react';
+import {login} from "../config/Firebase.jsx";
+import {useNavigate} from "react-router-dom";
 
 const Login = () => {
     // Estados inciales
@@ -83,8 +85,18 @@ const Login = () => {
         setDisabledSubmit(!(completedInputs && noErrors));
     }
 
-    const handleSubmit = async event => {
+    const navigate = useNavigate()
 
+    const handleSubmit = async event => {
+        event.preventDefault();
+
+        try {
+            await login({email: userAccount.email, password: userAccount.password})
+            navigate("/profile");
+        } catch (error) {
+            console.log(error.code)
+            console.log(error.message)
+        }
     }
 
     return (
