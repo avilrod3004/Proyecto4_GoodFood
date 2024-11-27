@@ -121,14 +121,14 @@ const Register = () => {
         setDisabledSubmit(!(completedInputs && noErrors));
     }
 
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     const handleSubmit = async event => {
         event.preventDefault();
 
         try {
             await register({email: userAccount.email, password: userAccount.password})
-            navigate("/profile");
+            // navigate("/profile");
         } catch (error) {
             if (error.code === "auth/email-already-in-use") {
                 setErrorRegister("El email ya esta en uso")

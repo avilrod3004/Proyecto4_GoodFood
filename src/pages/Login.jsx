@@ -85,14 +85,14 @@ const Login = () => {
         setDisabledSubmit(!(completedInputs && noErrors));
     }
 
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     const handleSubmit = async event => {
         event.preventDefault();
 
         try {
             await login({email: userAccount.email, password: userAccount.password})
-            navigate("/profile");
+            // navigate("/profile");
         } catch (error) {
             if (error.code === "auth/invalid-credential") {
                 setErrorLogin("Credenciales inválidas")
