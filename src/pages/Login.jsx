@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {login} from "../config/Firebase.jsx";
 import {useNavigate} from "react-router-dom";
+import {UserContext} from "../context/UserContext.jsx";
 
 const Login = () => {
     // Estados inciales
@@ -22,6 +23,14 @@ const Login = () => {
     const [errorLogin, setErrorLogin] = useState(errorLoginInitial)
     const [disabledSubmit, setDisabledSubmit] = useState(true);
 
+    const {user} = useContext(UserContext);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (user) {
+            navigate("/profile");
+        }
+    }, [user])
 
     // Funciones
     const validateInput = event => {
@@ -84,8 +93,6 @@ const Login = () => {
 
         setDisabledSubmit(!(completedInputs && noErrors));
     }
-
-    // const navigate = useNavigate()
 
     const handleSubmit = async event => {
         event.preventDefault();
