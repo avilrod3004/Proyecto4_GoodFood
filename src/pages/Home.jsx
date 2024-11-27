@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from "../components/Button.jsx";
 // import "../../public/img_home.jpeg"
+import "../sass/main.scss"
 
 const Home = () => {
     return (
