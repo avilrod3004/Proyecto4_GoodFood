@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "firebase/auth";
 
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -22,3 +22,6 @@ export const login = ({email, password}) => {
 export const register = ({email, password}) => {
     return createUserWithEmailAndPassword(auth, email, password)
 }
+
+// Función de cerrar sesión
+export const logOut = () => signOut(auth);
