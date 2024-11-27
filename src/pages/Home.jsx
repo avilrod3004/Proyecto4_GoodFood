@@ -4,6 +4,10 @@ import Button from "../components/Button.jsx";
 import "../sass/main.scss"
 
 const Home = () => {
+    const api_data = {
+        id: import.meta.env.VITE_RECIPES_API_ID,
+        key: import.meta.env.VITE_RECIPES_API_KEY,
+    }
     // Estados
     const [recipes, setRecipes] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
@@ -12,7 +16,7 @@ const Home = () => {
 
     async function getRandomRecipes() {
         try {
-            const response = await fetch("https://api.edamam.com/api/recipes/v2?type=public&app_id=32da34cb&app_key=7e487e43eed86b77a71e9d6f40b63073&diet=balanced&random=true");
+            const response = await fetch(`https://api.edamam.com/api/recipes/v2?type=public&app_id=${api_data.id}&app_key=${api_data.key}&diet=balanced&random=true`);
             const data = await response.json();
             setRecipes(data.hits || []);
             setLoading(false);
