@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Button from "../components/Button.jsx";
 // import "../../public/img_home.jpeg"
 import "../sass/main.scss"
+import Card from "../components/Card.jsx";
 
 const Home = () => {
     const api_data = {
@@ -12,7 +13,7 @@ const Home = () => {
     const [recipes, setRecipes] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
     const [currentPage, setCurrentPage] = useState(1); // Página actual
-    const recipesPerPage = 3; // Número de recetas por página
+    const recipesPerPage = 10; // Número de recetas por página
 
     async function getRandomRecipes() {
         try {
@@ -62,13 +63,11 @@ const Home = () => {
             {/* llamada api para mostrar 20 recetas */}
             {!loading && (
                 <>
-                    <ul>
+                    <section>
                         {currentRecipes.map((recipe, index) => (
-                            <li key={index}>
-                                {recipe.recipe.label} || {recipe.recipe.mealType} || {recipe.recipe.cuisineType}
-                            </li>
+                            <Card key={index} image={recipe.recipe.images.THUMBNAIL.url} title={recipe.recipe.label} mealType={recipe.recipe.mealType} cuisineType={recipe.recipe.cuisineType}/>
                         ))}
-                    </ul>
+                    </section>
                     {/* Botones de navegación */}
                     <div>
                         <button onClick={prevPage} disabled={currentPage === 1}>
