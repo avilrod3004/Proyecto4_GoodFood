@@ -5,6 +5,7 @@ const NotFound = () => {
     const error = useRouteError()
     return (
         <>
+            <h1>Error</h1>
             <p>{error.status}</p>
             <p>{error.statusText}</p>
             <Link to="/">Volver al menu principal</Link>
