@@ -55,7 +55,7 @@ export const router = createBrowserRouter([
                         ]
                     },
                     {
-                        path: "lunchdinner",
+                        path: "/lunchdinner",
                         element: <LayoutPrivate/>,
                         children: [
                             {
