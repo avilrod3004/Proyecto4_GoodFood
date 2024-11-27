@@ -19,66 +19,86 @@ export const router = createBrowserRouter([
         errorElement: <NotFound/>,
         children: [
             {
-                errorElement: <NotFound/>,
-                children: [
-                    {
-                        // path: "/",
-                        index: true,
-                        element: <Home/>
-                    },
-                    {
-                        path: "/login",
-                        element: <Login/>
-                    },
-                    {
-                        path: "/register",
-                        element: <Register/>
-                    },
-                    {
-                        path: "/quickrecipes",
-                        element: <LayoutPrivate/>,
-                        children: [
-                            {
-                                index: true,
-                                element: <QuickRecipes/>
-                            }
-                        ]
-                    },
-                    {
-                        path: "/breakfast",
-                        element: <LayoutPrivate/>,
-                        children: [
-                            {
-                                index: true,
-                                element: <Breakfast/>,
-                            }
-                        ]
-                    },
-                    {
-                        path: "/lunchdinner",
-                        element: <LayoutPrivate/>,
-                        children: [
-                            {
-                                index: true,
-                                element: <LunchDinner/>,
-                            }
-                        ]
-                    },
-                    {
-                        path: "/contactus",
-                        element: <ContactUs/>
-                    },
-                    {
-                        path: "/profile",
-                        element: <LayoutPrivate/>,
-                        children: [
-                            {
-                                index: true,
-                                element: <UserProfile/>
-                            }
-                        ]
-                    }
-                ]
+                // path: "/",
+                index: true,
+                element: <Home/>
+            }
+        ]
+    },
+    {
+        path: "/login",
+        element: <LayoutPublic/>,
+        errorElement: <NotFound/>,
+        children: [
+            {
+                index: true,
+                element: <Login/>
+            }
+        ]
+    },
+    {
+        path: "/register",
+        element: <LayoutPublic/>,
+        errorElement: <NotFound/>,
+        children: [
+            {
+                index: true,
+                element: <Register/>
+            }
+        ]
+    },
+    {
+        path: "/quickrecipes",
+        element: <LayoutPrivate/>,
+        errorElement: <NotFound/>,
+        children: [
+            {
+                index: true,
+                element: <QuickRecipes/>
+            }
+        ]
+    },
+    {
+        path: "/breakfast",
+        element: <LayoutPrivate/>,
+        errorElement: <NotFound/>,
+        children: [
+            {
+                index: true,
+                element: <Breakfast/>
+            }
+        ]
+    },
+    {
+        path: "/lunchdinner",
+        element: <LayoutPrivate/>,
+        errorElement: <NotFound/>,
+        children: [
+            {
+                index: true,
+                element: <LunchDinner/>
+            }
+        ]
+    },
+    {
+        path: "/contactus",
+        element: <LayoutPublic/>,
+        errorElement: <NotFound/>,
+        children: [
+            {
+                index: true,
+                element: <ContactUs/>
+            }
+        ]
+    },
+    {
+        path: "/profile",
+        element: <LayoutPrivate/>,
+        errorElement: <NotFound/>,
+        children: [
+            {
+                index: true,
+                element: <UserProfile/>
             }
         ]
     }
