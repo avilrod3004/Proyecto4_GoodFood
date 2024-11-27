@@ -37,7 +37,7 @@ const Home = () => {
             {/* llamada api para mostrar 20 recetas */}
             <ul>
                 {recipes.map((recipe, index) => (
-                    <li key={index}>{recipe.recipe.label}</li>
+                    <li key={index}>{recipe.recipe.label} || {recipe.recipe.mealType} || {recipe.recipe.cuisineType}</li>
                 ))}
             </ul>
         </>
