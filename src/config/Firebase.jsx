@@ -22,3 +22,6 @@ export const login = ({email, password}) => {
 export const register = ({email, password}) => {
     return createUserWithEmailAndPassword(auth, email, password)
 }
+
+// Función para cerrar sesión
+// export const logOut = () => signOut(auth)

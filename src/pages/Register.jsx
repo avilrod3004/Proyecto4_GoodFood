@@ -130,8 +130,8 @@ const Register = () => {
             await register({email: userAccount.email, password: userAccount.password})
             navigate("/profile");
         } catch (error) {
-            if (error.code === "auth/invalid-credential") {
-                setErrorRegister("Credenciales inválidas")
+            if (error.code === "auth/email-already-in-use") {
+                setErrorRegister("El email indicado ya está en uso")
             }
             console.error(error.code);
             console.log(error.message);

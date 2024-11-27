@@ -9,6 +9,7 @@ import ContactUs from "../pages/ContactUs.jsx";
 import Login from "../pages/Login.jsx";
 import Register from "../pages/Register.jsx";
 import UserProfile from "../pages/UserProfile.jsx";
+import LayoutPrivate from "../layouts/LayoutPrivate.jsx";
 
 export const router = createBrowserRouter([
 
@@ -35,15 +36,33 @@ export const router = createBrowserRouter([
                     },
                     {
                         path: "/quickrecipes",
-                        element: <QuickRecipes/>,
+                        element: <LayoutPrivate/>,
+                        children: [
+                            {
+                                index: true,
+                                element: <QuickRecipes/>
+                            }
+                        ]
                     },
                     {
                         path: "/breakfast",
-                        element: <Breakfast/>
+                        element: <LayoutPrivate/>,
+                        children: [
+                            {
+                                index: true,
+                                element: <Breakfast/>
+                            }
+                        ]
                     },
                     {
                         path: "lunchdinner",
-                        element: <LunchDinner/>
+                        element: <LayoutPrivate/>,
+                        children: [
+                            {
+                                index: true,
+                                element: <LunchDinner/>
+                            }
+                        ]
                     },
                     {
                         path: "/contactus",
@@ -51,7 +70,13 @@ export const router = createBrowserRouter([
                     },
                     {
                         path: "/profile",
-                        element: <UserProfile/>
+                        element: <LayoutPrivate/>,
+                        children: [
+                            {
+                                index: true,
+                                element: <UserProfile/>
+                            }
+                        ]
                     }
                 ]
             }
