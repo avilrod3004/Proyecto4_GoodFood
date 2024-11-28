@@ -1,39 +1,15 @@
 # GoodFood
 
-## Segunda entrega. Estructura y funcionalidad básica
-Estructura base:
-Los ficheros estan ordenados entre las siguientes carpetas:
-- `components` -> Contiene los componentes generales.
-- `layouts` -> Componentes que definen las estruturas básicas de las páginas (públicas y privadas).
-  - `components` -> Los componentes que forman los layouts.
-- `pages` -> Representan las páginas principales de la web.
-- `router` -> Enrutamiento de las páginas con React Router.
+## Tercera entrega. Integración y avance
+### Progreso
+Nuevas funcionalidades:
+- **Inicio de sesión y registro**: La autenticación de usuarios se realizar mediante Firebase.
+- **Protección de rutas**: Las rutas privadas (usan un layout privado) solo son accesibles si un usuario esta logueado. En caso de que no este logueado al intentar acceder a las páginas privadas el usuario es redirigido al formulario de login.
+- **Petición a la API**: Llamada a la API en la página de inicio. En la página `/home` se muestran 20 recetas aleatorias. Las recetas están paginadas en grupos de 10 recetas.
 
-```plaintext
-src/
-├── assets/
-├── components/
-│   └── Button.jsx
-├── layouts/
-│   ├── LayoutPublic.jsx
-│   └── components
-│       ├── Footer.jsx
-│       └── Navbar.jsx
-├── pages/
-│   ├── Breakfast.jsx
-│   ├── ContactUs.jsx
-│   ├── Home.jsx
-│   ├── LunchDinner.jsx
-│   ├── NotFound.jsx
-│   └── Quickrecipes.jsx
-├── router/
-│   └── index.jsx
-└── mian.jsx
-```
+Objeto con los datos para hacer la peticion:
+[Objeto datos API](https://github.com/avilrod3004/Proyecto4_GoodFood/blob/bc5f2a7bd4c920e6cc2ba91268b2f2127ea75415/src/pages/Home.jsx#L12-L16)
 
-## Progreso
-- Se han creado los componentes que representan las páginas principales de la web: Home, Quickrecipes, Breakfast, Lunch/dinner, Contact us y Not Found.
-- Se ha creado el layout público que define el header y el footer que tendrán todas las páginas públicas.
-- Configurado el router para navegar por las páginas desde el menú de navegación del header.
-- Creado formulario de contacto e implementado la validación de sus campos.
+Hacer la petición al cargar la página:
+[Llamada a la API](https://github.com/avilrod3004/Proyecto4_GoodFood/blob/bc5f2a7bd4c920e6cc2ba91268b2f2127ea75415/src/pages/Home.jsx#L23-L40)
 
