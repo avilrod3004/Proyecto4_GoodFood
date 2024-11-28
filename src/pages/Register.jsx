@@ -3,6 +3,10 @@ import {register} from "../config/Firebase.jsx";
 import {useNavigate} from "react-router-dom";
 import {UserContext} from "../context/UserContext.jsx";
 
+/**
+ * Formulario de registro de nuevos usuarios
+ * @returns {Element} Formulario
+ */
 const Register = () => {
     // Estados inciales
     const initialState = {
@@ -37,6 +41,10 @@ const Register = () => {
     }, [user])
 
     // Funciones
+    /**
+     * Valida las entradas del usuario
+     * @param event Evento ocurrido en el formulario
+     */
     const validateInput = event => {
         const {name, value} = event.target;
 
@@ -130,12 +138,15 @@ const Register = () => {
         setDisabledSubmit(!(completedInputs && noErrors));
     }
 
+    /**
+     * Registra al usuario y lo redirige a su perfil
+     * @param event Evento onSubmit
+     */
     const handleSubmit = async event => {
         event.preventDefault();
 
         try {
             await register({email: userAccount.email, password: userAccount.password})
-            // navigate("/profile");
         } catch (error) {
             if (error.code === "auth/email-already-in-use") {
                 setErrorRegister("El email ya esta en uso")

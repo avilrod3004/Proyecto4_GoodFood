@@ -3,6 +3,10 @@ import {login} from "../config/Firebase.jsx";
 import {useNavigate} from "react-router-dom";
 import {UserContext} from "../context/UserContext.jsx";
 
+/**
+ * Formulario de inicio de sesión
+ * @returns {Element} Formulario
+ */
 const Login = () => {
     // Estados inciales
     const initialState = {
@@ -33,6 +37,10 @@ const Login = () => {
     }, [user])
 
     // Funciones
+    /**
+     * Valida que las entradas del usuario sean válidas
+     * @param event Evento ocurrido en el formulario
+     */
     const validateInput = event => {
         const {name, value} = event.target;
 
@@ -94,12 +102,15 @@ const Login = () => {
         setDisabledSubmit(!(completedInputs && noErrors));
     }
 
+    /**
+     * Inicia la sesión de usuario y lo redirige a su perfil
+     * @param event Evento onSubmit
+     */
     const handleSubmit = async event => {
         event.preventDefault();
 
         try {
             await login({email: userAccount.email, password: userAccount.password})
-            // navigate("/profile");
         } catch (error) {
             if (error.code === "auth/invalid-credential") {
                 setErrorLogin("Credenciales inválidas")

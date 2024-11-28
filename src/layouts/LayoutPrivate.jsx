@@ -6,10 +6,16 @@ import {UserContext} from "../context/UserContext.jsx";
 import {logOut} from "../config/Firebase.jsx";
 import UserMenu from "./components/UserMenu.jsx";
 
+/**
+ * Esquema de las páginas privadas.
+ * Simplifica la protección las rutas privadas
+ * @returns {Element} Esquema
+ */
 const LayoutPrivate = () => {
-    const {user, setUser} = useContext(UserContext);
+    const {user} = useContext(UserContext);
     const navigate = useNavigate();
 
+    // Si el usuario no está logueado lo redirige al login
     useEffect(() => {
         if (!user) {
             navigate("/login");

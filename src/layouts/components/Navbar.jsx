@@ -1,9 +1,11 @@
 import React, {useContext} from 'react';
 import {NavLink} from "react-router-dom";
-import {UserContext} from "../../context/UserContext.jsx";
 
+/**
+ * Menú para navegar entre las páginas principales de la web
+ * @returns {Element} Menú de navegación
+ */
 const Navbar = () => {
-    console.log(useContext(UserContext));
     return (
         <nav>
             <ul>

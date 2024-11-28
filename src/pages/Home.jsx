@@ -4,7 +4,12 @@ import Button from "../components/Button.jsx";
 import "../sass/main.scss"
 import Card from "../components/Card.jsx";
 
+/**
+ * Página principal de la web
+ * @returns {Element} Página de inicio
+ */
 const Home = () => {
+    // Datos API de recetas
     const api_data = {
         id: import.meta.env.VITE_RECIPES_API_ID,
         key: import.meta.env.VITE_RECIPES_API_KEY,
@@ -15,29 +20,30 @@ const Home = () => {
     const [currentPage, setCurrentPage] = useState(1); // Página actual
     const recipesPerPage = 10; // Número de recetas por página
 
+    /**
+     * Llamada a la API para obtener 20 recetas aleatorios
+     */
     async function getRandomRecipes() {
         try {
             const response = await fetch(`https://api.edamam.com/api/recipes/v2?type=public&app_id=${api_data.id}&app_key=${api_data.key}&diet=balanced&random=true`);
             const data = await response.json();
             setRecipes(data.hits || []);
             setLoading(false);
-            console.log(data.hits);
         } catch (error) {
-            console.error(error);
             setLoading(false);
         }
     }
 
+    // Hace la peticion a la API al cargar el componente
     useEffect(() => {
         getRandomRecipes();
     }, [])
 
-    // Lógica para obtener las recetas de la página actual
+    // Paginación
     const indexOfLastRecipe = currentPage * recipesPerPage;
     const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
     const currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
 
-    // Cambiar página
     const nextPage = () => {
         if (currentPage < Math.ceil(recipes.length / recipesPerPage)) {
             setCurrentPage((prevPage) => prevPage + 1);
@@ -60,7 +66,7 @@ const Home = () => {
             <Button texto="What would you like to cook?"></Button>
 
             {loading && <p>Loading...</p>}
-            {/* llamada api para mostrar 20 recetas */}
+
             {!loading && (
                 <>
                     <section>
@@ -68,7 +74,7 @@ const Home = () => {
                             <Card key={index} image={recipe.recipe.images.THUMBNAIL.url} title={recipe.recipe.label} mealType={recipe.recipe.mealType} cuisineType={recipe.recipe.cuisineType}/>
                         ))}
                     </section>
-                    {/* Botones de navegación */}
+
                     <div>
                         <button onClick={prevPage} disabled={currentPage === 1}>
                             Previous
