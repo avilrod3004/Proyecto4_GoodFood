@@ -13,3 +13,8 @@ https://github.com/avilrod3004/Proyecto4_GoodFood/blob/bc5f2a7bd4c920e6cc2ba9126
 Hacer la petición al cargar la página:
 https://github.com/avilrod3004/Proyecto4_GoodFood/blob/bc5f2a7bd4c920e6cc2ba91268b2f2127ea75415/src/pages/Home.jsx#L23-L40
 
+La llamada es asíncrona, así que si todavía no hay respuesta se muestra un mensaje "Loading..."
+https://github.com/avilrod3004/Proyecto4_GoodFood/blob/b95648e98e47522f60ec69ddccc97340ab5c584c/src/pages/Home.jsx#L61-L95
+
+### Demostración del funcionamiento de las funcionalidades asíncronas
+![Demostración llamada API](./doc/prueba_llamada_api.gif)
