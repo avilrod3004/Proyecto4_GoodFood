@@ -1,5 +1,5 @@
 :root {
-//  Paleta de colores
+  // Paleta de colores
   --cadet-blue-050: #E6EBEC;
   --cadet-blue-100: #CED8D9;
   --cadet-blue-200: #B5C4C6;
@@ -23,8 +23,57 @@
   --indian-red-900: #401212;
 
   --white: #FFFFFF;
-  --gray-050: #F2F2F2; // Base
-  --grey-500: #56585E;
-  --grey-900: #212224;
+  --gray-050: #F2F2F2;
+  --gray-500: #56585E;
+  --gray-900: #212224;
   --black: #000000;
+
+
+  /* --- MODO CLARO --- */
+  // Fondo
+  --page-bg-color: var(--gray-050);
+  --page-containers-bg-color: var(--white);
+
+  // Header
+  --header-bg-color: var(--cadet-blue-500);
+  --header-text-color: var(--white);
+
+  // Footer
+  --footer-bg-color: var(--cadet-blue-500);
+  --footer-text-color: var(--white);
+
+  // Texto
+  --h1-text-color: var(--cadet-blue-500);
+  --h2-text-color: var(--cadet-blue-600);
+  --h3-text-color: var(--cadet-blue-700);
+  --h4-text-color: var(--cadet-blue-800);
+  --h5-text-color: var(--cadet-blue-900);
+  --h6-text-color: var(--cadet-blue-900);
+  --p-text-color: var(--black);
+
+  // Formularios
+  --form-text-color: var(--black);
+  --form-input-bg-color: var(--gray-050);
+
+  // Cards
+  --card-bg-color: var(--white);
+  --card-title-color: var(--indian-red-600);
+  --card-text-color: var(--black);
+  --card-reverse-text-color: var(--white);
+
+  // Iconos
+  --icon-color: var(--cadet-blue-900);
+
+  // Botones
+  --btn-primary-bg-color: var(--cadet-blue-500);
+  --btn-primaty-bg-color-hover: var(--cadet-blue-700);
+  --btn-primary-text-color: var(--gray-050);
+
+  --btn-secondary-bg-color: var(--gray-050);
+  --btn-secondary-bg-color-hover: var(--gray-500);
+  --btn-secondary-text-color: var(--cadet-blue-600);
+
+  --btn-cancel-bg-color: var(--white);
+  --btn-cancel-border-color: var(--cadet-blue-900);
+  --btn-cancel-text-color: var(--cadet-blue-900);
 }
