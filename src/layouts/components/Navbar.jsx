@@ -6,11 +6,13 @@ const Navbar = () => {
     console.log(useContext(UserContext));
     return (
         <nav>
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/quickrecipes">Quick recipes</NavLink>
-            <NavLink to="/breakfast">Breakfast</NavLink>
-            <NavLink to="/lunchdinner">Lunch/dinner</NavLink>
-            <NavLink to="/contactus">Contact us</NavLink>
+            <ul>
+                <li><NavLink to="/">Home</NavLink></li>
+                <li><NavLink to="/quickrecipes">Quick recipes</NavLink></li>
+                <li><NavLink to="/breakfast">Breakfast</NavLink></li>
+                <li><NavLink to="/lunchdinner">Lunch/dinner</NavLink></li>
+                <li><NavLink to="/contactus">Contact us</NavLink></li>
+            </ul>
         </nav>
     );
 }
