@@ -13,7 +13,6 @@ const Card = ({id, image, title, mealType, cuisineType}) => {
     const navigate = useNavigate();
 
     const consultarReceta = () => {
-        localStorage.setItem("receta", id);
         navigate(`/receta/${id}`);
     }
 

@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+import {useParams} from "react-router-dom";
 
 const RecipeInfo = () => {
 
@@ -9,12 +10,13 @@ const RecipeInfo = () => {
     }
 
     // Estados
+    const {id} = useParams();
     const [recipe, setRecipe] = React.useState({});
     const [loading, setLoading] = React.useState(true);
 
-    async function getRecipeInfo(recipeId) {
+    async function getRecipeInfo() {
         try {
-            const response = await fetch(`https://api.edamam.com/api/recipes/v2/${recipeId}?type=public&app_id=${api_data.id}&app_key=${api_data.key}`);
+            const response = await fetch(`https://api.edamam.com/api/recipes/v2/${id}?type=public&app_id=${api_data.id}&app_key=${api_data.key}`);
             const data = await response.json();
             setRecipe(data.recipe || {});
             setLoading(false);
@@ -24,9 +26,8 @@ const RecipeInfo = () => {
     }
 
     useEffect(() => {
-        const recipeId = localStorage.getItem("receta");
-        getRecipeInfo(recipeId);
-    }, [])
+        getRecipeInfo();
+    }, [id])
 
     return (
         <>
