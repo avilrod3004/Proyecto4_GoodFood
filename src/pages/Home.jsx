@@ -39,6 +39,8 @@ const Home = () => {
         getRandomRecipes();
     }, [])
 
+    const getRecipeId = (recipeUri) => recipeUri.split('recipe_')[1]
+
     // Paginación
     const indexOfLastRecipe = currentPage * recipesPerPage;
     const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
@@ -71,7 +73,13 @@ const Home = () => {
                 <>
                     <section>
                         {currentRecipes.map((recipe, index) => (
-                            <Card key={index} image={recipe.recipe.images.THUMBNAIL.url} title={recipe.recipe.label} mealType={recipe.recipe.mealType} cuisineType={recipe.recipe.cuisineType}/>
+                            <Card
+                                key={index}
+                                id={getRecipeId(recipe.recipe.uri)}
+                                image={recipe.recipe.images.THUMBNAIL.url}
+                                title={recipe.recipe.label}
+                                mealType={recipe.recipe.mealType}
+                                cuisineType={recipe.recipe.cuisineType}/>
                         ))}
                     </section>
 
