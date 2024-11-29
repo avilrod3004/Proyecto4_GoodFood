@@ -28,7 +28,7 @@ export const router = createBrowserRouter([
         ]
     },
     {
-        path: "/receta/:id",
+        path: "/recipe/:id",
         element: <LayoutPublic/>,
         errorElement: <NotFound/>,
         children: [

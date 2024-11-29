@@ -13,7 +13,7 @@ const Card = ({id, image, title, mealType, cuisineType}) => {
     const navigate = useNavigate();
 
     const consultarReceta = () => {
-        navigate(`/receta/${id}`);
+        navigate(`/recipe/${id}`);
     }
 
     return (
