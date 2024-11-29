@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 
-const RecipeInfo = ({recipeId}) => {
+const RecipeInfo = () => {
 
     // Datos API de recetas
     const api_data = {
@@ -12,7 +12,7 @@ const RecipeInfo = ({recipeId}) => {
     const [recipe, setRecipe] = React.useState({});
     const [loading, setLoading] = React.useState(true);
 
-    async function getRecipeInfo() {
+    async function getRecipeInfo(recipeId) {
         try {
             const response = await fetch(`https://api.edamam.com/api/recipes/v2/${recipeId}?type=public&app_id=${api_data.id}&app_key=${api_data.key}`);
             const data = await response.json();
@@ -24,38 +24,46 @@ const RecipeInfo = ({recipeId}) => {
     }
 
     useEffect(() => {
-        getRecipeInfo();
+        const recipeId = localStorage.getItem("receta");
+        getRecipeInfo(recipeId);
     }, [])
 
     return (
-        <article>
-            <img src={recipe.images.REGULAR.url} alt=""/>
-            <h1>{recipe.label}</h1>
-            <ul>
-                <li>Cuisine type: {recipe.cuisineType}</li>
-                <li>Meal type: {recipe.mealType}</li>
-                <li>Time: {recipe.totalTime}</li>
-            </ul>
+        <>
+            {loading && <p>Loading...</p>}
 
-            <ul>
-                {
-                    recipe.healthLabels.map((label, index) => (
-                        <li key={index}>{label}</li>
-                    ))
-                }
-            </ul>
+            {!loading && (
+                <article>
+                    <img src={recipe.images.REGULAR.url} alt=""/>
+                    <h1>{recipe.label}</h1>
+                    <ul>
+                        <li>Cuisine type: {recipe.cuisineType}</li>
+                        <li>Meal type: {recipe.mealType}</li>
+                        <li>Time: {recipe.totalTime}</li>
+                    </ul>
 
-            <h2>Ingredients</h2>
-            <ul>
-                {
-                    recipe.ingredientLines.map((ingredient, index) => (
-                        <li key={index}>{ingredient}</li>
-                    ))
-                }
-            </ul>
+                    <ul>
+                        {
+                            recipe.healthLabels.map((label, index) => (
+                                <li key={index}>{label}</li>
+                            ))
+                        }
+                    </ul>
 
-            <a href={recipe.url}>More details</a>
-        </article>
+                    <h2>Ingredients</h2>
+                    <ul>
+                        {
+                            recipe.ingredientLines.map((ingredient, index) => (
+                                <li key={index}>{ingredient}</li>
+                            ))
+                        }
+                    </ul>
+
+                    <a href={recipe.url}>More details</a>
+                </article>
+            )}
+        </>
+
     );
 };
 
