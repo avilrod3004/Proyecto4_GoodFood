@@ -6,6 +6,7 @@ import ContactUs from "../pages/ContactUs.jsx";
 import Login from "../pages/Login.jsx";
 import Register from "../pages/Register.jsx";
 import React from "react";
+import RecipeInfo from "../pages/RecipeInfo.jsx";
 
 const QuickRecipes = React.lazy(() => import("../pages/QuickRecipes"));
 const Breakfast = React.lazy(() => import("../pages/Breakfast"));
@@ -23,6 +24,17 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 element: <Home/>
+            }
+        ]
+    },
+    {
+        path: "/receta/:id",
+        element: <LayoutPublic/>,
+        errorElement: <NotFound/>,
+        children: [
+            {
+                index: true,
+                element: <RecipeInfo/>
             }
         ]
     },
