@@ -60,7 +60,7 @@ const RecipeInfo = () => {
                         }
                     </ul>
 
-                    <a href={recipe.url}>More details</a>
+                    <a href={recipe.url} target="_blank">More details</a>
                 </article>
             )}
         </>
