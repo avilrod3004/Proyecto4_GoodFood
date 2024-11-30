@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Button from "../components/Button.jsx";
 // import "../../public/img_home.jpeg"
 import "../sass/main.scss"
-import Card from "../components/Card.jsx";
+import SmallCard from "../components/SmallCard.jsx";
 
 /**
  * Página principal de la web
@@ -77,7 +77,7 @@ const Home = () => {
                 <>
                     <section>
                         {currentRecipes.map((recipe, index) => (
-                            <Card
+                            <SmallCard
                                 key={index}
                                 id={getRecipeId(recipe.recipe.uri)}
                                 image={recipe.recipe.images.THUMBNAIL.url}

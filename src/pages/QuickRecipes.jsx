@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import FilterRecipes from "../components/FilterRecipes.jsx";
-import Card from "../components/Card.jsx";
+import SmallCard from "../components/SmallCard.jsx";
 
 const QuickRecipes = () => {
     // Datos API de recetas
@@ -103,7 +103,7 @@ const QuickRecipes = () => {
                 <>
                     <section>
                         {recipes.map((recipe, index) => (
-                            <Card
+                            <SmallCard
                                 key={index}
                                 id={getRecipeId(recipe.recipe.uri)}
                                 image={recipe.recipe.images.THUMBNAIL.url}

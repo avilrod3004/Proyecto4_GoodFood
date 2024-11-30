@@ -9,7 +9,7 @@ import {useNavigate} from "react-router-dom";
  * @param cuisineType Tipo de cocina
  * @returns {Element} Tarjeta
  */
-const Card = ({id, image, title, mealType, cuisineType}) => {
+const SmallCard = ({id, image, title, mealType, cuisineType}) => {
     const navigate = useNavigate();
 
     const consultarReceta = () => {
@@ -30,4 +30,4 @@ const Card = ({id, image, title, mealType, cuisineType}) => {
     );
 };
 
-export default Card;
+export default SmallCard;
