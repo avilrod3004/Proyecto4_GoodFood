@@ -1,9 +1,35 @@
-import React from 'react';
+import React, {useState} from 'react';
+import FilterRecipes from "../components/FilterRecipes.jsx";
 
 const QuickRecipes = () => {
+    // Estados iniciales
+    const filtersInitialValues = {
+        q: "",
+        mealTypes: [],
+        cuisineTypes: [],
+        health: [],
+        maxTime: ""
+    }
+
+    const errorFiltersInitial = {
+        q: "",
+        maxTime: ""
+    }
+
+    // Estados
+    const [filters, setFilters] = useState(filtersInitialValues)
+    const [filterErrors, setFilterErrors] = useState(errorFiltersInitial)
+
     return (
         <>
             Quick recipes
+
+            <FilterRecipes
+                filters={filters}
+                setFilters={setFilters}
+                filterErrors={filterErrors}
+                setFilterErrors={setFilterErrors}
+            />
         </>
     );
 };
