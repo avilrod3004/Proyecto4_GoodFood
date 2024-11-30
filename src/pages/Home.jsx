@@ -15,13 +15,13 @@ const Home = () => {
         key: import.meta.env.VITE_RECIPES_API_KEY,
     }
     // Estados
-    const [recipes, setRecipes] = React.useState([]);
-    const [loading, setLoading] = React.useState(true);
+    const [recipes, setRecipes] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1); // Página actual
     const recipesPerPage = 10; // Número de recetas por página
 
     /**
-     * Llamada a la API para obtener 20 recetas aleatorios
+     * Llamada a la API para obtener 20 recetas aleatorias
      */
     async function getRandomRecipes() {
         try {
