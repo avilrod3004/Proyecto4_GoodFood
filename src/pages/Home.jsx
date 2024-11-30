@@ -17,6 +17,7 @@ const Home = () => {
     // Estados
     const [recipes, setRecipes] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [currentPage, setCurrentPage] = useState(1); // Página actual
     const recipesPerPage = 10; // Número de recetas por página
 
@@ -29,8 +30,10 @@ const Home = () => {
             const data = await response.json();
             setRecipes(data.hits || []);
             setLoading(false);
+            setError(null);
         } catch (error) {
             setLoading(false);
+            setError(`${error.code} - ${error.message}`);
         }
     }
 
@@ -68,6 +71,7 @@ const Home = () => {
             <Button texto="What would you like to cook?"></Button>
 
             {loading && <p>Loading...</p>}
+            {error && <p>{error}</p>}
 
             {!loading && (
                 <>

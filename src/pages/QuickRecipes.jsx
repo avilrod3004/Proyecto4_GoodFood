@@ -31,6 +31,8 @@ const QuickRecipes = () => {
     const [filterErrors, setFilterErrors] = useState(errorFiltersInitial)
     const [recipes, setRecipes] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
+    const [error, setError] = useState(null);
+
 
     const addFilters = () => {
         urlFilters = url
@@ -68,8 +70,10 @@ const QuickRecipes = () => {
             const data = await response.json()
             setRecipes(data.hits || [])
             setLoading(false)
+            setError(null)
         } catch (error) {
             setLoading(false)
+            setError(`${error.code} - ${error.message}`);
         }
     }
 
@@ -93,6 +97,7 @@ const QuickRecipes = () => {
             />
 
             {loading && <p>Loading...</p>}
+            {error && <p>{error}</p>}
 
             {!loading && (
                 <>
@@ -108,6 +113,10 @@ const QuickRecipes = () => {
                         ))}
                     </section>
                 </>
+            )}
+
+            {recipes.length === 0 && (
+                <p>Nothing found :(</p>
             )}
         </>
     );
