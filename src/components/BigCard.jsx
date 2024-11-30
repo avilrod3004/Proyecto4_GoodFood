@@ -1,8 +1,15 @@
 import React from 'react';
+import {useNavigate} from "react-router-dom";
 
 const BigCard = ({id, image, title, mealType, cuisineType, healthLabels, totalTime}) => {
+    const navigate = useNavigate();
+
+    const consultarReceta = () => {
+        navigate(`/recipe/${id}`);
+    }
+
     return (
-        <article style={{border: `1px solid black`}}>
+        <article style={{border: `1px solid black`}} onClick={() => {consultarReceta()}}>
             <img src={image} alt={title}/>
             <h1>{title}</h1>
             <ul>
