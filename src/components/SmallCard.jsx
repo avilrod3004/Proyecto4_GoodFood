@@ -23,7 +23,6 @@ const SmallCard = ({id, image, title, mealType, cuisineType}) => {
             <ul>
                 <li>{mealType}</li>
                 <li>{cuisineType}</li>
-                <li>{id}</li>
             </ul>
 
         </article>

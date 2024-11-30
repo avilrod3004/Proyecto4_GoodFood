@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import FilterRecipes from "../components/FilterRecipes.jsx";
 import SmallCard from "../components/SmallCard.jsx";
+import BigCard from "../components/BigCard.jsx";
 
 const QuickRecipes = () => {
     // Datos API de recetas
@@ -32,6 +33,7 @@ const QuickRecipes = () => {
     const [recipes, setRecipes] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
     const [error, setError] = useState(null);
+    const [cardSize, setCardSize] = React.useState("small");
 
 
     const addFilters = () => {
@@ -96,6 +98,8 @@ const QuickRecipes = () => {
                 setFilterErrors={setFilterErrors}
             />
 
+            <button onClick={() => {cardSize === "small" ? setCardSize("big") : setCardSize("small")}}>Change card size</button>
+
             {loading && <p>Loading...</p>}
             {error && <p>{error}</p>}
 
@@ -103,13 +107,29 @@ const QuickRecipes = () => {
                 <>
                     <section>
                         {recipes.map((recipe, index) => (
-                            <SmallCard
-                                key={index}
-                                id={getRecipeId(recipe.recipe.uri)}
-                                image={recipe.recipe.images.THUMBNAIL.url}
-                                title={recipe.recipe.label}
-                                mealType={recipe.recipe.mealType}
-                                cuisineType={recipe.recipe.cuisineType}/>
+                            cardSize === "small" ? (
+                                <SmallCard
+                                    key={index}
+                                    id={getRecipeId(recipe.recipe.uri)}
+                                    image={recipe.recipe.images.THUMBNAIL.url}
+                                    title={recipe.recipe.label}
+                                    mealType={recipe.recipe.mealType}
+                                    cuisineType={recipe.recipe.cuisineType}
+                                />
+                                )
+                                : (
+                                    <BigCard
+                                        key={index}
+                                        id={getRecipeId(recipe.recipe.uri)}
+                                        image={recipe.recipe.images.THUMBNAIL.url}
+                                        title={recipe.recipe.label}
+                                        mealType={recipe.recipe.mealType}
+                                        cuisineType={recipe.recipe.cuisineType}
+                                        healthLabels={recipe.recipe.healthLabels}
+                                        totalTime={recipe.recipe.totalTime}
+                                    />
+
+                                )
                         ))}
                     </section>
                 </>
