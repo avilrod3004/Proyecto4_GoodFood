@@ -8,7 +8,7 @@ const QuickRecipes = () => {
         mealTypes: [],
         cuisineTypes: [],
         health: [],
-        maxTime: ""
+        maxTime: "15" // Aplicar filtro por defecto
     }
 
     const errorFiltersInitial = {
