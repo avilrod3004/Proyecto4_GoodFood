@@ -18,7 +18,7 @@ request.onupgradeneeded = event => {
     }
 }
 
-const addUser = (user) => {
+export const addUser = (user) => {
     const transaction = db.transaction(["users"], "readwrite");
     const objectStore = transaction.objectStore("users");
     const request = objectStore.put(user);
@@ -32,7 +32,7 @@ const addUser = (user) => {
     }
 }
 
-const getUser = (email) => {
+export const getUser = (email) => {
     const transaction = db.transaction(["users"], "readonly");
     const objectStore = transaction.objectStore("users");
     const index = objectStore.index("email");

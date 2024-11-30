@@ -2,6 +2,8 @@ import React, {useContext, useEffect, useState} from 'react';
 import {login} from "../config/Firebase.jsx";
 import {useNavigate} from "react-router-dom";
 import {UserContext} from "../context/UserContext.jsx";
+import {addUser} from "../config/IndexedDB.jsx";
+
 
 /**
  * Formulario de inicio de sesión
@@ -111,6 +113,7 @@ const Login = () => {
 
         try {
             await login({email: userAccount.email, password: userAccount.password})
+            addUser(user);
         } catch (error) {
             if (error.code === "auth/invalid-credential") {
                 setErrorLogin("Credenciales inválidas")
