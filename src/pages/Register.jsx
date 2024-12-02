@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {register} from "../config/Firebase.jsx";
+import {register, saveUserData} from "../config/Firebase.jsx";
 import {useNavigate} from "react-router-dom";
 import {UserContext} from "../context/UserContext.jsx";
 
@@ -36,7 +36,13 @@ const Register = () => {
 
     useEffect(() => {
         if (user) {
-            navigate("/profile");
+            saveUserData({...user, userName: userAccount.name})
+                .then(() => {
+                    console.log("Usuario guardado")
+                    navigate("/profile");
+                })
+                .catch((error) => console.error("Error:", error));
+            // navigate("/profile");
         }
     }, [user])
 
