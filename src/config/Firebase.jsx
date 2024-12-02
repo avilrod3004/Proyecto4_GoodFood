@@ -1,5 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+
+import { doc, setDoc, getDoc } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -12,6 +15,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+export const db = getFirestore(app);
 
 // Función de login
 export const login = ({email, password}) => {
@@ -25,3 +29,55 @@ export const register = ({email, password}) => {
 
 // Función de cerrar sesión
 export const logOut = () => signOut(auth);
+
+/**
+ * Guardar o actualizar datos del usuario en Firestore.
+ * @param {Object} user - Objeto con los datos del usuario.
+ * @returns {Promise<void>}
+ */
+export const saveUserData = async (user) => {
+    try {
+        const userRef = doc(db, "users", user.uid); // Documento del usuario
+        await setDoc(
+            userRef,
+            {
+                userName: user.userName || "",
+                picture: user.picture || "",
+                biography: user.biography || "",
+                website: user.website || "",
+                socialAccount1: user.socialAccount1 || "",
+                socialAccount2: user.socialAccount2 || "",
+                socialAccount3: user.socialAccount3 || "",
+                name: user.name || "",
+                lastName: user.lastName || "",
+                phone: user.phone || "",
+                favoriteRecipes: user.favoriteRecipes || [],
+            },
+            { merge: true } // Para no sobrescribir datos existentes
+        );
+        console.log("Datos del usuario guardados correctamente.");
+    } catch (error) {
+        console.error("Error al guardar los datos del usuario:", error);
+    }
+};
+
+/**
+ * Obtener datos del usuario desde Firestore.
+ * @param {string} uid - UID del usuario.
+ * @returns {Promise<Object|null>} Datos del usuario o null si no existen.
+ */
+export const getUserData = async (uid) => {
+    try {
+        const userRef = doc(db, "users", uid);
+        const userSnap = await getDoc(userRef);
+
+        if (userSnap.exists()) {
+            return userSnap.data();
+        } else {
+            console.log("No se encontró el usuario.");
+            return null;
+        }
+    } catch (error) {
+        console.error("Error al obtener los datos del usuario:", error);
+    }
+};
