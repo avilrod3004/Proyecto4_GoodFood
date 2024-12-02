@@ -29,7 +29,7 @@ export const router = createBrowserRouter([
     },
     {
         path: "/recipe/:id",
-        element: <LayoutPublic/>,
+        element: <LayoutPrivate/>,
         errorElement: <NotFound/>,
         children: [
             {
