@@ -20,7 +20,11 @@ const UserMenu = () => {
         <>
             {
                 user
-                    ? <NavLink onClick={handleLogout} to="/">Log out</NavLink>
+                    ? <>
+                        <NavLink to="/profile">My profile</NavLink>
+                        <NavLink to="/">Edit profile</NavLink>
+                        <NavLink onClick={handleLogout} to="/">Log out</NavLink>
+                    </>
                     : <>
                         <NavLink to="/login">Login</NavLink>
                         <NavLink to="/register">Sign up</NavLink>
