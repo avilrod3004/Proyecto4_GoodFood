@@ -43,7 +43,6 @@ const UserProfile = () => {
             setLoading(false);
             console.log(data);
         } catch (error) {
-            // console.log(error);
             setLoading(false);
             setError(error);
             setUserData(userDataInitial)
