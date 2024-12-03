@@ -52,9 +52,14 @@ const RecipeInfo = () => {
     const fetchUserData = async (uid) => {
         try {
             const data = await getUserData(uid);
-            setUserData(data || {})
+            setUserData({
+                ...userDataInitial,
+                ...data,
+            });
             setLoadingUser(false);
             console.log("Datos del usuario:", data);
+
+            setRecipeFavorite(isMarked())
         } catch (error) {
             console.log(error)
             setLoadingUser(false);
@@ -62,12 +67,22 @@ const RecipeInfo = () => {
     };
 
     // Actualizar los datos del usuario en la base de datos
-    const updateUserData = () => {
-        saveUserData(userData)
-            .then(() => {
-                console.log("Usuario actualizado")
-            })
-            .catch((error) => console.error("Error:", error));
+    const updateUserData = async () => {
+        try {
+            console.log("Datos del usuario que se van a guardar:", userData);
+            await saveUserData({
+                ...userData,
+                uid: user.uid
+            });
+            console.log("Usuario actualizado")
+        } catch (error) {
+            console.error("Error:", error)
+        }
+        // saveUserData(userData)
+        //     .then(() => {
+        //         console.log("Usuario actualizado")
+        //     })
+        //     .catch((error) => console.error("Error:", error));
     }
 
     // Obtener el id de la receta
@@ -75,7 +90,7 @@ const RecipeInfo = () => {
 
     // Agregar una receta a favoritos
     const addFavorite = () => {
-        const recipesList = userData.favoriteRecipes;
+        const recipesList = userData.favoriteRecipes || [];
         const recipeData = {
             id: getRecipeId(recipe.uri),
             title: recipe.label,
@@ -87,19 +102,34 @@ const RecipeInfo = () => {
         }
 
         recipesList.push(recipeData);
+        console.log("recipesList" + recipesList)
         setUserData({
             ...userData,
             favoriteRecipes: recipesList
         });
+
+        updateUserData();
+        setRecipeFavorite(true);
+        console.log("receta añadida a favoritos")
     }
 
     // Eliminar una receta de favoritos
     const deteteFavorite = () => {
         const updateFavoriteRecipes = userData.favoriteRecipes.filter((recipeSaved) => recipeSaved.id !== getRecipeId(recipe.uri));
+        console.log("updateFavoriteRecipes", updateFavoriteRecipes);
         setUserData({
             ...userData,
             favoriteRecipes: updateFavoriteRecipes,
         })
+
+        updateUserData();
+        setRecipeFavorite(false);
+        console.log("receta eliminada de favoritos")
+    }
+
+    // ¿Está marcada como favorita?
+    const isMarked = () => {
+        return userData.favoriteRecipes.some((item) => item.id === getRecipeId(recipe.uri))
     }
 
     // Al cargar la página
@@ -108,10 +138,17 @@ const RecipeInfo = () => {
         fetchUserData(user.uid);
     }, [])
 
-    useEffect(() => {
-        recipeFavorite ? addFavorite() : deteteFavorite()
-        updateUserData()
-    }, [recipeFavorite]);
+    // useEffect(() => {
+    //     if (recipeFavorite !== null && userData.favoriteRecipes) {
+    //         if (recipeFavorite) {
+    //             addFavorite();
+    //         } else {
+    //             deteteFavorite();
+    //         }
+    //         updateUserData();
+    //     }
+    // }, [recipeFavorite]);
+
 
     return (
         <>
@@ -120,7 +157,7 @@ const RecipeInfo = () => {
             {!loadingRecipe && !loadingUser && (
                 <article>
                     <img src={recipe.images.REGULAR.url} alt=""/>
-                    <button onClick={() => setRecipeFavorite(!recipeFavorite)}>Add fovorite</button>
+                    <button onClick={() => addFavorite()}>Add fovorite</button>
                     <p>
                         {
                             recipeFavorite ? "si" : "no"
