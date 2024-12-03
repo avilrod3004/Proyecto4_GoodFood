@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import {UserContext} from "../context/UserContext.jsx";
-import {getUserData} from "../config/Firebase.jsx";
+import {getUserData, saveUserData} from "../config/Firebase.jsx";
 
 const RecipeInfo = () => {
 
@@ -11,55 +11,90 @@ const RecipeInfo = () => {
         key: import.meta.env.VITE_RECIPES_API_KEY,
     }
 
-    // Estados - recetas
-    const {id} = useParams();
-    const [recipe, setRecipe] = React.useState({});
-    const [loading, setLoading] = React.useState(true);
+    // Estados iniciales
+    const userDataInitial = {
+        userName: "",
+        picture: "",
+        biography: "",
+        website: "",
+        socialAccount1: "",
+        socialAccount2: "",
+        socialAccount3: "",
+        name: "",
+        lastName: "",
+        phone: "",
+        favoriteRecipes: []
+    }
 
-    // Llamada a la API
+    // Estados
+    const {id} = useParams();
+    const [recipe, setRecipe] = useState({});
+    const [recipeFavorite, setRecipeFavorite] = useState(false);
+    const [loadingRecipe, setLoadingRecipe] = useState(true);
+    const [loadingUser, setLoadingUser] = useState(true);
+    const {user, setUser} = useContext(UserContext);
+    const [userData, setUserData] = useState(userDataInitial);
+
+    // Llama a la API para obtener la información de la receta
     async function getRecipeInfo() {
         try {
             const response = await fetch(`https://api.edamam.com/api/recipes/v2/${id}?type=public&app_id=${api_data.id}&app_key=${api_data.key}`);
             const data = await response.json();
             setRecipe(data.recipe || {});
-            console.log("Recipe info", data.recipe);
-            setLoading(false);
+            // console.log("Recipe info", data.recipe);
+            setLoadingRecipe(false);
         } catch (error) {
-            setLoading(false);
+            setLoadingRecipe(false);
         }
     }
 
-    useEffect(() => {
-        getRecipeInfo();
-    }, [id])
-
-    const getRecipeId = (recipeUri) => recipeUri.split('recipe_')[1]
-
-
-    // Estados - usuario
-    const {user, setUser} = useContext(UserContext);
-    const [userData, setUserData] = useState(null);
-
-    // Obtener los datos del usuario al cargar la página
+    // Obtener los datos del usuario de la base de datos
     const fetchUserData = async (uid) => {
-        const data = await getUserData(uid);
-        if (data) {
+        try {
+            const data = await getUserData(uid);
+            setUserData(data || {})
+            setLoadingUser(false);
             console.log("Datos del usuario:", data);
-            setUserData(data);
+        } catch (error) {
+            console.log(error)
+            setLoadingUser(false);
         }
     };
 
-    useEffect(() => {
-        fetchUserData(user.uid);
-    }, [])
+    // Actualizar los datos del usuario en la base de datos
+    const updateUserData = () => {
+        saveUserData(userData)
+            .then(() => {
+                console.log("Usuario actualizado")
+            })
+            .catch((error) => console.error("Error:", error));
+    }
+
+    // Obtener el id de la receta
+    const getRecipeId = (recipeUri) => recipeUri.split('recipe_')[1]
 
     // Agregar una receta a favoritos
     const addFavorite = () => {
+        const recipesList = userData.favoriteRecipes;
+        const recipeData = {
+            id: getRecipeId(recipe.uri),
+            title: recipe.label,
+            image: recipe.images.REGULAR.url,
+            mealType: recipe.mealType,
+            cuisineType: recipe.cuisineType,
+            healthLabels: recipe.healthLabels,
+            totalTime: recipe.totalTime
+        }
 
+        recipesList.push(recipeData);
+        setUserData({
+            ...userData,
+            favoriteRecipes: recipesList
+        });
     }
 
     // Eliminar una receta de favoritos
-    const deteteFavorito = () => {
+    const deteteFavorite = () => {
         const updateFavoriteRecipes = userData.favoriteRecipes.filter((recipeSaved) => recipeSaved.id !== getRecipeId(recipe.uri));
         setUserData({
             ...userData,
@@ -67,22 +102,28 @@ const RecipeInfo = () => {
         })
     }
 
-    // ¿Está marcado?
-    const isMarked = () => {
-        return userData.favoriteRecipes.some((item) => item.id === getRecipeId(recipe.uri))
-    }
+    // Al cargar la página
+    useEffect(() => {
+        getRecipeInfo();
+        fetchUserData(user.uid);
+    }, [])
+
+    useEffect(() => {
+        recipeFavorite ? addFavorite() : deteteFavorite()
+        updateUserData()
+    }, [recipeFavorite]);
 
     return (
         <>
-            {loading && <p>Loading...</p>}
+            {loadingRecipe && <p>Loading...</p>}
 
-            {!loading && (
+            {!loadingRecipe && !loadingUser && (
                 <article>
                     <img src={recipe.images.REGULAR.url} alt=""/>
-                    <button onClick={() => isMarked() ? deteteFavorito : addFavorite }>Add fovorite</button>
+                    <button onClick={() => setRecipeFavorite(!recipeFavorite)}>Add fovorite</button>
                     <p>
                         {
-                            userData && isMarked() ? "si" : "no"
+                            recipeFavorite ? "si" : "no"
                         }
                     </p>
                     <h1>{recipe.label}</h1>
