@@ -13,8 +13,6 @@ const NotFound = () => {
         <>
             <img src={errorImageLight} alt="Error 404"/>
             <h1>Page not found</h1>
-            <p>{error.status}</p>
-            <p>{error.statusText}</p>
             <p>The page you&#39;re looking for doesn&#39;t exist or has been moved</p>
             <Link to="/">Back to Home</Link>
         </>
