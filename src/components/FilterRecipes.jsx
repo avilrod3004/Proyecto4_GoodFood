@@ -72,7 +72,6 @@ const FilterRecipes = ({filters, setFilters, filterErrors, setFilterErrors}) => 
                             type="text"
                             name="q"
                             value={filters.q}
-                            onBlur={validateInput}
                             onChange={validateInput}
                         />
                         {filterErrors.q !== "" ? <p>{filterErrors.q}</p> : null}
@@ -135,7 +134,6 @@ const FilterRecipes = ({filters, setFilters, filterErrors, setFilterErrors}) => 
                                 type="text"
                                 name="maxTime"
                                 value={filters.maxTime}
-                                onBlur={validateInput}
                                 onChange={validateInput}
                             />
                             {filterErrors.maxTime !== "" ? <p>{filterErrors.maxTime}</p> : null}
