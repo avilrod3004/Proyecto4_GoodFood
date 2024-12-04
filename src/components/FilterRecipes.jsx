@@ -64,83 +64,85 @@ const FilterRecipes = ({filters, setFilters, filterErrors, setFilterErrors}) => 
 
     return (
         <>
-            <form action="">
-                <label htmlFor="q">
-                    Ingredient:
-                    <input
-                        type="text"
-                        name="q"
-                        value={filters.q}
-                        onBlur={validateInput}
-                        onChange={validateInput}
-                    />
-                    {filterErrors.q !== "" ? <p>{filterErrors.q}</p> : null}
-                </label>
-
-                <h1>Filters</h1>
-
-                <fieldset>
-                    <legend>Meal type</legend>
-                    {mealTypesOptions.map((option) => (
-                        <label key={option}>
-                            <input
-                                type="checkbox"
-                                name="mealTypes"
-                                value={option}
-                                checked={filters.mealTypes.includes(option)}
-                                onChange={validateInput}
-                            />
-                            {option}
-                        </label>
-                    ))}
-                </fieldset>
-
-                <fieldset>
-                    <legend>Cuisine type</legend>
-                    {cuisineTypeOptions.map((option) => (
-                        <label key={option}>
-                            <input
-                                type="checkbox"
-                                name="cuisineTypes"
-                                value={option}
-                                checked={filters.cuisineTypes.includes(option)}
-                                onChange={validateInput}
-                            />
-                            {option}
-                        </label>
-                    ))}
-                </fieldset>
-
-                <fieldset>
-                    <legend>Health</legend>
-                    {healthOptions.map((option) => (
-                        <label key={option}>
-                            <input
-                                type="checkbox"
-                                name="health"
-                                value={option}
-                                checked={filters.health.includes(option)}
-                                onChange={validateInput}
-                            />
-                            {option}
-                        </label>
-                    ))}
-                </fieldset>
-
-                <fieldset>
-                    <legend>Max. time</legend>
-                    <label>
+            <aside>
+                <form action="">
+                    <label htmlFor="q">
+                        Ingredient:
                         <input
                             type="text"
-                            name="maxTime"
-                            value={filters.maxTime}
+                            name="q"
+                            value={filters.q}
                             onBlur={validateInput}
                             onChange={validateInput}
                         />
-                        {filterErrors.maxTime !== "" ? <p>{filterErrors.maxTime}</p> : null}
+                        {filterErrors.q !== "" ? <p>{filterErrors.q}</p> : null}
                     </label>
-                </fieldset>
-            </form>
+
+                    <h1>Filters</h1>
+
+                    <fieldset>
+                        <legend>Meal type</legend>
+                        {mealTypesOptions.map((option) => (
+                            <label key={option}>
+                                <input
+                                    type="checkbox"
+                                    name="mealTypes"
+                                    value={option}
+                                    checked={filters.mealTypes.includes(option)}
+                                    onChange={validateInput}
+                                />
+                                {option}
+                            </label>
+                        ))}
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Cuisine type</legend>
+                        {cuisineTypeOptions.map((option) => (
+                            <label key={option}>
+                                <input
+                                    type="checkbox"
+                                    name="cuisineTypes"
+                                    value={option}
+                                    checked={filters.cuisineTypes.includes(option)}
+                                    onChange={validateInput}
+                                />
+                                {option}
+                            </label>
+                        ))}
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Health</legend>
+                        {healthOptions.map((option) => (
+                            <label key={option}>
+                                <input
+                                    type="checkbox"
+                                    name="health"
+                                    value={option}
+                                    checked={filters.health.includes(option)}
+                                    onChange={validateInput}
+                                />
+                                {option}
+                            </label>
+                        ))}
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Max. time</legend>
+                        <label>
+                            <input
+                                type="text"
+                                name="maxTime"
+                                value={filters.maxTime}
+                                onBlur={validateInput}
+                                onChange={validateInput}
+                            />
+                            {filterErrors.maxTime !== "" ? <p>{filterErrors.maxTime}</p> : null}
+                        </label>
+                    </fieldset>
+                </form>
+            </aside>
         </>
     );
 };
