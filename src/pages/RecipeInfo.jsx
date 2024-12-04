@@ -32,6 +32,7 @@ const RecipeInfo = () => {
     const [recipeFavorite, setRecipeFavorite] = useState(false);
     const [loadingRecipe, setLoadingRecipe] = useState(true);
     const [loadingUser, setLoadingUser] = useState(true);
+    const [error, setError] = useState("");
     const {user, setUser} = useContext(UserContext);
     const [userData, setUserData] = useState(userDataInitial);
 
@@ -137,52 +138,50 @@ const RecipeInfo = () => {
         }
     }, [loadingRecipe, loadingUser, recipe, userData]);
 
+    if (loadingRecipe || loadingUser) return <p>Cargando...</p>;
+    if (error) return <p>Error: {error}</p>;
 
 
     return (
         <>
-            {loadingRecipe && <p>Loading...</p>}
+            <article>
+                <img src={recipe.images.REGULAR.url} alt=""/>
 
-            {!loadingRecipe && !loadingUser && (
-                <article>
-                    <img src={recipe.images.REGULAR.url} alt=""/>
+                <button onClick={() => (recipeFavorite ? deteteFavorite() : addFavorite())}>
+                    {recipeFavorite ? "Remove from Favorites" : "Add to Favorites"}
+                </button>
 
-                    <button onClick={() => (recipeFavorite ? deteteFavorite() : addFavorite())}>
-                        {recipeFavorite ? "Remove from Favorites" : "Add to Favorites"}
-                    </button>
+                <p>
+                    {
+                        recipeFavorite ? "si" : "no"
+                    }
+                </p>
+                <h1>{recipe.label}</h1>
+                <ul>
+                    <li>Cuisine type: {recipe.cuisineType}</li>
+                    <li>Meal type: {recipe.mealType}</li>
+                    <li>Time: {recipe.totalTime}</li>
+                </ul>
 
-                    <p>
-                        {
-                            recipeFavorite ? "si" : "no"
-                        }
-                    </p>
-                    <h1>{recipe.label}</h1>
-                    <ul>
-                        <li>Cuisine type: {recipe.cuisineType}</li>
-                        <li>Meal type: {recipe.mealType}</li>
-                        <li>Time: {recipe.totalTime}</li>
-                    </ul>
+                <ul>
+                    {
+                        recipe.healthLabels.map((label, index) => (
+                            <li key={index}>{label}</li>
+                        ))
+                    }
+                </ul>
 
-                    <ul>
-                        {
-                            recipe.healthLabels.map((label, index) => (
-                                <li key={index}>{label}</li>
-                            ))
-                        }
-                    </ul>
+                <h2>Ingredients</h2>
+                <ul>
+                    {
+                        recipe.ingredientLines.map((ingredient, index) => (
+                            <li key={index}>{ingredient}</li>
+                        ))
+                    }
+                </ul>
 
-                    <h2>Ingredients</h2>
-                    <ul>
-                        {
-                            recipe.ingredientLines.map((ingredient, index) => (
-                                <li key={index}>{ingredient}</li>
-                            ))
-                        }
-                    </ul>
-
-                    <a href={recipe.url} target="_blank">More details</a>
-                </article>
-            )}
+                <a href={recipe.url} target="_blank">More details</a>
+            </article>
         </>
 
     );
