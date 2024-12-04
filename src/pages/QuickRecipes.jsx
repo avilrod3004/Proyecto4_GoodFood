@@ -31,6 +31,7 @@ const QuickRecipes = () => {
     const [filters, setFilters] = useState(filtersInitialValues)
     const [filterErrors, setFilterErrors] = useState(errorFiltersInitial)
     const [recipes, setRecipes] = React.useState([]);
+    const [recipesCounter, setRecipesCounter] = useState(0);
     const [loading, setLoading] = React.useState(true);
     const [error, setError] = useState(null);
     const [cardSize, setCardSize] = React.useState("small");
@@ -71,6 +72,7 @@ const QuickRecipes = () => {
             const response = await fetch(urlFilters)
             const data = await response.json()
             setRecipes(data.hits || [])
+            setRecipesCounter(data.count)
             setLoading(false)
             setError(null)
         } catch (error) {
@@ -87,10 +89,11 @@ const QuickRecipes = () => {
         getRecipes()
     }, [filters])
 
+    if (loading) return <p>Cargando...</p>;
+    if (error) return <p>Error: {error}</p>;
+
     return (
         <>
-            Quick recipes
-
             <FilterRecipes
                 filters={filters}
                 setFilters={setFilters}
@@ -98,42 +101,42 @@ const QuickRecipes = () => {
                 setFilterErrors={setFilterErrors}
             />
 
-            <button onClick={() => {cardSize === "small" ? setCardSize("big") : setCardSize("small")}}>Change card size</button>
+            <header>
+                <h1>Search result: <span>{recipesCounter}</span></h1>
 
-            {loading && <p>Loading...</p>}
-            {error && <p>{error}</p>}
+                <button onClick={() => {
+                    cardSize === "small" ? setCardSize("big") : setCardSize("small")
+                }}>Change card size
+                </button>
+            </header>
 
-            {!loading && (
-                <>
-                    <section>
-                        {recipes.map((recipe, index) => (
-                            cardSize === "small" ? (
-                                <SmallCard
-                                    key={index}
-                                    id={getRecipeId(recipe.recipe.uri)}
-                                    image={recipe.recipe.images.THUMBNAIL.url}
-                                    title={recipe.recipe.label}
-                                    mealType={recipe.recipe.mealType}
-                                    cuisineType={recipe.recipe.cuisineType}
-                                />
-                                )
-                                : (
-                                    <BigCard
-                                        key={index}
-                                        id={getRecipeId(recipe.recipe.uri)}
-                                        image={recipe.recipe.images.THUMBNAIL.url}
-                                        title={recipe.recipe.label}
-                                        mealType={recipe.recipe.mealType}
-                                        cuisineType={recipe.recipe.cuisineType}
-                                        healthLabels={recipe.recipe.healthLabels}
-                                        totalTime={recipe.recipe.totalTime}
-                                    />
+            <section>
+                {recipes.map((recipe, index) => (
+                    cardSize === "small" ? (
+                            <SmallCard
+                                key={index}
+                                id={getRecipeId(recipe.recipe.uri)}
+                                image={recipe.recipe.images.THUMBNAIL.url}
+                                title={recipe.recipe.label}
+                                mealType={recipe.recipe.mealType}
+                                cuisineType={recipe.recipe.cuisineType}
+                            />
+                        )
+                        : (
+                            <BigCard
+                                key={index}
+                                id={getRecipeId(recipe.recipe.uri)}
+                                image={recipe.recipe.images.THUMBNAIL.url}
+                                title={recipe.recipe.label}
+                                mealType={recipe.recipe.mealType}
+                                cuisineType={recipe.recipe.cuisineType}
+                                healthLabels={recipe.recipe.healthLabels}
+                                totalTime={recipe.recipe.totalTime}
+                            />
 
-                                )
-                        ))}
-                    </section>
-                </>
-            )}
+                        )
+                ))}
+            </section>
 
             {recipes.length === 0 && (
                 <p>Nothing found :(</p>
