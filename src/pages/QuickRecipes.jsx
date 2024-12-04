@@ -30,13 +30,25 @@ const QuickRecipes = () => {
     // Estados
     const [filters, setFilters] = useState(filtersInitialValues)
     const [filterErrors, setFilterErrors] = useState(errorFiltersInitial)
-    const [recipes, setRecipes] = React.useState([]);
+
+    const [recipes, setRecipes] = useState([]);
     const [recipesCounter, setRecipesCounter] = useState(0);
-    const [loading, setLoading] = React.useState(true);
+
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [cardSize, setCardSize] = React.useState("small");
 
+    const [cardSize, setCardSize] = useState("small");
 
+    const [pagesList, setPagesList] = useState([]);
+    const [nextPage, setNextPage] = useState(null);
+    const [currentPage, setCurrentPage] = useState(0);
+
+    // Saber si un objeto está vacío
+    function isEmptyObject(obj) {
+        return Object.keys(obj).length === 0;
+    }
+
+    // Añadir los filtros a la url de la peticion
     const addFilters = () => {
         urlFilters = url
 
@@ -67,26 +79,52 @@ const QuickRecipes = () => {
         }
     }
 
-    async function getRecipes() {
+    // Obtener las recetas según los filtros
+    async function getRecipes(request, addToPagesList = true) {
         try {
-            const response = await fetch(urlFilters)
+            const response = await fetch(request)
             const data = await response.json()
+
             setRecipes(data.hits || [])
             setRecipesCounter(data.count)
+            setNextPage(isEmptyObject(data._links) ? null : data._links.next.href)
+
+            if (addToPagesList) {
+                setPagesList([...pagesList, request])
+            }
+
+            setCurrentPage(pagesList.length - 1)
             setLoading(false)
-            setError(null)
         } catch (error) {
             setLoading(false)
             setError(`${error.code} - ${error.message}`);
         }
     }
 
+    // Obtener el id de una receta
     const getRecipeId = (recipeUri) => recipeUri.split('recipe_')[1]
+
+    // Pasar a la siguiente página de las recetas obtenidas
+    const goToNextPage = () => {
+        getRecipes(nextPage)
+    }
+
+    // Volver a la página anterior de las recetas obtenidas
+    const goToPreviousPage = () => {
+        pagesList.pop()
+        getRecipes(pagesList.at(pagesList.length - 1), false)
+    }
 
     useEffect(() => {
         addFilters()
-        console.log(urlFilters)
-        getRecipes()
+
+        setPagesList([])
+        setNextPage(null)
+        setCurrentPage(0)
+
+        if (pagesList.length === 0 && nextPage === null && currentPage === 0) {
+            getRecipes(urlFilters)
+        }
     }, [filters])
 
     if (loading) return <p>Cargando...</p>;
@@ -101,16 +139,16 @@ const QuickRecipes = () => {
                 setFilterErrors={setFilterErrors}
             />
 
-            <header>
-                <h1>Search result: <span>{recipesCounter}</span></h1>
-
-                <button onClick={() => {
-                    cardSize === "small" ? setCardSize("big") : setCardSize("small")
-                }}>Change card size
-                </button>
-            </header>
-
             <section>
+                <header>
+                    <h1>Search result: <span>{recipesCounter}</span></h1>
+
+                    <button onClick={() => {
+                        cardSize === "small" ? setCardSize("big") : setCardSize("small")
+                    }}>Change card size
+                    </button>
+                </header>
+
                 {recipes.map((recipe, index) => (
                     cardSize === "small" ? (
                             <SmallCard
@@ -133,9 +171,14 @@ const QuickRecipes = () => {
                                 healthLabels={recipe.recipe.healthLabels}
                                 totalTime={recipe.recipe.totalTime}
                             />
-
                         )
                 ))}
+
+                <footer>
+                    <button onClick={() => goToPreviousPage()} disabled={pagesList.length === 1}>Previous</button>
+                    <span>{currentPage + 1} of {Math.ceil(recipesCounter / 20)}</span>
+                    <button onClick={() => goToNextPage()} disabled={nextPage === null}>Next</button>
+                </footer>
             </section>
 
             {recipes.length === 0 && (
