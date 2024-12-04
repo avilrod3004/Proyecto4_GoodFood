@@ -45,6 +45,7 @@ const RecipeInfo = () => {
             setLoadingRecipe(false);
         } catch (error) {
             setLoadingRecipe(false);
+            setError("Error: " + error);
         }
     }
 
@@ -59,6 +60,7 @@ const RecipeInfo = () => {
             setLoadingUser(false);
         } catch (error) {
             setLoadingUser(false);
+            setError("Error: " + error);
         }
     };
 
@@ -70,7 +72,7 @@ const RecipeInfo = () => {
                 uid: user.uid
             });
         } catch (error) {
-            console.error("Error:", error)
+            setError("Error: " + error)
         }
     }
 

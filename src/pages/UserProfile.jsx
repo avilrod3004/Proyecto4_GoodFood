@@ -45,7 +45,7 @@ const UserProfile = () => {
             setLoading(false);
         } catch (error) {
             setLoading(false);
-            setError(error);
+            setError("Error: " + error);
             setUserData(userDataInitial)
         }
     };
