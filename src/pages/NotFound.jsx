@@ -1,5 +1,7 @@
 import React from 'react';
 import {Link, useRouteError} from "react-router-dom";
+import errorImageLight from "../assets/error_404_modo_claro.png"
+import errorImageDark from "../assets/error_404_modo_oscuro.png"
 
 /**
  * Página de error 404
@@ -9,10 +11,12 @@ const NotFound = () => {
     const error = useRouteError()
     return (
         <>
-            <h1>Error 404</h1>
+            <img src={errorImageLight} alt="Error 404"/>
+            <h1>Page not found</h1>
             <p>{error.status}</p>
             <p>{error.statusText}</p>
-            <Link to="/">Volver al menu principal</Link>
+            <p>The page you&#39;re looking for doesn&#39;t exist or has been moved</p>
+            <Link to="/">Back to Home</Link>
         </>
     );
 };
