@@ -1,0 +1,48 @@
+.pie {
+  background-color: var(--footer-bg-color);
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  padding: 2rem 6rem;
+}
+
+.menu-cuentas__listado-cuentas {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.opcion-cuentas__enlace-cuentas {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.enlace-cuentas__logo {
+  height: 1.5rem;
+}
+
+.enlace-cuentas__nombre {
+  color: var(--footer-text-color);
+  font-weight: bold;
+}
+
+.menu-terminos__listado-terminos {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.opcion-terminos__enlace-terminos {
+  color: var(--footer-text-color);
+}
+
+.opcion-terminos__enlace-terminos:hover {
+  text-decoration: underline;
+}
+
+.opcion-terminos__separador {
+  color: var(--footer-text-color);
+}
