@@ -4,6 +4,7 @@ import Footer from "./components/Footer.jsx";
 import Navbar from "./components/Navbar.jsx";
 import Button from "../components/Button.jsx";
 import UserMenu from "./components/UserMenu.jsx";
+import Header from "./components/Header.jsx";
 
 /**
  * Esquema de las páginas públicas
@@ -12,11 +13,7 @@ import UserMenu from "./components/UserMenu.jsx";
 const LayoutPublic = () => {
     return (
         <>
-            <header style={{ border: `1px solid black` }}>
-                <h1>GoodFood</h1>
-                <Navbar/>
-                <UserMenu/>
-            </header>
+            <Header/>
 
             <Outlet/>
 

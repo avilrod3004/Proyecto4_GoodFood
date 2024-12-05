@@ -5,6 +5,7 @@ import Footer from "./components/Footer.jsx";
 import {UserContext} from "../context/UserContext.jsx";
 import {logOut} from "../config/Firebase.jsx";
 import UserMenu from "./components/UserMenu.jsx";
+import Header from "./components/Header.jsx";
 
 /**
  * Esquema de las páginas privadas.
@@ -24,11 +25,7 @@ const LayoutPrivate = () => {
 
     return (
         <>
-            <header style={{ border: `1px solid black` }}>
-                <h1>GoodFood</h1>
-                <Navbar/>
-                <UserMenu/>
-            </header>
+            <Header/>
 
             <Outlet/>
 

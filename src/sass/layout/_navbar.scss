@@ -1,0 +1,19 @@
+.menu__nombre {
+  color: var(--header-text-color);
+  font-size: 5rem;
+}
+
+.menu__listado {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.listado__opcion {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.listado__opcion:hover {
+  text-decoration: underline;
+}

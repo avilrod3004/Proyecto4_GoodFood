@@ -1,0 +1,25 @@
+.navegacion__usuario {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.usuario__listado {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.tema__imagen {
+  height: 2rem;
+}
+
+.boton__opcion {
+  @extend %botones;
+  background-color: var(--btn-secondary-bg-color);
+  color: var(--btn-secondary-text-color)
+}
+
+.boton__opcion:hover {
+  background-color: var(--btn-secondary-bg-color-hover)
+}
