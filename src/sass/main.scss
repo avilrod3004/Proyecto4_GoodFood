@@ -1,3 +1,17 @@
-h1 {
-  color: green;
-}
+// Utilities: variables, functions y mixins
+@import "utilities/variables";
+@import "utilities/mixins";
+@import "utilities/herencia";
+
+// Base
+@import "base/reset";
+@import "base/typo";
+
+// Layout
+
+// Components
+@import "layout/header";
+@import "layout/navbar";
+@import "layout/usermenu";
+
+// Pages/views
