@@ -120,7 +120,7 @@ const Login = () => {
 
     return (
         <>
-            <img src="/img_login.jpeg" alt="Img login"/>
+            <img src="/src/assets/img_login.jpeg" alt="Img login"/>
             <h1>Login</h1>
 
             <form onSubmit={handleSubmit}>

@@ -164,7 +164,7 @@ const Register = () => {
 
     return (
         <>
-            <img src="/img_register.jpeg" alt="Img login"/>
+            <img src="/src/assets/img_register.jpeg" alt="Img login"/>
             <h1>Create account</h1>
 
             <form onSubmit={handleSubmit}>
