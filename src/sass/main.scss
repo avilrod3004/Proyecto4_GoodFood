@@ -8,11 +8,12 @@
 @import "base/typo";
 
 // Layout
+@import "layout/header";
+@import "layout/footer";
 
 // Components
-@import "layout/header";
-@import "layout/navbar";
-@import "layout/usermenu";
-@import "layout/footer";
+@import "components/navbar";
+@import "components/usermenu";
+
 
 // Pages/views
