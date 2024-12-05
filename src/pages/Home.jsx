@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Button from "../components/Button.jsx";
-// import "../../public/img_home.jpeg"
+import Portada from "../assets/img_home.jpeg"
 import "../sass/main.scss"
 import SmallCard from "../components/SmallCard.jsx";
 
@@ -61,49 +61,47 @@ const Home = () => {
         }
     };
 
-
+    if (loading) return <p>Cargando...</p>;
+    if (error) return <p>Error: {error}</p>;
 
     return (
-        <>
-            <h1>Looking for new recipes</h1>
-            <h2>Bored of always eating the same thing?</h2>
-            <img src="/src/assets/img_home.jpeg" alt="Cocina" style={{'height': '300px'}} />
-            <Button texto="What would you like to cook?"></Button>
+        <main className="entrada">
+            <section className="entrada__portada">
+                <div className="portada__texto">
+                    <h1 className="texto__titulo">Looking for new recipes?</h1>
+                    <h2 className="texto__subtitulo">Bored of always eating the same thing?</h2>
+                    <a href="#" className="texto__boton">What would you like to cook?</a>
+                </div>
+                <img src={Portada} alt="Cocina" className="portada__imagen"/>
+            </section>
 
-            {loading && <p>Loading...</p>}
-            {error && <p>{error}</p>}
+            <section>
+                {currentRecipes.map((recipe, index) => (
+                    <SmallCard
+                        key={index}
+                        id={getRecipeId(recipe.recipe.uri)}
+                        image={recipe.recipe.images.THUMBNAIL.url}
+                        title={recipe.recipe.label}
+                        mealType={recipe.recipe.mealType}
+                        cuisineType={recipe.recipe.cuisineType}/>
+                ))}
+            </section>
 
-            {!loading && (
-                <>
-                    <section>
-                        {currentRecipes.map((recipe, index) => (
-                            <SmallCard
-                                key={index}
-                                id={getRecipeId(recipe.recipe.uri)}
-                                image={recipe.recipe.images.THUMBNAIL.url}
-                                title={recipe.recipe.label}
-                                mealType={recipe.recipe.mealType}
-                                cuisineType={recipe.recipe.cuisineType}/>
-                        ))}
-                    </section>
-
-                    <div>
-                        <button onClick={prevPage} disabled={currentPage === 1}>
-                            Previous
-                        </button>
-                        <span>
+            <nav>
+                <button onClick={prevPage} disabled={currentPage === 1}>
+                    Previous
+                </button>
+                <span>
                             Page {currentPage} of {Math.ceil(recipes.length / recipesPerPage)}
                         </span>
-                        <button
-                            onClick={nextPage}
-                            disabled={currentPage === Math.ceil(recipes.length / recipesPerPage)}
-                        >
-                            Next
-                        </button>
-                    </div>
-                </>
-            )}
-        </>
+                <button
+                    onClick={nextPage}
+                    disabled={currentPage === Math.ceil(recipes.length / recipesPerPage)}
+                >
+                    Next
+                </button>
+            </nav>
+        </main>
     );
 };
 
