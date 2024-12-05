@@ -67,7 +67,7 @@ const Home = () => {
         <>
             <h1>Looking for new recipes</h1>
             <h2>Bored of always eating the same thing?</h2>
-            <img src="/img_home.jpeg" alt="Cocina" style={{'height': '300px'}} />
+            <img src="/src/assets/img_home.jpeg" alt="Cocina" style={{'height': '300px'}} />
             <Button texto="What would you like to cook?"></Button>
 
             {loading && <p>Loading...</p>}
