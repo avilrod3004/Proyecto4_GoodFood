@@ -1,9 +1,6 @@
 import React from 'react';
-import {NavLink, Outlet} from "react-router-dom";
+import {Outlet} from "react-router-dom";
 import Footer from "./components/Footer.jsx";
-import Navbar from "./components/Navbar.jsx";
-import Button from "../components/Button.jsx";
-import UserMenu from "./components/UserMenu.jsx";
 import Header from "./components/Header.jsx";
 
 /**

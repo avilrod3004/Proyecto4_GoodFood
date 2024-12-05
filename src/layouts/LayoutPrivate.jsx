@@ -1,10 +1,7 @@
 import React, {useContext, useEffect} from 'react';
-import Navbar from "./components/Navbar.jsx";
-import {NavLink, Outlet, useNavigate} from "react-router-dom";
+import {Outlet, useNavigate} from "react-router-dom";
 import Footer from "./components/Footer.jsx";
 import {UserContext} from "../context/UserContext.jsx";
-import {logOut} from "../config/Firebase.jsx";
-import UserMenu from "./components/UserMenu.jsx";
 import Header from "./components/Header.jsx";
 
 /**
