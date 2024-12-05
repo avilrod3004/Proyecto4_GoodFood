@@ -8,6 +8,7 @@
 @import "base/typo";
 
 // Layout
+@import "layout/layout";
 @import "layout/header";
 @import "layout/footer";
 
@@ -15,5 +16,5 @@
 @import "components/navbar";
 @import "components/usermenu";
 
-
 // Pages/views
+@import "views/home";
