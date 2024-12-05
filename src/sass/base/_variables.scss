@@ -30,7 +30,7 @@
 
 
   /* --- MODO CLARO --- */
-  // Fondo
+  // Fondo página
   --page-bg-color: var(--gray-050);
   --page-containers-bg-color: var(--white);
 
@@ -75,11 +75,58 @@
 
   --btn-cancel-bg-color: var(--white);
   --btn-cancel-border-color: var(--indian-red-400);
-  --btn-cancel-border-color-hover: var(--indian-red-600);
   --btn-cancel-text-color: var(--indian-red-400);
+  --btn-cancel-border-color-hover: var(--indian-red-600);
   --btn-cancel-text-color-hover: var(--indian-red-600);
 }
 
 [data-theme="dark"] {
+  // Fondo página
+  --page-bg-color: var(--gray-500);
+  --page-containers-bg-color: var(--gray-900);
 
+  // Header
+  --header-bg-color: var(--cadet-blue-900);
+  --header-text-color: var(--white);
+
+  // Footer
+  --footer-bg-color: var(--cadet-blue-900);
+  --footer-text-color: var(--white);
+
+  // Texto
+  --h1-text-color: var(--cadet-blue-200);
+  --h2-text-color: var(--cadet-blue-300);
+  --h3-text-color: var(--cadet-blue-400);
+  --h4-text-color: var(--cadet-blue-500);
+  --h5-text-color: var(--cadet-blue-600);
+  --h6-text-color: var(--cadet-blue-700);
+  --p-text-color: var(--white);
+
+  // Formularios
+  --form-text-color: var(--white);
+  --form-input-bg-color: var(--gray-500);
+
+  // Cards
+  --card-bg-color: var(--gray-900);
+  --card-title-color: var(--indian-red-100);
+  --card-text-color: var(--white);
+  --card-reverse-text-color: var(--white);
+
+  // Iconos
+  --icon-color: var(--gray-050);
+
+  // Botones
+  --btn-primary-bg-color: var(--cadet-blue-200);
+  --btn-primaty-bg-color-hover: var(--cadet-blue-500);
+  --btn-primary-text-color: var(--gray-900);
+
+  --btn-secondary-bg-color: var(--gray-050);
+  --btn-secondary-bg-color-hover: var(--gray-500);
+  --btn-secondary-text-color: var(--cadet-blue-600);
+
+  --btn-cancel-bg-color: var(--gray-900);
+  --btn-cancel-border-color: var(--indian-red-400);
+  --btn-cancel-text-color: var(--indian-red-400);
+  --btn-cancel-border-color-hover: var(--indian-red-600);
+  --btn-cancel-text-color-hover: var(--indian-red-600);
 }
