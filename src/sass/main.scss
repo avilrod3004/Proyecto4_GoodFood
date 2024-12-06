@@ -1,4 +1,4 @@
-// Utilities: variables, functions y mixins
+// Utilities
 @import "utilities/variables";
 @import "utilities/mixins";
 @import "utilities/herencia";
@@ -17,6 +17,8 @@
 @import "components/navbar";
 @import "components/usermenu";
 @import "components/smallcard";
+@import "components/searchrecipes";
+@import "components/filterrecipes";
 
 // Pages/views
 @import "views/home";
