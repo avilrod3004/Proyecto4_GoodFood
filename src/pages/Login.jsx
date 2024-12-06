@@ -3,7 +3,6 @@ import {getUserData, login} from "../config/Firebase.jsx";
 import {useNavigate} from "react-router-dom";
 import {UserContext} from "../context/UserContext.jsx";
 import Loading from "../components/Loading.jsx";
-import {notifyError} from "../utils/Toast.jsx";
 
 /**
  * Formulario de inicio de sesión
@@ -111,6 +110,8 @@ const Login = () => {
         } catch (error) {
             if (error.code === "auth/invalid-credential") {
                 setErrorLogin("Invalid credentials")
+            } else {
+                setErrorLogin(error.message)
             }
         }
     }
@@ -176,7 +177,7 @@ const Login = () => {
 
                 <button disabled={disabledSubmit} type="submit">Login</button>
 
-                {errorLogin && notifyError(errorLogin, "light")}
+                {errorLogin && <p>{errorLogin}</p>}
             </form>
         </>
     );
