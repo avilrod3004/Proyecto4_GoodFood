@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import {notifySuccess} from "../utils/Toast.jsx";
 
 /**
  * Componente que muestra el formulario de contacto
@@ -136,18 +137,9 @@ const ContactUs = () => {
      */
     const send = event => {
         event.preventDefault();
-        notify();
+        notifySuccess("Message send!", "light");
         reset();
     }
-
-    /**
-     * Notifica al usuario de que se ha enviado correctamente
-     */
-    const notify = () => {
-        toast.success("Message sent!", {
-            position: "top-right",
-        });
-    };
 
     /**
      * Resetea el contenido del formulario
