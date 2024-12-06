@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FilterRecipes = ({filters, setFilters, filterErrors, setFilterErrors}) => {
+const FilterRecipes = ({filters, setFilters, filterErrors, setFilterErrors, page}) => {
     const mealTypesOptions = ["Breakfast", "Dinner", "Lunch", "Snack", "Teatime"];
     const cuisineTypeOptions = ["American", "Asian", "British", "Caribbean", "Chinese", "French", "Indian", "Italian", "Japanese", "Mediterranean", "Nordic"]
     const healthOptions = ["Alcohol-free", "Celery-free", "Dairy-free", "Egg-free", "Fish-free", "Gluten-free", "Low-sugar", "Mollusk-free", "Mustard-free", "Peanut-free", "Pork-free", "Soy-free", "Vegan", "Vegetarian", "Wheat-free"];
@@ -79,21 +79,25 @@ const FilterRecipes = ({filters, setFilters, filterErrors, setFilterErrors}) => 
 
                     <h1>Filters</h1>
 
-                    <fieldset>
-                        <legend>Meal type</legend>
-                        {mealTypesOptions.map((option) => (
-                            <label key={option}>
-                                <input
-                                    type="checkbox"
-                                    name="mealTypes"
-                                    value={option}
-                                    checked={filters.mealTypes.includes(option)}
-                                    onChange={validateInput}
-                                />
-                                {option}
-                            </label>
-                        ))}
-                    </fieldset>
+                    {
+                        page !== "mealsTypes" && (
+                            <fieldset>
+                                <legend>Meal type</legend>
+                                {mealTypesOptions.map((option) => (
+                                    <label key={option}>
+                                        <input
+                                            type="checkbox"
+                                            name="mealTypes"
+                                            value={option}
+                                            checked={filters.mealTypes.includes(option)}
+                                            onChange={validateInput}
+                                        />
+                                        {option}
+                                    </label>
+                                ))}
+                            </fieldset>
+                        )
+                    }
 
                     <fieldset>
                         <legend>Cuisine type</legend>
@@ -127,18 +131,22 @@ const FilterRecipes = ({filters, setFilters, filterErrors, setFilterErrors}) => 
                         ))}
                     </fieldset>
 
-                    <fieldset>
-                        <legend>Max. time</legend>
-                        <label>
-                            <input
-                                type="text"
-                                name="maxTime"
-                                value={filters.maxTime}
-                                onChange={validateInput}
-                            />
-                            {filterErrors.maxTime !== "" ? <p>{filterErrors.maxTime}</p> : null}
-                        </label>
-                    </fieldset>
+                    {
+                        page !== "quickrecipes" && (
+                            <fieldset>
+                                <legend>Max. time</legend>
+                                <label>
+                                    <input
+                                        type="text"
+                                        name="maxTime"
+                                        value={filters.maxTime}
+                                        onChange={validateInput}
+                                    />
+                                    {filterErrors.maxTime !== "" ? <p>{filterErrors.maxTime}</p> : null}
+                                </label>
+                            </fieldset>
+                        )
+                    }
                 </form>
             </aside>
         </>
