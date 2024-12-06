@@ -17,13 +17,15 @@ const SmallCard = ({id, image, title, mealType, cuisineType}) => {
     }
 
     return (
-        <article style={{ border: `1px solid black`}} onClick={() => {consultarReceta()}}>
-            <img src={image} alt={title}/>
-            <h1>{title}</h1>
-            <ul>
-                <li>{mealType}</li>
-                <li>{cuisineType}</li>
-            </ul>
+        <article className="receta-pequenia" onClick={() => {consultarReceta()}}>
+            <img className="receta-paquenia__imagen" src={image} alt={title}/>
+            <div className="receta-paquenia__texto-pequenia">
+                <h1 className="texto-pequenia__titulo">{title}</h1>
+                <ul className="texto-pequenia__listado">
+                    <li className="listado__dato">{mealType}</li>
+                    <li className="listado__dato">{cuisineType}</li>
+                </ul>
+            </div>
 
         </article>
     );

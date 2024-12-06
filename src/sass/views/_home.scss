@@ -51,3 +51,12 @@
   flex: 1;
   max-width: 50%;
 }
+
+.entrada__aletatorias {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  @include padding(4rem, 6rem);
+}

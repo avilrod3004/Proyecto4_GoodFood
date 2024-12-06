@@ -1,0 +1,44 @@
+.receta-pequenia {
+  background-color: var(--card-bg-color) ;
+
+  height: 24.5rem;
+  width: 19rem;
+
+  cursor: pointer;
+}
+
+.receta-paquenia__imagen {
+  width: 100%;
+  height: 12rem;
+  object-fit: cover;
+}
+
+.receta-paquenia__texto-pequenia {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  @include padding(0.5rem, 1rem)
+}
+
+.texto-pequenia__titulo {
+  color: var(--card-title-color);
+  font-size: 2.5rem;
+
+  // El titulo ocupa 2 lineas
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+}
+
+.texto-pequenia__listado {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.listado__dato {
+  font-size: 1.25rem;
+}

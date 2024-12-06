@@ -19,7 +19,7 @@ const Home = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [currentPage, setCurrentPage] = useState(1); // Página actual
-    const recipesPerPage = 10; // Número de recetas por página
+    const recipesPerPage = 20; // Número de recetas por página
 
     /**
      * Llamada a la API para obtener 20 recetas aleatorias
@@ -75,12 +75,12 @@ const Home = () => {
                 <img src={Portada} alt="Cocina" className="portada__imagen"/>
             </section>
 
-            <section>
+            <section className="entrada__aletatorias">
                 {currentRecipes.map((recipe, index) => (
                     <SmallCard
                         key={index}
                         id={getRecipeId(recipe.recipe.uri)}
-                        image={recipe.recipe.images.THUMBNAIL.url}
+                        image={recipe.recipe.image}
                         title={recipe.recipe.label}
                         mealType={recipe.recipe.mealType}
                         cuisineType={recipe.recipe.cuisineType}/>
