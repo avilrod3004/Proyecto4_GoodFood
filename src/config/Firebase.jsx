@@ -36,29 +36,24 @@ export const logOut = () => signOut(auth);
  * @returns {Promise<void>}
  */
 export const saveUserData = async (user) => {
-    try {
-        const userRef = doc(db, "users", user.uid); // Documento del usuario
-        await setDoc(
-            userRef,
-            {
-                userName: user.userName || "",
-                picture: user.picture || "",
-                biography: user.biography || "",
-                website: user.website || "",
-                socialAccount1: user.socialAccount1 || "",
-                socialAccount2: user.socialAccount2 || "",
-                socialAccount3: user.socialAccount3 || "",
-                name: user.name || "",
-                lastName: user.lastName || "",
-                phone: user.phone || "",
-                favoriteRecipes: user.favoriteRecipes || [],
-            },
-            { merge: true } // Para no sobrescribir datos existentes
-        );
-        console.log("Datos del usuario guardados correctamente.");
-    } catch (error) {
-        console.error("Error al guardar los datos del usuario:", error);
-    }
+    const userRef = doc(db, "users", user.uid); // Documento del usuario
+    await setDoc(
+        userRef,
+        {
+            userName: user.userName || "",
+            picture: user.picture || "",
+            biography: user.biography || "",
+            website: user.website || "",
+            socialAccount1: user.socialAccount1 || "",
+            socialAccount2: user.socialAccount2 || "",
+            socialAccount3: user.socialAccount3 || "",
+            name: user.name || "",
+            lastName: user.lastName || "",
+            phone: user.phone || "",
+            favoriteRecipes: user.favoriteRecipes || [],
+        },
+        { merge: true } // Para no sobrescribir datos existentes
+    );
 };
 
 /**
