@@ -5,6 +5,7 @@ import Home from "../pages/Home.jsx";
 import Login from "../pages/Login.jsx";
 import Register from "../pages/Register.jsx";
 import React from "react";
+import AllRecipes from "../pages/AllRecipes.jsx";
 
 const QuickRecipes = React.lazy(() => import("../pages/QuickRecipes"));
 const ContactUs = React.lazy(() => import("../pages/ContactUs.jsx"));
@@ -27,6 +28,7 @@ const privateRoutes = [
     { path: "/quickrecipes", element: <QuickRecipes /> },
     { path: "/breakfast", element: <Breakfast /> },
     { path: "/lunchdinner", element: <LunchDinner /> },
+    { path: "/allrecipes", element: <AllRecipes /> },
     { path: "/profile", element: <UserProfile /> },
     { path: "/profile/update", element: <UpdateUserProfile /> },
 ];

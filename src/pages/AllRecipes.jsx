@@ -1,21 +1,21 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import SearchRecipes from "../components/SearchRecipes.jsx";
 
-const QuickRecipes = () => {
+const AllRecipes = () => {
     // Estado inicial
     const filtersInitialValues = {
         q: "",
         mealTypes: [],
         cuisineTypes: [],
         health: [],
-        maxTime: "15" // Aplicar filtro por defecto
+        maxTime: ""
     }
 
     return (
         <>
-            <SearchRecipes filtersInitialValues={filtersInitialValues} page="quickRecipes" />
+            <SearchRecipes filtersInitialValues={filtersInitialValues} page="" />
         </>
     );
 };
 
-export default QuickRecipes;
+export default AllRecipes;

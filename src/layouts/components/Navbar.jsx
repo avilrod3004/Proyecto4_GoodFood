@@ -23,6 +23,9 @@ const Navbar = () => {
                     <NavLink to="/lunchdinner" className="opcion__enlace">Lunch/dinner</NavLink>
                 </li>
                 <li className="listado__opcion">
+                    <NavLink to="/allrecipes" className="opcion__enlace">All recipes</NavLink>
+                </li>
+                <li className="listado__opcion">
                     <NavLink to="/contactus" className="opcion__enlace">Contact us</NavLink>
                 </li>
             </ul>
