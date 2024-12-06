@@ -154,7 +154,7 @@ const QuickRecipes = () => {
                             <SmallCard
                                 key={index}
                                 id={getRecipeId(recipe.recipe.uri)}
-                                image={recipe.recipe.images.THUMBNAIL.url}
+                                image={recipe.recipe.image}
                                 title={recipe.recipe.label}
                                 mealType={recipe.recipe.mealType}
                                 cuisineType={recipe.recipe.cuisineType}
@@ -164,7 +164,7 @@ const QuickRecipes = () => {
                             <BigCard
                                 key={index}
                                 id={getRecipeId(recipe.recipe.uri)}
-                                image={recipe.recipe.images.THUMBNAIL.url}
+                                image={recipe.recipe.images}
                                 title={recipe.recipe.label}
                                 mealType={recipe.recipe.mealType}
                                 cuisineType={recipe.recipe.cuisineType}
