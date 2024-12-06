@@ -28,7 +28,9 @@ const UserProfile = () => {
 
     // Funciones
 
-    // Obtener los datos del usuario de la base de datos
+    /**
+     * Obtener los datos del usuario almacenados en localStorage
+     */
     const getUserData = () => {
         const data = JSON.parse(localStorage.getItem("user"));
 
@@ -42,7 +44,7 @@ const UserProfile = () => {
 
     // Cuando el usuario logueado se haya cargado
     useEffect(() => {
-        if (user?.uid) {
+        if (user) {
             getUserData();
         }
     }, [])
