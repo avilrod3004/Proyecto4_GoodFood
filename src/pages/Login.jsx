@@ -33,32 +33,6 @@ const Login = () => {
     const {user} = useContext(UserContext);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (user) {
-            fetchUserData(user.uid);
-        }
-    }, [user])
-
-    // Obtener los datos del usuario de la base de datos
-    const fetchUserData = async (uid) => {
-        try {
-            setLoading(true);
-            const data = await getUserData(uid);
-
-            if (data === null) {
-                throw new Error("User not found");
-            }
-
-            localStorage.setItem("user", JSON.stringify(data));
-            navigate("/profile");
-
-            setLoading(false);
-        } catch (error) {
-            setLoading(false);
-            setErrorLogin("Error: " + error);
-        }
-    };
-
     // Funciones
     /**
      * Valida que las entradas del usuario sean válidas
@@ -140,6 +114,32 @@ const Login = () => {
             }
         }
     }
+
+    // Obtener los datos del usuario de la base de datos
+    const fetchUserData = async (uid) => {
+        try {
+            setLoading(true);
+            const data = await getUserData(uid);
+
+            if (data === null) {
+                throw new Error("User not found");
+            }
+
+            localStorage.setItem("user", JSON.stringify(data));
+            navigate("/profile");
+
+            setLoading(false);
+        } catch (error) {
+            setLoading(false);
+            setErrorLogin("Error: " + error);
+        }
+    };
+
+    useEffect(() => {
+        if (user) {
+            fetchUserData(user.uid);
+        }
+    }, [user])
 
     if (loading) return <Loading />;
 
