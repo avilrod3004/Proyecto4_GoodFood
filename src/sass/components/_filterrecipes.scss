@@ -1,0 +1,20 @@
+.filter__formulario-filtros {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.formulario-filtros__fieldset-filtros {
+  display: flex;
+  flex-direction: column;
+}
+
+.fieldset-filtros__leyenda-filtros {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--form-legend_text-color);
+}
+
+.leyenda__checkbox {
+  display: flex;
+}

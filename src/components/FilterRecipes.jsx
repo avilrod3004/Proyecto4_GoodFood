@@ -1,4 +1,5 @@
 import React from 'react';
+import {validateIngredients, validateMinutes} from "../utils/ValidateForms.jsx";
 
 const FilterRecipes = ({filters, setFilters, filterErrors, setFilterErrors, page}) => {
     const mealTypesOptions = ["Breakfast", "Dinner", "Lunch", "Snack", "Teatime"];
@@ -52,22 +53,12 @@ const FilterRecipes = ({filters, setFilters, filterErrors, setFilterErrors, page
         }
     }
 
-    const validateIngredients = text => {
-        const regex = /^[a-zA-Z]+(\s[a-zA-Z]+)*$/i;
-        return regex.test(text);
-    }
-
-    const validateMinutes = minutes => {
-        const regex = /^[1-9]\d*$/;
-        return regex.test(minutes);
-    }
-
     return (
         <>
-            <aside>
-                <form action="">
-                    <label htmlFor="q">
-                        Ingredient:
+            <form className="filter__formulario-filtros">
+                <fieldset className="formulario-filtros__fieldset-filtros">
+                    <legend className="fieldset-filtros__leyenda-filtros">Ingredients</legend>
+                    <label htmlFor="q" className="leyenda-filtros__label">
                         <input
                             type="text"
                             name="q"
@@ -76,79 +67,77 @@ const FilterRecipes = ({filters, setFilters, filterErrors, setFilterErrors, page
                         />
                         {filterErrors.q !== "" ? <p>{filterErrors.q}</p> : null}
                     </label>
+                </fieldset>
 
-                    <h1>Filters</h1>
-
-                    {
-                        page !== "mealsTypes" && (
-                            <fieldset>
-                                <legend>Meal type</legend>
-                                {mealTypesOptions.map((option) => (
-                                    <label key={option}>
-                                        <input
-                                            type="checkbox"
-                                            name="mealTypes"
-                                            value={option}
-                                            checked={filters.mealTypes.includes(option)}
-                                            onChange={validateInput}
-                                        />
-                                        {option}
-                                    </label>
-                                ))}
-                            </fieldset>
-                        )
-                    }
-
-                    <fieldset>
-                        <legend>Cuisine type</legend>
-                        {cuisineTypeOptions.map((option) => (
-                            <label key={option}>
-                                <input
-                                    type="checkbox"
-                                    name="cuisineTypes"
-                                    value={option}
-                                    checked={filters.cuisineTypes.includes(option)}
-                                    onChange={validateInput}
-                                />
-                                {option}
-                            </label>
-                        ))}
-                    </fieldset>
-
-                    <fieldset>
-                        <legend>Health</legend>
-                        {healthOptions.map((option) => (
-                            <label key={option}>
-                                <input
-                                    type="checkbox"
-                                    name="health"
-                                    value={option}
-                                    checked={filters.health.includes(option)}
-                                    onChange={validateInput}
-                                />
-                                {option}
-                            </label>
-                        ))}
-                    </fieldset>
-
-                    {
-                        page !== "quickRecipes" && (
-                            <fieldset>
-                                <legend>Max. time</legend>
-                                <label>
+                {
+                    page !== "mealsTypes" && (
+                        <fieldset className="formulario-filtros__fieldset-filtros">
+                            <legend className="fieldset-filtros__leyenda-filtros">Meal type</legend>
+                            {mealTypesOptions.map((option) => (
+                                <label key={option} className="leyenda-filtros__checkbox">
                                     <input
-                                        type="text"
-                                        name="maxTime"
-                                        value={filters.maxTime}
+                                        type="checkbox"
+                                        name="mealTypes"
+                                        value={option}
+                                        checked={filters.mealTypes.includes(option)}
                                         onChange={validateInput}
                                     />
-                                    {filterErrors.maxTime !== "" ? <p>{filterErrors.maxTime}</p> : null}
+                                    {option}
                                 </label>
-                            </fieldset>
-                        )
-                    }
-                </form>
-            </aside>
+                            ))}
+                        </fieldset>
+                    )
+                }
+
+                <fieldset className="formulario-filtros__fieldset-filtros">
+                    <legend className="fieldset-filtros__leyenda-filtros">Cuisine type</legend>
+                    {cuisineTypeOptions.map((option) => (
+                        <label key={option} className="leyenda-filtros__checkbox">
+                            <input
+                                type="checkbox"
+                                name="cuisineTypes"
+                                value={option}
+                                checked={filters.cuisineTypes.includes(option)}
+                                onChange={validateInput}
+                            />
+                            {option}
+                        </label>
+                    ))}
+                </fieldset>
+
+                <fieldset className="formulario-filtros__fieldset-filtros">
+                    <legend className="fieldset-filtros__leyenda-filtros">Health</legend>
+                    {healthOptions.map((option) => (
+                        <label key={option} className="leyenda-filtros__checkbox">
+                            <input
+                                type="checkbox"
+                                name="health"
+                                value={option}
+                                checked={filters.health.includes(option)}
+                                onChange={validateInput}
+                            />
+                            {option}
+                        </label>
+                    ))}
+                </fieldset>
+
+                {
+                    page !== "quickRecipes" && (
+                        <fieldset className="formulario-filtros__fieldset-filtros">
+                            <legend className="fieldset-filtros__leyenda-filtros">Max. time</legend>
+                            <label className="leyenda-filtros__checkbox">
+                                <input
+                                    type="text"
+                                    name="maxTime"
+                                    value={filters.maxTime}
+                                    onChange={validateInput}
+                                />
+                                {filterErrors.maxTime !== "" ? <p>{filterErrors.maxTime}</p> : null}
+                            </label>
+                        </fieldset>
+                    )
+                }
+            </form>
         </>
     );
 };
