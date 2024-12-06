@@ -4,6 +4,7 @@ import {UserContext} from "../context/UserContext.jsx";
 import {getUserData, saveUserData} from "../config/Firebase.jsx";
 import {ToastContainer} from "react-toastify";
 import {notifySuccess, notifyWarning} from "../utils/Toast.jsx";
+import Loading from "../components/Loading.jsx";
 
 const RecipeInfo = () => {
 
@@ -33,9 +34,7 @@ const RecipeInfo = () => {
     const [recipe, setRecipe] = useState({});
     const [recipeFavorite, setRecipeFavorite] = useState(false);
     const [loadingRecipe, setLoadingRecipe] = useState(true);
-    const [loadingUser, setLoadingUser] = useState(true);
     const [error, setError] = useState("");
-    const {user, setUser} = useContext(UserContext);
     const [userData, setUserData] = useState(userDataInitial);
 
     // Llama a la API para obtener la información de la receta
@@ -52,35 +51,22 @@ const RecipeInfo = () => {
     }
 
     // Obtener los datos del usuario de la base de datos
-    const fetchUserData = async (uid) => {
-        try {
-            const data = await getUserData(uid);
-            setUserData({
-                ...userDataInitial,
-                ...data,
-            });
-            setLoadingUser(false);
-        } catch (error) {
-            setLoadingUser(false);
-            setError("Error: " + error);
-        }
+    const getUserData = () => {
+        const data = JSON.parse(localStorage.getItem("user"));
+        setUserData({
+            ...userDataInitial,
+            ...data,
+        });
     };
 
     // Actualizar los datos del usuario en la base de datos
-    const updateUserData = async (updatedData, action) => {
-        try {
-            await saveUserData({
-                ...updatedData,
-                uid: user.uid
-            });
+    const updateUserData = (updatedData, action) => {
+        localStorage.setItem("user", JSON.stringify(updatedData));
 
-            if (action === "marked") {
-                notifySuccess("Marked recipe", "light")
-            } else {
-                notifyWarning("Unmarked recipe", "light");
-            }
-        } catch (error) {
-            setError("Error: " + error)
+        if (action === "marked") {
+            notifySuccess("Marked recipe", "light")
+        } else {
+            notifyWarning("Unmarked recipe", "light");
         }
     }
 
@@ -88,7 +74,7 @@ const RecipeInfo = () => {
     const getRecipeId = (recipeUri) => recipeUri.split('recipe_')[1]
 
     // Agregar una receta a favoritos
-    const addFavorite = async () => {
+    const addFavorite = () => {
         const recipesList = userData.favoriteRecipes || [];
         const recipeData = {
             id: getRecipeId(recipe.uri),
@@ -108,13 +94,13 @@ const RecipeInfo = () => {
         }
 
         setUserData(updatedUserData);
-        await updateUserData(updatedUserData, "marked");
+        updateUserData(updatedUserData, "marked");
 
         setRecipeFavorite(true);
     }
 
     // Eliminar una receta de favoritos
-    const deteteFavorite = async () => {
+    const deteteFavorite = () => {
         const updateFavoriteRecipes = userData.favoriteRecipes.filter((recipeSaved) => recipeSaved.id !== getRecipeId(recipe.uri));
 
         const updatedUserData = {
@@ -123,7 +109,7 @@ const RecipeInfo = () => {
         };
 
         setUserData(updatedUserData);
-        await updateUserData(updatedUserData, "unmarked");
+        updateUserData(updatedUserData, "unmarked");
 
         setRecipeFavorite(false);
     }
@@ -137,18 +123,18 @@ const RecipeInfo = () => {
     // Al cargar la página
     useEffect(() => {
         getRecipeInfo();
-        fetchUserData(user.uid);
+        getUserData();
     }, [])
 
     // Verificar si la receta está marcada como favorita cuando los datos estén listos
     useEffect(() => {
-        if (!loadingRecipe && !loadingUser && recipe.uri) {
+        if (!loadingRecipe && recipe.uri) {
             const marked = isMarked();
             setRecipeFavorite(marked);
         }
-    }, [loadingRecipe, loadingUser, recipe, userData]);
+    }, [loadingRecipe, recipe, userData]);
 
-    if (loadingRecipe || loadingUser) return <p>Cargando...</p>;
+    if (loadingRecipe) return <Loading/>;
     if (error) return <p>Error: {error}</p>;
 
 
