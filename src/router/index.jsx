@@ -15,117 +15,39 @@ const NotFound = React.lazy(() => import("../pages/NotFound"));
 const RecipeInfo = React.lazy(() => import("../pages/RecipeInfo"));
 const UpdateUserProfile = React.lazy(() => import("../pages/UpdateUserProfile"));
 
-export const router = createBrowserRouter([
+const publicRoutes = [
+    { path: "/", element: <Home /> },
+    { path: "/login", element: <Login /> },
+    { path: "/register", element: <Register /> },
+    { path: "/contactus", element: <ContactUs /> },
+];
 
+const privateRoutes = [
+    { path: "/recipe/:id", element: <RecipeInfo /> },
+    { path: "/quickrecipes", element: <QuickRecipes /> },
+    { path: "/breakfast", element: <Breakfast /> },
+    { path: "/lunchdinner", element: <LunchDinner /> },
+    { path: "/profile", element: <UserProfile /> },
+    { path: "/profile/update", element: <UpdateUserProfile /> },
+];
+
+export const router = createBrowserRouter([
     {
         path: "/",
-        element: <LayoutPublic/>,
-        errorElement: <NotFound/>,
-        children: [
-            {
-                index: true,
-                element: <Home/>
-            }
-        ]
+        element: <LayoutPublic />,
+        errorElement: <NotFound />,
+        children: publicRoutes.map((route) => ({
+            index: route.path === "/" ? true : undefined,
+            ...route,
+        })),
     },
     {
-        path: "/recipe/:id",
-        element: <LayoutPrivate/>,
-        errorElement: <NotFound/>,
-        children: [
-            {
-                index: true,
-                element: <RecipeInfo/>
-            }
-        ]
+        path: "/",
+        element: <LayoutPrivate />,
+        errorElement: <NotFound />,
+        children: privateRoutes.map((route) => ({
+            index: route.path === "/recipe/:id" ? true : undefined,
+            ...route,
+        })),
     },
-    {
-        path: "/login",
-        element: <LayoutPublic/>,
-        errorElement: <NotFound/>,
-        children: [
-            {
-                index: true,
-                element: <Login/>
-            }
-        ]
-    },
-    {
-        path: "/register",
-        element: <LayoutPublic/>,
-        errorElement: <NotFound/>,
-        children: [
-            {
-                index: true,
-                element: <Register/>
-            }
-        ]
-    },
-    {
-        path: "/quickrecipes",
-        element: <LayoutPrivate/>,
-        errorElement: <NotFound/>,
-        children: [
-            {
-                index: true,
-                element: <QuickRecipes/>
-            }
-        ]
-    },
-    {
-        path: "/breakfast",
-        element: <LayoutPrivate/>,
-        errorElement: <NotFound/>,
-        children: [
-            {
-                index: true,
-                element: <Breakfast/>
-            }
-        ]
-    },
-    {
-        path: "/lunchdinner",
-        element: <LayoutPrivate/>,
-        errorElement: <NotFound/>,
-        children: [
-            {
-                index: true,
-                element: <LunchDinner/>
-            }
-        ]
-    },
-    {
-        path: "/contactus",
-        element: <LayoutPublic/>,
-        errorElement: <NotFound/>,
-        children: [
-            {
-                index: true,
-                element: <ContactUs/>
-            }
-        ]
-    },
-    {
-        path: "/profile",
-        element: <LayoutPrivate/>,
-        errorElement: <NotFound/>,
-        children: [
-            {
-                index: true,
-                element: <UserProfile/>
-            }
-        ]
-    },
-    {
-        path: "/profile/update",
-        element: <LayoutPrivate/>,
-        errorElement: <NotFound/>,
-        children: [
-            {
-                index: true,
-                element: <UpdateUserProfile/>
-            }
-        ]
-    }
-
-])
+]);
