@@ -2,6 +2,8 @@ import React, {useContext, useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import {UserContext} from "../context/UserContext.jsx";
 import {getUserData, saveUserData} from "../config/Firebase.jsx";
+import {ToastContainer} from "react-toastify";
+import {notifySuccess, notifyWarning} from "../utils/Toast.jsx";
 
 const RecipeInfo = () => {
 
@@ -65,12 +67,18 @@ const RecipeInfo = () => {
     };
 
     // Actualizar los datos del usuario en la base de datos
-    const updateUserData = async (updatedData) => {
+    const updateUserData = async (updatedData, action) => {
         try {
             await saveUserData({
                 ...updatedData,
                 uid: user.uid
             });
+
+            if (action === "marked") {
+                notifySuccess("Marked recipe", "light")
+            } else {
+                notifyWarning("Unmarked recipe", "light");
+            }
         } catch (error) {
             setError("Error: " + error)
         }
@@ -100,7 +108,7 @@ const RecipeInfo = () => {
         }
 
         setUserData(updatedUserData);
-        await updateUserData(updatedUserData);
+        await updateUserData(updatedUserData, "marked");
 
         setRecipeFavorite(true);
     }
@@ -115,7 +123,7 @@ const RecipeInfo = () => {
         };
 
         setUserData(updatedUserData);
-        await updateUserData(updatedUserData);
+        await updateUserData(updatedUserData, "unmarked");
 
         setRecipeFavorite(false);
     }
@@ -183,6 +191,8 @@ const RecipeInfo = () => {
                 </ul>
 
                 <a href={recipe.url} target="_blank">More details</a>
+
+                <ToastContainer />
             </article>
         </>
 
