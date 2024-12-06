@@ -28,7 +28,7 @@ const UserMenu = () => {
                             <NavLink to="/profile" className="boton__opcion">My profile</NavLink>
                         </li>
                         <li className="listado__boton">
-                            <NavLink to="/" className="boton__opcion">Edit profile</NavLink>
+                            <NavLink to="/profile/update" className="boton__opcion">Edit profile</NavLink>
                         </li>
                         <li className="listado__boton">
                             <NavLink onClick={handleLogout} to="/" className="boton__opcion">Log out</NavLink>
