@@ -5,10 +5,10 @@ const LunchDinner = () => {
     // Estado inicial
     const filtersInitialValues = {
         q: "",
-        mealTypes: ["Dinner", "Lunch"],
+        mealTypes: ["Dinner", "Lunch"], // Aplicar filtro por defecto
         cuisineTypes: [],
         health: [],
-        maxTime: "" // Aplicar filtro por defecto
+        maxTime: ""
     }
 
     return (
