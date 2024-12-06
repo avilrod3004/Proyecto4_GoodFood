@@ -1,7 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {UserContext} from "../context/UserContext.jsx";
 import {useNavigate} from "react-router-dom";
-import {getUserData} from "../config/Firebase.jsx";
 import {ToastContainer} from "react-toastify";
 import {notifySuccess} from "../utils/Toast.jsx";
 
