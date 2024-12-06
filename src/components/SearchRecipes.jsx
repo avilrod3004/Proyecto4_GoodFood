@@ -3,6 +3,10 @@ import FilterRecipes from "../components/FilterRecipes.jsx";
 import SmallCard from "../components/SmallCard.jsx";
 import BigCard from "../components/BigCard.jsx";
 import Loading from "../components/Loading.jsx";
+import BigCardLight from "../../src/assets/big_cards_light.svg";
+import BigCardDark from "../../src/assets/big_cards_dark.svg";
+import SmallCardLight from "../../src/assets/small_cards_light.svg";
+import SmallCardDark from "../../src/assets/small_cards_dark.svg";
 
 const SearchRecipes = ({filtersInitialValues, page}) => {
 
@@ -124,23 +128,47 @@ const SearchRecipes = ({filtersInitialValues, page}) => {
     if (error) return <p>Error: {error}</p>;
 
     return (
-        <>
-            <FilterRecipes
-                filters={filters}
-                setFilters={setFilters}
-                filterErrors={filterErrors}
-                setFilterErrors={setFilterErrors}
-                page={page}
-            />
+        <main className="busqueda">
+            <aside className="busqueda__filtros">
+                <FilterRecipes
+                    filters={filters}
+                    setFilters={setFilters}
+                    filterErrors={filterErrors}
+                    setFilterErrors={setFilterErrors}
+                    page={page}
+                />
+            </aside>
 
-            <section>
-                <header>
-                    <h1>Search result: <span>{recipesCounter}</span></h1>
+            <section className="busqueda__resultados">
+                <header className="resultados__encabezado">
+                    <p className="encabezado__contador">
+                        Search result:
+                        <span className="contador__numero">{recipesCounter} results</span>
+                    </p>
 
-                    <button onClick={() => {
-                        cardSize === "small" ? setCardSize("big") : setCardSize("small")
-                    }}>Change card size
-                    </button>
+                    <a
+                        className="encabezado__vista"
+                        onClick={() => {
+                            cardSize === "small" ? setCardSize("big") : setCardSize("small")
+                        }}
+                    >
+                        {
+                            cardSize === "small"
+                                ? (
+                                    <img
+                                        className="vista__imagen"
+                                        src={BigCardLight}
+                                        alt="Change cards size"
+                                    />
+                                ) : (
+                                    <img
+                                        className="vista__imagen"
+                                        src={SmallCardLight}
+                                        alt="Change cards size"
+                                    />
+                                )
+                        }
+                    </a>
                 </header>
 
                 {recipes.map((recipe, index) => (
@@ -168,17 +196,32 @@ const SearchRecipes = ({filtersInitialValues, page}) => {
                         )
                 ))}
 
-                <footer>
-                    <button onClick={() => goToPreviousPage()} disabled={pagesList.length === 1}>Previous</button>
-                    <span>{currentPage + 1} of {Math.ceil(recipesCounter / 20)}</span>
-                    <button onClick={() => goToNextPage()} disabled={nextPage === null}>Next</button>
-                </footer>
+                <nav className="resultados__paginacion">
+                    <button
+                        className="paginacion__boton"
+                        onClick={() => goToPreviousPage()}
+                        disabled={pagesList.length === 1}
+                    >
+                        Previous
+                    </button>
+
+                    <span className="paginacion__texto">
+                        {currentPage + 1} of {Math.ceil(recipesCounter / 20)}
+                    </span>
+                    <button
+                        className="paginacion__boton"
+                        onClick={() => goToNextPage()}
+                        disabled={nextPage === null}
+                    >
+                        Next
+                    </button>
+                </nav>
             </section>
 
             {recipes.length === 0 && (
                 <p>Nothing found :(</p>
             )}
-        </>
+        </main>
     );
 };
 

@@ -1,0 +1,68 @@
+.busqueda {
+  display: flex;
+}
+
+
+/* --- FILTROS DE BÚSQUEDA --- */
+
+.busqueda__filtros {
+  background-color: var(--page-containers-bg-color);
+
+  flex: 1;
+
+  @include padding(2rem, 2rem, 6rem, 2rem)
+}
+
+
+/* --- RESULTADOS --- */
+
+.busqueda__resultados {
+  flex: 3;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+
+  @include padding(2rem, 2rem, 2rem, 6rem)
+}
+
+.resultados__encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  width: 100%;
+}
+
+.encabezado__contador {
+  color: var(--results-text-color);
+  font-size: 2rem;
+  font-family: "Medula One", Helvetica, Arial, sans-serif;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.contador__numero {
+  color: var(--black);
+  font-size: 1.25rem;
+  font-family: "Asap", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+}
+
+.vista__imagen {
+  height: 2rem;
+
+  cursor: pointer;
+}
+
+
+/* --- PAGINACIÓN --- */
+
+.resultados__paginacion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  width: 100%;
+}
