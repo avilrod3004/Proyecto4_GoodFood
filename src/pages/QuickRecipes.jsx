@@ -137,6 +137,7 @@ const QuickRecipes = () => {
                 setFilters={setFilters}
                 filterErrors={filterErrors}
                 setFilterErrors={setFilterErrors}
+                page="quickrecipes"
             />
 
             <section>
