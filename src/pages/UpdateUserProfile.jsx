@@ -1,6 +1,9 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {UserContext} from "../context/UserContext.jsx";
 import {useNavigate} from "react-router-dom";
+import {getUserData} from "../config/Firebase.jsx";
+import {ToastContainer} from "react-toastify";
+import {notifySuccess} from "../utils/Toast.jsx";
 
 const UpdateUserProfile = () => {
     // Estados iniciales
@@ -34,12 +37,14 @@ const UpdateUserProfile = () => {
     const {user, setUser} = useContext(UserContext);
     const [userData, setUserData] = useState(userDataInitial);
     const [errorMessages, setErrorMessages] = useState(errorMessagesInitial);
+    const [loading, setLoading] = useState(true);
     const [disabledSend, setDisabledSend] = useState(false);
 
     const navigate = useNavigate();
-    const requiredInputs = ["userName", "picture", "biography", "name"];
+    const requiredInputs = ["userName", "picture", "biography"];
 
     // Funciones
+
     const validateInput = event => {
         const {name, value, type} = event.target
 
@@ -48,7 +53,7 @@ const UpdateUserProfile = () => {
             [name]: ""
         })
 
-        if (!value.trim() && requiredInputs.includes(value)) {
+        if (!value.trim() && requiredInputs.includes(name)) {
             setErrorMessages({
                 ...errorMessages,
                 [name]: "This field is required"
@@ -102,13 +107,35 @@ const UpdateUserProfile = () => {
         setDisabledSend(!Object.values(errorMessages).every(value => value === ""));
     }
 
-    const save = () => {
+    /**
+     * Obtener los datos del usuario almacenados en localStorage
+     */
+    const getUserData = () => {
+        const data = JSON.parse(localStorage.getItem("user"));
 
+        setUserData({...data});
+
+        setLoading(false);
     }
+
+    const updateUserData = event => {
+        event.preventDefault();
+
+        localStorage.setItem("user", JSON.stringify(userData));
+        navigate("/profile");
+        notifySuccess("Updated profile", "light")
+    }
+
+    // Cuando el usuario logueado se haya cargado
+    useEffect(() => {
+        if (user) {
+            getUserData();
+        }
+    }, [])
 
     return (
         <>
-            <form action="">
+            <form action="" onSubmit={updateUserData}>
                 <fieldset>
                     <legend>Profile <span>(public)</span></legend>
 
@@ -126,7 +153,7 @@ const UpdateUserProfile = () => {
                     <label htmlFor="picture">
                         Picture:
                         <input
-                            type="file"
+                            type="text"
                             name="picture"
                             value={userData.picture}
                             onChange={validateInput}
@@ -229,10 +256,12 @@ const UpdateUserProfile = () => {
                     </label>
                 </fieldset>
 
-                <button disabled={disabledSend} onClick={() => save()}>Save</button>
+                <button disabled={disabledSend} type="submit">Save</button>
                 <button onClick={() => navigate("/profile")}>Cancel</button>
 
             </form>
+
+            <ToastContainer />
         </>
     );
 };
