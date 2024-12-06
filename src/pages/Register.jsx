@@ -11,14 +11,14 @@ import Loading from "../components/Loading.jsx";
 const Register = () => {
     // Estados inciales
     const initialState = {
-        name: "",
+        userName: "",
         email: "",
         password: "",
         repeatPassword: ""
     }
 
     const errorMessagesInitial = {
-        name: "",
+        userName: "",
         email: "",
         password: "",
         repeatPassword: ""
@@ -155,7 +155,10 @@ const Register = () => {
     const saveNewUser = async () => {
         try {
             setLoading(true);
-            await saveUserData({...user, password: user.password})
+            await saveUserData({
+                uid: user.uid,
+                userName: userAccount.userName,
+            })
             const data = await getUserData(user.uid);
 
             if (data === null) {
@@ -186,16 +189,16 @@ const Register = () => {
             <h1>Create account</h1>
 
             <form onSubmit={handleSubmit}>
-                <label htmlFor="name">
+                <label htmlFor="userName">
                     User name:
                     <input
                         type="text"
-                        name="name"
-                        value={userAccount.name}
+                        name="userName"
+                        value={userAccount.userName}
                         onBlur={handleBlur}
                         onChange={validateInput}
                     />
-                    {errorMessages.name !== "" ? <p>{errorMessages.name}</p> : null}
+                    {errorMessages.userName !== "" ? <p>{errorMessages.userName}</p> : null}
                 </label>
 
                 <label htmlFor="email">
