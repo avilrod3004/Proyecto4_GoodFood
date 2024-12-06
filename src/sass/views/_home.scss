@@ -17,7 +17,7 @@
   gap: 2.5rem;
 
   width: 100%;
-  @include padding(4rem, 6rem);
+  @include padding(4rem, 4rem, 6rem, 6rem);
 }
 
 .portada__texto {
@@ -67,7 +67,7 @@
   flex-wrap: wrap;
   justify-content: center;
 
-  @include padding(4rem, 6rem);
+  @include padding(4rem, 4rem, 6rem, 6rem);
 }
 
 /* --- PAGINACIÓN --- */

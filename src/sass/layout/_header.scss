@@ -7,7 +7,7 @@
   align-items: center;
 
   width: 100%;
-  @include padding(2rem, 6rem);
+  @include padding(2rem, 2rem, 6rem, 6rem);
 }
 
 .cabecera__navegacion {
