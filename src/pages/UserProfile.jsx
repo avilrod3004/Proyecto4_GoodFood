@@ -1,8 +1,8 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {UserContext} from "../context/UserContext.jsx";
-import {getUserData} from "../config/Firebase.jsx";
 import SmallCard from "../components/SmallCard.jsx";
 import BigCard from "../components/BigCard.jsx";
+import Loading from "../components/Loading.jsx";
 
 const UserProfile = () => {
     // Estados iniciales
@@ -25,40 +25,29 @@ const UserProfile = () => {
     const [userData, setUserData] = useState(userDataInitial);
     const [cardSize, setCardSize] = useState("small");
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("");
 
+    // Funciones
 
     // Obtener los datos del usuario de la base de datos
-    const fetchUserData = async (uid) => {
-        try {
-            const data = await getUserData(uid);
+    const getUserData = () => {
+        const data = JSON.parse(localStorage.getItem("user"));
 
-            if (data === null) {
-                throw new Error("No se encontraron datos para el usuario");
-            }
+        setUserData({
+            ...userDataInitial,
+            ...data
+        });
 
-            setUserData({
-                ...userDataInitial,
-                ...data
-            });
-
-            setLoading(false);
-        } catch (error) {
-            setLoading(false);
-            setError("Error: " + error);
-            setUserData(userDataInitial)
-        }
-    };
+        setLoading(false);
+    }
 
     // Cuando el usuario logueado se haya cargado
     useEffect(() => {
         if (user?.uid) {
-            fetchUserData(user.uid);
+            getUserData();
         }
     }, [])
 
-    if (loading) return <p>Cargando...</p>;
-    if (error) return <p>Error: {error}</p>;
+    if (loading) return <Loading />;
 
     return (
         <>
