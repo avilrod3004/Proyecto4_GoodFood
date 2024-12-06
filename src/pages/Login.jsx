@@ -1,7 +1,9 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {login} from "../config/Firebase.jsx";
+import {getUserData, login} from "../config/Firebase.jsx";
 import {useNavigate} from "react-router-dom";
 import {UserContext} from "../context/UserContext.jsx";
+import Loading from "../components/Loading.jsx";
+import {notifyError} from "../utils/Toast.jsx";
 
 /**
  * Formulario de inicio de sesión
@@ -25,6 +27,7 @@ const Login = () => {
     const [userAccount, setUserAccount] = useState(initialState)
     const [errorMessages, setErrorMessages] = useState(errorMessagesInitial)
     const [errorLogin, setErrorLogin] = useState(errorLoginInitial)
+    const [loading, setLoading] = useState(false);
     const [disabledSubmit, setDisabledSubmit] = useState(true);
 
     const {user} = useContext(UserContext);
@@ -32,9 +35,29 @@ const Login = () => {
 
     useEffect(() => {
         if (user) {
-            navigate("/profile");
+            fetchUserData(user.uid);
         }
     }, [user])
+
+    // Obtener los datos del usuario de la base de datos
+    const fetchUserData = async (uid) => {
+        try {
+            setLoading(true);
+            const data = await getUserData(uid);
+
+            if (data === null) {
+                throw new Error("User not found");
+            }
+
+            localStorage.setItem("user", JSON.stringify(data));
+            navigate("/profile");
+
+            setLoading(false);
+        } catch (error) {
+            setLoading(false);
+            setErrorLogin("Error: " + error);
+        }
+    };
 
     // Funciones
     /**
@@ -52,7 +75,7 @@ const Login = () => {
         if (!value.trim()) {
             setErrorMessages({
                 ...errorMessages,
-                [name]: `El campo ${name} es obligatorio`
+                [name]: `This field is required`
             })
         }
 
@@ -61,7 +84,7 @@ const Login = () => {
             if (!valido) {
                 setErrorMessages({
                     ...errorMessages,
-                    [name]: "El email no tiene un formato válido"
+                    [name]: "The email format is invalid"
                 })
             }
         }
@@ -113,10 +136,12 @@ const Login = () => {
             await login({email: userAccount.email, password: userAccount.password})
         } catch (error) {
             if (error.code === "auth/invalid-credential") {
-                setErrorLogin("Credenciales inválidas")
+                setErrorLogin("Invalid credentials")
             }
         }
     }
+
+    if (loading) return <Loading />;
 
     return (
         <>
@@ -136,6 +161,7 @@ const Login = () => {
                     />
                     {errorMessages.email !== "" ? <p>{errorMessages.email}</p> : null}
                 </label>
+
                 <label htmlFor="">
                     Password:
                     <input
@@ -147,8 +173,10 @@ const Login = () => {
                     />
                     {errorMessages.password !== "" ? <p>{errorMessages.password}</p> : null}
                 </label>
+
                 <button disabled={disabledSubmit} type="submit">Login</button>
-                {errorLogin && <p>{errorLogin}</p>}
+
+                {errorLogin && notifyError(errorLogin, "light")}
             </form>
         </>
     );
