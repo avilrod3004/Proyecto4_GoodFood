@@ -46,7 +46,7 @@ const ContactUs = () => {
         if (!value.trim() && name !== "phone") {
             setErrorMessages({
                 ...errorMessages,
-                [name]: `El campo ${name} es obligatorio`
+                [name]: `This field is required`
             })
         }
 
@@ -55,7 +55,7 @@ const ContactUs = () => {
             if (!valido) {
                 setErrorMessages({
                     ...errorMessages,
-                    [name]: "El email no tiene un formato válido"
+                    [name]: "The email format is invalid"
                 })
             }
         }
@@ -65,7 +65,7 @@ const ContactUs = () => {
             if (!valido) {
                 setErrorMessages({
                     ...errorMessages,
-                    [name]: "El número de telefono no tiene un formato"
+                    [name]: "The phone format is invalid"
                 })
             }
         }
@@ -74,7 +74,7 @@ const ContactUs = () => {
             if (!checked) {
                 setErrorMessages({
                     ...errorMessages,
-                    [name]: "Debes aceptar los terminos y condiciones"
+                    [name]: "You must accept the terms and conditions"
                 })
             }
         }
