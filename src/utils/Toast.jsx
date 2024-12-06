@@ -24,3 +24,15 @@ export const notifyError = (message, theme) => {
         theme: theme
     })
 }
+
+/**
+ * Notifica al usuario que algo importante ha ocurrido
+ * @param message
+ * @param theme
+ */
+export const notifyWarning = (message, theme) => {
+    toast.warning(`${message}`, {
+        position: "top-right",
+        theme: theme
+    })
+}
