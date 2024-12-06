@@ -1,7 +1,8 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {register, saveUserData} from "../config/Firebase.jsx";
+import {getUserData, register, saveUserData} from "../config/Firebase.jsx";
 import {useNavigate} from "react-router-dom";
 import {UserContext} from "../context/UserContext.jsx";
+import Loading from "../components/Loading.jsx";
 
 /**
  * Formulario de registro de nuevos usuarios
@@ -29,22 +30,11 @@ const Register = () => {
     const [userAccount, setUserAccount] = useState(initialState)
     const [errorMessages, setErrorMessages] = useState(errorMessagesInitial)
     const [errorRegister, setErrorRegister] = useState(errorRegisterInitial)
+    const [loading, setLoading] = useState(false);
     const [disabledSubmit, setDisabledSubmit] = useState(true);
 
     const {user} = useContext(UserContext);
     const navigate = useNavigate();
-
-    useEffect(() => {
-        if (user) {
-            saveUserData({...user, userName: userAccount.name})
-                .then(() => {
-                    console.log("Usuario guardado")
-                    navigate("/profile");
-                })
-                .catch((error) => console.error("Error:", error));
-            // navigate("/profile");
-        }
-    }, [user])
 
     // Funciones
     /**
@@ -62,7 +52,7 @@ const Register = () => {
         if (!value.trim()) {
             setErrorMessages({
                 ...errorMessages,
-                [name]: `El campo ${name} es obligatorio`
+                [name]: `This field is required`
             })
         }
 
@@ -71,7 +61,7 @@ const Register = () => {
             if (!valido) {
                 setErrorMessages({
                     ...errorMessages,
-                    [name]: "El email no tiene un formato válido"
+                    [name]: "The email format is invalid"
                 })
             }
         }
@@ -81,7 +71,7 @@ const Register = () => {
             if (!valido) {
                 setErrorMessages({
                     ...errorMessages,
-                    [name]: "El formato de la contraseña no es válido, como mínimo debe contener: 8 caracteres, una letra en mayúscula y un caracter especial"
+                    [name]: "The password format is invalid. It must contain at least: 8 characters, a capital letter and a special character."
                 })
             }
         }
@@ -90,7 +80,7 @@ const Register = () => {
             if (userAccount.password !== value) {
                 setErrorMessages({
                     ...errorMessages,
-                    [name]: "Las contraseñas no coinciden"
+                    [name]: "Passwords do not match"
                 })
             }
         }
@@ -155,12 +145,40 @@ const Register = () => {
             await register({email: userAccount.email, password: userAccount.password})
         } catch (error) {
             if (error.code === "auth/email-already-in-use") {
-                setErrorRegister("El email ya esta en uso")
+                setErrorRegister("Email is already in use")
+            } else {
+                setErrorRegister(error.message);
             }
-            console.error(error.code);
-            console.log(error.message);
         }
     }
+
+    const saveNewUser = async () => {
+        try {
+            setLoading(true);
+            await saveUserData({...user, password: user.password})
+            const data = await getUserData(user.uid);
+
+            if (data === null) {
+                throw new Error("User not found");
+            }
+
+            localStorage.setItem("user", JSON.stringify(data));
+
+            navigate("/profile");
+            setLoading(false);
+        } catch (error) {
+            setLoading(false);
+            setErrorRegister("Error: " + error);
+        }
+    }
+
+    useEffect(() => {
+        if (user) {
+            saveNewUser();
+        }
+    }, [user])
+
+    if (loading) return <Loading />;
 
     return (
         <>
@@ -205,7 +223,7 @@ const Register = () => {
                     {errorMessages.password !== "" ? <p>{errorMessages.password}</p> : null}
                 </label>
 
-                <label htmlFor="repearPassword">
+                <label htmlFor="repeatPassword">
                     Repear password:
                     <input
                         type="password"
@@ -217,7 +235,7 @@ const Register = () => {
                     {errorMessages.repeatPassword !== "" ? <p>{errorMessages.repeatPassword}</p> : null}
                 </label>
 
-                <button disabled={disabledSubmit} type="submit">Login</button>
+                <button disabled={disabledSubmit} type="submit">Sign up</button>
                 {errorRegister && <p>{errorRegister}</p>}
             </form>
         </>
