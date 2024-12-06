@@ -34,10 +34,7 @@ const UserProfile = () => {
     const getUserData = () => {
         const data = JSON.parse(localStorage.getItem("user"));
 
-        setUserData({
-            ...userDataInitial,
-            ...data
-        });
+        setUserData({...data});
 
         setLoading(false);
     }

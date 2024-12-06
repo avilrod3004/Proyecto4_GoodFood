@@ -2,9 +2,11 @@ import React, {useContext} from 'react';
 import {UserContext} from "../../context/UserContext.jsx";
 import Navbar from "./Navbar.jsx";
 import {NavLink} from "react-router-dom";
-import {logOut} from "../../config/Firebase.jsx";
+import {logOut, saveUserData} from "../../config/Firebase.jsx";
 
 import DarkModeIcon from "../../assets/moon.svg"
+import {ToastContainer} from "react-toastify";
+import {notifyError, notifySuccess} from "../../utils/Toast.jsx";
 
 /**
  * Menú de botones del usuario
@@ -15,8 +17,19 @@ const UserMenu = () => {
     const {user, setUser} = useContext(UserContext);
 
     const handleLogout = async () => {
-        await logOut();
-        setUser(false)
+        try {
+            const userData = JSON.parse(localStorage.getItem("user"));
+            await saveUserData({
+                ...userData,
+                uid: user.uid
+            })
+
+            await logOut();
+            notifySuccess("Bye bye!", "light")
+            setUser(false)
+        } catch (error) {
+            notifyError(`An error has ocurred, could not log out. ${error}`, "light")
+        }
     }
     return (
         <nav className="navegacion__usuario">
@@ -48,6 +61,8 @@ const UserMenu = () => {
             <a href="#" className="usuario__tema">
                 <img src={DarkModeIcon} alt="Change dark mode" className="tema__imagen"/>
             </a>
+
+            <ToastContainer />
         </nav>
     );
 };

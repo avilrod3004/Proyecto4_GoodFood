@@ -107,6 +107,7 @@ const Login = () => {
 
         try {
             await login({email: userAccount.email, password: userAccount.password})
+
         } catch (error) {
             if (error.code === "auth/invalid-credential") {
                 setErrorLogin("Invalid credentials")
@@ -127,9 +128,9 @@ const Login = () => {
             }
 
             localStorage.setItem("user", JSON.stringify(data));
-            navigate("/profile");
 
             setLoading(false);
+            navigate("/profile");
         } catch (error) {
             setLoading(false);
             setErrorLogin("Error: " + error);
@@ -137,7 +138,7 @@ const Login = () => {
     };
 
     useEffect(() => {
-        if (user) {
+        if (user?.uid) {
             fetchUserData(user.uid);
         }
     }, [user])
