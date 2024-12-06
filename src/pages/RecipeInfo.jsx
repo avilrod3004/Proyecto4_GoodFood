@@ -1,7 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
-import {UserContext} from "../context/UserContext.jsx";
-import {getUserData, saveUserData} from "../config/Firebase.jsx";
 import {ToastContainer} from "react-toastify";
 import {notifySuccess, notifyWarning} from "../utils/Toast.jsx";
 import Loading from "../components/Loading.jsx";
@@ -53,6 +51,7 @@ const RecipeInfo = () => {
     // Obtener los datos del usuario de la base de datos
     const getUserData = () => {
         const data = JSON.parse(localStorage.getItem("user"));
+
         setUserData({
             ...userDataInitial,
             ...data,
