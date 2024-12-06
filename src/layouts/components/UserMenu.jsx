@@ -1,12 +1,12 @@
 import React, {useContext} from 'react';
 import {UserContext} from "../../context/UserContext.jsx";
-import Navbar from "./Navbar.jsx";
 import {NavLink} from "react-router-dom";
 import {logOut, saveUserData} from "../../config/Firebase.jsx";
-
 import DarkModeIcon from "../../assets/moon.svg"
 import {ToastContainer} from "react-toastify";
 import {notifyError, notifySuccess} from "../../utils/Toast.jsx";
+import ProfileIcon from "../../assets/user.svg"
+import ConfigIcon from "../../assets/config.svg"
 
 /**
  * Menú de botones del usuario
@@ -37,11 +37,15 @@ const UserMenu = () => {
                 user
                     ?
                     <ul className="usuario__listado">
-                        <li className="listado__boton">
-                            <NavLink to="/profile" className="boton__opcion">My profile</NavLink>
+                        <li className="listado__boton-user">
+                            <NavLink to="/profile" className="boton-user__opcion">
+                                <img className="boton__imagen" src={ProfileIcon} alt="My profile" />
+                            </NavLink>
                         </li>
-                        <li className="listado__boton">
-                            <NavLink to="/profile/update" className="boton__opcion">Edit profile</NavLink>
+                        <li className="listado__boton-user">
+                            <NavLink to="/profile/update" className="boton-user__opcion">
+                                <img className="boton__imagen" src={ConfigIcon} alt="Edit profile" />
+                            </NavLink>
                         </li>
                         <li className="listado__boton">
                             <NavLink onClick={handleLogout} to="/" className="boton__opcion">Log out</NavLink>
