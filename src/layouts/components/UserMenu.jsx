@@ -39,12 +39,12 @@ const UserMenu = () => {
                     <ul className="usuario__listado">
                         <li className="listado__boton-user">
                             <NavLink to="/profile" className="boton-user__opcion">
-                                <img className="boton__imagen" src={ProfileIcon} alt="My profile" />
+                                <img className="boton__imagen" src={ProfileIcon} alt="My profile" title="View profile"/>
                             </NavLink>
                         </li>
                         <li className="listado__boton-user">
                             <NavLink to="/profile/update" className="boton-user__opcion">
-                                <img className="boton__imagen" src={ConfigIcon} alt="Edit profile" />
+                                <img className="boton__imagen" src={ConfigIcon} alt="Edit profile" title="Edit profile"/>
                             </NavLink>
                         </li>
                         <li className="listado__boton">
