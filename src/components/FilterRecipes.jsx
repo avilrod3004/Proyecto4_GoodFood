@@ -132,7 +132,7 @@ const FilterRecipes = ({filters, setFilters, filterErrors, setFilterErrors, page
                     </fieldset>
 
                     {
-                        page !== "quickrecipes" && (
+                        page !== "quickRecipes" && (
                             <fieldset>
                                 <legend>Max. time</legend>
                                 <label>
