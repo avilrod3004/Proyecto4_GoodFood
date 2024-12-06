@@ -67,17 +67,12 @@ export const saveUserData = async (user) => {
  * @returns {Promise<Object|null>} Datos del usuario o null si no existen.
  */
 export const getUserData = async (uid) => {
-    try {
-        const userRef = doc(db, "users", uid);
-        const userSnap = await getDoc(userRef);
+    const userRef = doc(db, "users", uid);
+    const userSnap = await getDoc(userRef);
 
-        if (userSnap.exists()) {
-            return userSnap.data();
-        } else {
-            console.log("No se encontró el usuario.");
-            return null;
-        }
-    } catch (error) {
-        console.error("Error al obtener los datos del usuario:", error);
+    if (userSnap.exists()) {
+        return userSnap.data();
+    } else {
+        return null;
     }
 };
