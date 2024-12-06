@@ -3,6 +3,11 @@ import Button from "../components/Button.jsx";
 import Portada from "../assets/img_home.jpeg"
 import "../sass/main.scss"
 import SmallCard from "../components/SmallCard.jsx";
+import Apple from "../assets/apple.svg"
+import Carrot from "../assets/carrot.svg"
+import Chicken from "../assets/chicken.svg"
+import Fish from "../assets/fish.svg"
+import Loading from "../components/Loading.jsx";
 
 /**
  * Página principal de la web
@@ -61,7 +66,7 @@ const Home = () => {
         }
     };
 
-    if (loading) return <p>Cargando...</p>;
+    if (loading) return <Loading/>;
     if (error) return <p>Error: {error}</p>;
 
     return (
