@@ -1,1 +1,3 @@
-//@mixin user-menu-button
+@mixin padding($top-and-bottom, $left-and-right) {
+  padding: $top-and-bottom $left-and-right;
+}

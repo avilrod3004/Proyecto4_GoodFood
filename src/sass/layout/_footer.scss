@@ -5,7 +5,8 @@
   flex-direction: column;
   gap: 1rem;
 
-  padding: 2rem 6rem;
+  @include padding(2rem, 6rem);
+
 }
 
 .menu-cuentas__listado-cuentas {
