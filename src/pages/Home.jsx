@@ -75,7 +75,7 @@ const Home = () => {
                 <div className="portada__texto">
                     <h1 className="texto__titulo">Looking for new recipes?</h1>
                     <h2 className="texto__subtitulo">Bored of always eating the same thing?</h2>
-                    <a href="#" className="texto__boton">What would you like to cook?</a>
+                    {/*<a href="#" className="texto__boton">What would you like to cook?</a>*/}
                 </div>
                 <img src={Portada} alt="Cocina" className="portada__imagen"/>
             </section>
@@ -92,14 +92,21 @@ const Home = () => {
                 ))}
             </section>
 
-            <nav>
-                <button onClick={prevPage} disabled={currentPage === 1}>
+            <nav className="entrada__paginacion">
+                <button
+                    className="paginacion__boton"
+                    onClick={prevPage}
+                    disabled={currentPage === 1}
+                >
                     Previous
                 </button>
-                <span>
-                            Page {currentPage} of {Math.ceil(recipes.length / recipesPerPage)}
-                        </span>
+
+                <span className="paginacion__texto">
+                    Page {currentPage} of {Math.ceil(recipes.length / recipesPerPage)}
+                </span>
+
                 <button
+                    className="paginacion__boton"
                     onClick={nextPage}
                     disabled={currentPage === Math.ceil(recipes.length / recipesPerPage)}
                 >
