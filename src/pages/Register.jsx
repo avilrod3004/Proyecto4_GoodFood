@@ -234,7 +234,7 @@ const Register = () => {
                         && <p className="formulario-registro__error">{errorMessages.repeatPassword}</p>
                     }
 
-                    <NavLink to="/login" className="formulario-registro__login">Already have an account? Sign in</NavLink>
+                    <a onClick={() => navigate("/login")} className="formulario-registro__login">Already have an account? Sign in</a>
 
                     <nav className="formulario-registro__navegacion-registro">
                         <button

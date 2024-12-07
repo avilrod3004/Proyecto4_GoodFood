@@ -70,6 +70,10 @@
   border-color: var(--indian-red-400);
 }
 
+.formulario-registro__login {
+  cursor: pointer;
+}
+
 .formulario-registro__login:hover {
   text-decoration: underline;
 }
