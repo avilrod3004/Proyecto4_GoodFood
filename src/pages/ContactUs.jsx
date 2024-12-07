@@ -101,16 +101,21 @@ const ContactUs = () => {
      * Valida si el formulario ha sido completado correctamente y si no hay mensajes de error en los campos
      */
     const validateMessage = () => {
-        const { phone, ...fieldsToValidate } = message; // el campo del número de teléfono es opcional
+        const { phone, accept, ...fieldsToValidate } = message; // Excluimos el campo opcional (phone) y el checkbox para validarlo aparte
 
-        // true si todos los campos estan completos (excepto phone)
-        const completedInputs = Object.values(fieldsToValidate).every(value => value !== "" || value === true);
+        // true si todos los campos requeridos están completos (excepto phone)
+        const completedInputs = Object.values(fieldsToValidate).every(value => value.trim() !== "");
 
         // true si no hay errores
         const noErrors = Object.values(errorMessages).every(value => value === "");
 
-        setDisabledSubmit(!(completedInputs && noErrors));
-    }
+        // Verificamos que el checkbox esté marcado
+        const isCheckboxChecked = accept === true;
+
+        // El formulario solo será válido si todos los campos están completos, no hay errores y el checkbox está marcado
+        setDisabledSubmit(!(completedInputs && noErrors && isCheckboxChecked));
+    };
+
 
     /**
      * Envía el mensaje
@@ -227,8 +232,22 @@ const ContactUs = () => {
                     && <p className="formulario-contacto__error-checkbox">{errorMessages.accept}</p>
                 }
 
-                <button className="formulario-contacto__enviar" disabled={disabledSubmit} type="submit">Send</button>
-                <button className="formulario-contacto__limpiar" type="reset">Reset</button>
+                <nav className="formulario-contacto__navegacion">
+                    <button
+                        className="navegacion__enviar"
+                        disabled={disabledSubmit}
+                        type="submit"
+                    >
+                        Send
+                    </button>
+
+                    <button
+                        className="navegacion__limpiar"
+                        type="reset"
+                    >
+                        Reset
+                    </button>
+                </nav>
             </form>
 
             <ToastContainer/>

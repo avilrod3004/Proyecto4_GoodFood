@@ -52,7 +52,7 @@
 
   @extend %campos-formulario;
 
-  height: 2rem;
+  height: 2.5rem;
   width: 100%;
 }
 
@@ -92,4 +92,46 @@
 /* --- CHECKBOX --- */
 .formulario-contacto__error-checkbox {
   color: var(--indian-red-400);
+}
+
+
+/* --- NAVEGACIÓN: BOTONES --- */
+
+.formulario-contacto__navegacion {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+
+  width: 100%;
+}
+
+.navegacion__enviar {
+  @extend %botones;
+
+  background-color: var(--btn-primary-bg-color);
+  border: 0.25rem solid var(--btn-primary-border-color);
+  color: var(--btn-primary-text-color);
+}
+
+.navegacion__enviar:hover {
+  background-color: var(--btn-primaty-bg-color-hover);
+}
+
+.navegacion__enviar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.navegacion__limpiar {
+  @extend %botones;
+
+  background-color: var(--btn-cancel-bg-color);
+  border: 0.25rem solid var(--btn-cancel-border-color);
+  color: var(--btn-cancel-text-color);
+}
+
+.navegacion__limpiar:hover {
+  border: 0.25rem solid var(--btn-cancel-border-color-hover);
+  color: var(--btn-cancel-text-color-hover)
 }
