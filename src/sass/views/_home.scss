@@ -82,8 +82,7 @@
   @extend %botones;
   background-color: var(--btn-primary-bg-color);
   color: var(--btn-primary-text-color);
-
-  cursor: pointer;
+  border: 0.25rem solid var(--btn-primary-border-color);
 }
 
 .paginacion__boton:hover {

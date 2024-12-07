@@ -17,6 +17,7 @@
 .boton__opcion {
   @extend %botones;
   background-color: var(--btn-secondary-bg-color);
+  border: 0.25rem solid var(--btn-secondary-bg-color);
   color: var(--btn-secondary-text-color)
 }
 
