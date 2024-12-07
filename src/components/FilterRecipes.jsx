@@ -4,7 +4,7 @@ import {validateIngredients, validateMinutes} from "../utils/ValidateForms.jsx";
 const FilterRecipes = ({filters, setFilters, filterErrors, setFilterErrors, page}) => {
     const mealTypesOptions = ["Breakfast", "Dinner", "Lunch", "Snack", "Teatime"];
     const cuisineTypeOptions = ["American", "Asian", "British", "Caribbean", "Chinese", "French", "Indian", "Italian", "Japanese", "Mediterranean", "Nordic"]
-    const healthOptions = ["Alcohol-free", "Celery-free", "Dairy-free", "Egg-free", "Fish-free", "Gluten-free", "Low-sugar", "Mollusk-free", "Mustard-free", "Peanut-free", "Pork-free", "Soy-free", "Vegan", "Vegetarian", "Wheat-free"];
+    const healthOptions = ["Alcohol-free", "Celery-free", "Dairy-free", "Egg-free", "Fish-free", "Gluten-free", "Low-sugar", "Mustard-free", "Peanut-free", "Pork-free", "Soy-free", "Vegan", "Vegetarian"];
 
     const validateInput = event => {
         let {name, value, checked, type} = event.target
