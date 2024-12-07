@@ -146,7 +146,7 @@ const SearchRecipes = ({filtersInitialValues, page}) => {
                 <header className="resultados__encabezado">
                     <p className="encabezado__contador">
                         Search result:
-                        <span className="contador__numero">{recipesCounter} results</span>
+                        <span className="contador__numero">{recipesCounter} recipes</span>
                     </p>
 
                     <a
