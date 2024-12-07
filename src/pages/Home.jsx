@@ -8,6 +8,7 @@ import Carrot from "../assets/carrot.svg"
 import Chicken from "../assets/chicken.svg"
 import Fish from "../assets/fish.svg"
 import Loading from "../components/Loading.jsx";
+import ErrorMessage from "../components/ErrorMessage.jsx";
 
 /**
  * Página principal de la web
@@ -67,7 +68,7 @@ const Home = () => {
     };
 
     if (loading) return <Loading/>;
-    if (error) return <p>Error: {error}</p>;
+    if (error) return <ErrorMessage/>;
 
     return (
         <main className="entrada">
