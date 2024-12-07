@@ -1,8 +1,11 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {getUserData, login} from "../config/Firebase.jsx";
-import {useNavigate} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import {UserContext} from "../context/UserContext.jsx";
 import Loading from "../components/Loading.jsx";
+import {validateEmail} from "../utils/ValidateForms.jsx";
+import {ToastContainer} from "react-toastify";
+import {notifyError} from "../utils/Toast.jsx";
 
 /**
  * Formulario de inicio de sesión
@@ -20,12 +23,9 @@ const Login = () => {
         password: ""
     }
 
-    const errorLoginInitial = "";
-
     // Estados
     const [userAccount, setUserAccount] = useState(initialState)
     const [errorMessages, setErrorMessages] = useState(errorMessagesInitial)
-    const [errorLogin, setErrorLogin] = useState(errorLoginInitial)
     const [loading, setLoading] = useState(false);
     const [disabledSubmit, setDisabledSubmit] = useState(true);
 
@@ -48,7 +48,7 @@ const Login = () => {
         if (!value.trim()) {
             setErrorMessages({
                 ...errorMessages,
-                [name]: `This field is required`
+                [name]: `* This field is required`
             })
         }
 
@@ -57,7 +57,7 @@ const Login = () => {
             if (!valido) {
                 setErrorMessages({
                     ...errorMessages,
-                    [name]: "The email format is invalid"
+                    [name]: "* The email format is invalid"
                 })
             }
         }
@@ -77,16 +77,6 @@ const Login = () => {
     const handleBlur = event => {
         validateInput(event);
     };
-
-    /**
-     * Valida si el email del formulario tiene un formato válido
-     * @param email {String} Email dado por el usuario
-     * @returns {boolean} True si es válido // False si no es válido
-     */
-    const validateEmail = email => {
-        const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-        return regex.test(email);
-    }
 
     /**
      * Valida si el formulario ha sido completado correctamente y si no hay mensajes de error en los campos
@@ -110,9 +100,9 @@ const Login = () => {
 
         } catch (error) {
             if (error.code === "auth/invalid-credential") {
-                setErrorLogin("Invalid credentials")
+                notifyError("Invalid credentials", "light")
             } else {
-                setErrorLogin(error.message)
+                notifyError("An error has occurred. Please try again later.", "light")
             }
         }
     }
@@ -133,7 +123,7 @@ const Login = () => {
             navigate("/profile");
         } catch (error) {
             setLoading(false);
-            setErrorLogin("Error: " + error);
+            notifyError("An error has occurred. Please try again later.", "light")
         }
     };
 
@@ -146,41 +136,70 @@ const Login = () => {
     if (loading) return <Loading />;
 
     return (
-        <>
-            <img src="/src/assets/img_login.jpeg" alt="Img login"/>
-            <h1>Login</h1>
+        <main className="login">
+            <section className="login__ventana-login">
+                <img className="ventana-login__imagen" src="/src/assets/img_login.jpeg" alt="Img login"/>
 
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="email">
-                    Email:
-                    <input
-                        type="text"
-                        name="email"
-                        placeholder="email@example.com"
-                        value={userAccount.email}
-                        onBlur={handleBlur}
-                        onChange={validateInput}
-                    />
-                    {errorMessages.email !== "" ? <p>{errorMessages.email}</p> : null}
-                </label>
+                <form onSubmit={handleSubmit} className="ventana-login__formulario-login">
+                    <h1 className="formulario-login__titulo">Log in</h1>
 
-                <label htmlFor="">
-                    Password:
-                    <input
-                        type="password"
-                        name="password"
-                        value={userAccount.password}
-                        onBlur={handleBlur}
-                        onChange={validateInput}
-                    />
-                    {errorMessages.password !== "" ? <p>{errorMessages.password}</p> : null}
-                </label>
+                    <label htmlFor="email" className="formulario-login__label-login">
+                        Email:
+                        <input
+                            className={errorMessages.email !== "" ? "label-login__input label-login__input-error" : "label-login__input"}
+                            type="text"
+                            name="email"
+                            placeholder="email@example.com"
+                            value={userAccount.email}
+                            onBlur={handleBlur}
+                            onChange={validateInput}
+                        />
+                    </label>
+                    {
+                        errorMessages.email !== ""
+                        && <p className="formulario-login__error">{errorMessages.email}</p>
+                    }
 
-                <button disabled={disabledSubmit} type="submit">Login</button>
+                    <label htmlFor="password" className="formulario-login__label-login">
+                        Password:
+                        <input
+                            className={errorMessages.password !== "" ? "label-login__input label-login__input-error" : "label-login__input"}
+                            type="password"
+                            name="password"
+                            value={userAccount.password}
+                            onBlur={handleBlur}
+                            onChange={validateInput}
+                        />
+                    </label>
+                    {
+                        errorMessages.password !== ""
+                        && <p className="formulario-login__error">{errorMessages.password}</p>
+                    }
 
-                {errorLogin && <p>{errorLogin}</p>}
-            </form>
-        </>
+                    <NavLink to="/register" className="fomulario-login__registro">Create an account</NavLink>
+
+                    <nav className="fomulario-login__navegacion-login">
+                        <button
+                            className="navegacion-login__submit"
+                            disabled={disabledSubmit}
+                            type="submit"
+                        >
+                            Countinue
+                        </button>
+
+                        <button
+                            className="navegacion-login__cancel"
+                            onClick={() => navigate("/")}
+                        >
+                            Cancel
+                        </button>
+                    </nav>
+
+                </form>
+            </section>
+
+            <ToastContainer/>
+        </main>
     );
 };
 
