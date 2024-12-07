@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import {notifySuccess} from "../utils/Toast.jsx";
+import {validateEmail, validatePhoneNumber} from "../utils/ValidateForms.jsx";
 
 /**
  * Componente que muestra el formulario de contacto
@@ -47,7 +48,7 @@ const ContactUs = () => {
         if (!value.trim() && name !== "phone") {
             setErrorMessages({
                 ...errorMessages,
-                [name]: `This field is required`
+                [name]: `* This field is required`
             })
         }
 
@@ -56,7 +57,7 @@ const ContactUs = () => {
             if (!valido) {
                 setErrorMessages({
                     ...errorMessages,
-                    [name]: "The email format is invalid"
+                    [name]: "* The email format is invalid"
                 })
             }
         }
@@ -66,7 +67,7 @@ const ContactUs = () => {
             if (!valido) {
                 setErrorMessages({
                     ...errorMessages,
-                    [name]: "The phone format is invalid"
+                    [name]: "* The phone format is invalid"
                 })
             }
         }
@@ -75,7 +76,7 @@ const ContactUs = () => {
             if (!checked) {
                 setErrorMessages({
                     ...errorMessages,
-                    [name]: "You must accept the terms and conditions"
+                    [name]: "* You must accept the terms and conditions"
                 })
             }
         }
@@ -95,26 +96,6 @@ const ContactUs = () => {
     const handleBlur = event => {
         validateInput(event);
     };
-
-    /**
-     * Valida si el email del formulario tiene un formato válido
-     * @param email {String} Email dado por el usuario
-     * @returns {boolean} True si es válido // False si no es válido
-     */
-    const validateEmail = email => {
-        const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-        return regex.test(email);
-    }
-
-    /**
-     * Valida si el número de teléfono del formulario tiene un formato válido
-     * @param phoneNumber {String} Teléfono dado por el usuario
-     * @returns {boolean} True si es válido // False si no es válido
-     */
-    const validatePhoneNumber = phoneNumber => {
-        const regex = /^(\d{3}\s?\d{3}\s?\d{3}|\d{9})$/;
-        return regex.test(phoneNumber);
-    }
 
     /**
      * Valida si el formulario ha sido completado correctamente y si no hay mensajes de error en los campos
@@ -150,57 +131,68 @@ const ContactUs = () => {
     }
 
     return (
-        <>
-            <form action="" onSubmit={send} onReset={reset}>
-                <label htmlFor="name">
+        <main className="contacto">
+            <form action="" onSubmit={send} onReset={reset} className="contacto__formulario-contacto">
+                <h1 className="formulario-contacto__titulo">Contact us</h1>
+
+                <label htmlFor="name" className="formulario-contacto__label-text">
                     Your name:
                     <input
+                        className={errorMessages.name !== "" ? "label-text__input label-text__input-error" : "label-text__input"}
                         type="text"
                         name="name"
                         value={message.name}
                         onBlur={handleBlur}
                         onChange={validateInput}/>
-                    {errorMessages.name !== "" ? <p>{errorMessages.name}</p> : null}
                 </label>
+                {errorMessages.name !== "" ? <p className="formulario-contacto__error">{errorMessages.name}</p> : null}
 
-                <label htmlFor="phone">
+                <label htmlFor="phone" className="formulario-contacto__label-text">
                     Phone number:
                     <input
+                        className={errorMessages.phone !== "" ? "label-text__input label-text__input-error" : "label-text__input"}
                         type="tel"
                         name="phone"
                         value={message.phone}
                         onBlur={handleBlur}
                         onChange={validateInput}/>
-                    {errorMessages.phone !== "" ? <p>{errorMessages.phone}</p> : null}
                 </label>
+                {errorMessages.phone !== "" ?
+                    <p className="formulario-contacto__error">{errorMessages.phone}</p> : null}
 
-                <label htmlFor="email">
+
+                <label htmlFor="email" className="formulario-contacto__label-text">
                     Email:
                     <input
+                        className={errorMessages.email !== "" ? "label-text__input label-text__input-error" : "label-text__input"}
                         type="email"
                         name="email"
                         value={message.email}
                         onBlur={handleBlur}
                         onChange={validateInput}/>
-                    {errorMessages.email !== "" ? <p>{errorMessages.email}</p> : null}
-
                 </label>
+                {errorMessages.email !== "" ?
+                    <p className="formulario-contacto__error">{errorMessages.email}</p> : null}
 
-                <label htmlFor="subject">
+
+                <label htmlFor="subject" className="formulario-contacto__label-text">
                     Subject:
                     <input
+                        className={errorMessages.subject !== "" ? "label-text__input label-text__input-error" : "label-text__input"}
                         type="text"
                         name="subject"
                         value={message.subject}
                         onBlur={handleBlur}
                         onChange={validateInput}/>
-                    {errorMessages.subject !== "" ? <p>{errorMessages.subject}</p> : null}
-
                 </label>
+                {errorMessages.subject !== "" ?
+                    <p className="formulario-contacto__error">{errorMessages.subject}</p> : null}
 
-                <label htmlFor="body">
+
+                <label htmlFor="body" className="formulario-contacto__label-textarea">
                     Body:
                     <textarea
+                        className={errorMessages.body !== "" ? "label-textarea__textarea label-textarea__textarea-error" : "label-textarea__textarea"}
                         name="body"
                         id="body"
                         cols="60"
@@ -208,26 +200,29 @@ const ContactUs = () => {
                         value={message.body}
                         onBlur={handleBlur}
                         onChange={validateInput}/>
-                    {errorMessages.body !== "" ? <p>{errorMessages.body}</p> : null}
-
                 </label>
+                {errorMessages.body !== "" ? <p className="formulario-contacto__error">{errorMessages.body}</p> : null}
 
-                <label htmlFor="accept">
+
+                <label htmlFor="accept" className="formulario-contacto__label-checkbox">
                     <input
+                        className="label-checkbox__checkbox"
                         type="checkbox"
                         name="accept"
                         checked={message.accept}
                         onBlur={handleBlur}
-                        onChange={validateInput}/>I accept the legal terms, the privacy policy, and the conditions od this website.
-                    {errorMessages.accept !== "" ? <p>{errorMessages.accept}</p> : null}
+                        onChange={validateInput}/>I accept the legal terms, the privacy policy, and the conditions od
+                    this website.
                 </label>
+                {errorMessages.accept !== "" ?
+                    <p className="formulario-contacto__error-checkbox">{errorMessages.accept}</p> : null}
 
-                <button disabled={disabledSubmit} type="submit">Send</button>
-                <button type="reset">Reset</button>
+                <button className="formulario-contacto__enviar" disabled={disabledSubmit} type="submit">Send</button>
+                <button className="formulario-contacto__limpiar" type="reset">Reset</button>
             </form>
 
-            <ToastContainer />
-        </>
+            <ToastContainer/>
+        </main>
     );
 };
 

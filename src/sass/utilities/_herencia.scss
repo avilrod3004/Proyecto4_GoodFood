@@ -6,3 +6,9 @@
   font-size: 1.25rem;
   font-weight: bold;
 }
+
+%campos-formulario {
+  border-radius: 0.5rem;
+  border: none;
+  border-bottom: 2px solid var(--gray-900);
+}
