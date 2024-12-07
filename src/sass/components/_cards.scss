@@ -76,15 +76,6 @@
   @include padding(0.5rem, 0.5rem, 1rem, 1rem)
 }
 
-.texto-receta__listado-etiquetas {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.etiqueta__imagen {
-  height: 2rem;
-}
-
 .texto-receta__tiempo {
   display: flex;
   gap: 0.5rem;

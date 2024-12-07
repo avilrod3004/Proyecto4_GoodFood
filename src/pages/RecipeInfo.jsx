@@ -3,6 +3,8 @@ import {useParams} from "react-router-dom";
 import {ToastContainer} from "react-toastify";
 import {notifySuccess, notifyWarning} from "../utils/Toast.jsx";
 import Loading from "../components/Loading.jsx";
+import ErrorMessage from "../components/ErrorMessage.jsx";
+import HealthLabelsList from "../components/HealthLabelsList.jsx";
 
 const RecipeInfo = () => {
 
@@ -63,9 +65,9 @@ const RecipeInfo = () => {
         localStorage.setItem("user", JSON.stringify(updatedData));
 
         if (action === "marked") {
-            notifySuccess("Marked recipe", "light")
+            notifySuccess("Added to favorites", "light")
         } else {
-            notifyWarning("Unmarked recipe", "light");
+            notifyWarning("Removed from favorites", "light");
         }
     }
 
@@ -134,52 +136,58 @@ const RecipeInfo = () => {
     }, [loadingRecipe, recipe, userData]);
 
     if (loadingRecipe) return <Loading/>;
-    if (error) return <p>Error: {error}</p>;
+    if (error) return <ErrorMessage/>;
 
 
     return (
-        <>
-            <article>
-                <img src={recipe.images.REGULAR.url} alt=""/>
+        <main className="info-receta">
+            <article className="info-receta__tarjeta-info">
+                <img className="tarjeta-info__imagen" src={recipe.image} alt={recipe.label}/>
 
-                <button onClick={() => (recipeFavorite ? deteteFavorite() : addFavorite())}>
-                    {recipeFavorite ? "Remove from Favorites" : "Add to Favorites"}
-                </button>
+                <aside className="tarjeta-info__texto-info">
+                    <button onClick={() => (recipeFavorite ? deteteFavorite() : addFavorite())}>
+                        {recipeFavorite ? "Remove from Favorites" : "Add to Favorites"}
+                    </button>
 
-                <p>
-                    {
-                        recipeFavorite ? "si" : "no"
-                    }
-                </p>
-                <h1>{recipe.label}</h1>
-                <ul>
-                    <li>Cuisine type: {recipe.cuisineType}</li>
-                    <li>Meal type: {recipe.mealType}</li>
-                    <li>Time: {recipe.totalTime}</li>
-                </ul>
+                    <p>
+                        {
+                            recipeFavorite ? "si" : "no"
+                        }
+                    </p>
 
-                <ul>
-                    {
-                        recipe.healthLabels.map((label, index) => (
-                            <li key={index}>{label}</li>
-                        ))
-                    }
-                </ul>
+                    <h1 className="texto-info__nombre">{recipe.label}</h1>
+                    <ul className="texto-info__listado-datos">
+                        <li className="listado-datos__dato">
+                            <span className="dato__nombre">Cuisine type: </span>
+                            {recipe.cuisineType}
+                        </li>
+                        <li className="listado-datos__dato">
+                            <span className="dato__nombre">Meal type: </span>
+                            {recipe.mealType}
+                        </li>
+                        <li className="listado-datos__dato">
+                            <span className="dato__nombre">Time: </span>
+                            {recipe.totalTime} minutes
+                        </li>
+                    </ul>
 
-                <h2>Ingredients</h2>
-                <ul>
-                    {
-                        recipe.ingredientLines.map((ingredient, index) => (
-                            <li key={index}>{ingredient}</li>
-                        ))
-                    }
-                </ul>
+                    <HealthLabelsList healthLabels={recipe.healthLabels}/>
 
-                <a href={recipe.url} target="_blank">More details</a>
+                    <h2 className="texto-info__listado-ingredientes">Ingredients</h2>
+                    <ul>
+                        {
+                            recipe.ingredientLines.map((ingredient, index) => (
+                                <li className="listado-ingredientes__ingrediente" key={index}>{ingredient}</li>
+                            ))
+                        }
+                    </ul>
 
-                <ToastContainer />
+                    <a className="texto-info__detalles" href={recipe.url} target="_blank">More details</a>
+                </aside>
             </article>
-        </>
+
+            <ToastContainer/>
+        </main>
 
     );
 };

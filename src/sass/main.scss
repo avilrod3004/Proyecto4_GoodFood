@@ -21,6 +21,7 @@
 @import "components/searchrecipes";
 @import "components/filterrecipes";
 @import "components/buttontotop";
+@import "components/healthlabelslist";
 
 // Pages/views
 @import "views/home";
@@ -28,3 +29,4 @@
 @import "views/login";
 @import "views/register";
 @import "views/userprofile";
+@import "views/recipeinfo";
