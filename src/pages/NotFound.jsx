@@ -10,12 +10,12 @@ import errorImageDark from "../assets/error_404_modo_oscuro.png"
 const NotFound = () => {
     const error = useRouteError()
     return (
-        <>
-            <img src={errorImageLight} alt="Error 404"/>
-            <h1>Page not found</h1>
-            <p>The page you&#39;re looking for doesn&#39;t exist or has been moved</p>
-            <Link to="/">Back to Home</Link>
-        </>
+        <main className="not-found">
+            <img className="not-found__imagen" src={errorImageLight} alt="Error 404"/>
+            <h1 className="not-found__titulo">Page not found</h1>
+            <p className="not-found__mensaje">The page you&#39;re looking for doesn&#39;t exist or has been moved</p>
+            <Link className="not-found__enlace" to="/">Back to Home</Link>
+        </main>
     );
 };
 
