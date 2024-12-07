@@ -24,7 +24,7 @@ const Home = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [currentPage, setCurrentPage] = useState(1); // Página actual
-    const recipesPerPage = 20; // Número de recetas por página
+    const recipesPerPage = 12; // Número de recetas por página
 
     /**
      * Llamada a la API para obtener 20 recetas aleatorias
