@@ -14,11 +14,28 @@
 }
 
 
+/* --- BUSQUEDA SIN RESULTADOS --- */
+.resultados__nada {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.nada__imagen {
+  height: 2rem;
+}
+
+.nada__mensaje {
+  text-align: center;
+}
+
 /* --- RESULTADOS --- */
 
 .busqueda__resultados {
   flex: 4;
   display: flex;
+  align-items: flex-start;
   justify-content: center;
   flex-wrap: wrap;
   gap: 1.25rem;

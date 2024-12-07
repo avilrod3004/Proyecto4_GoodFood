@@ -7,6 +7,9 @@ import BigCardLight from "../../src/assets/big_cards_light.svg";
 import BigCardDark from "../../src/assets/big_cards_dark.svg";
 import SmallCardLight from "../../src/assets/small_cards_light.svg";
 import SmallCardDark from "../../src/assets/small_cards_dark.svg";
+import SadFaceDark from "../../src/assets/sad_face_dark.svg";
+import SadFaceLight from "../../src/assets/sad_face_light.svg";
+import ButtonToTop from "./ButtonToTop.jsx";
 
 const SearchRecipes = ({filtersInitialValues, page}) => {
 
@@ -171,6 +174,14 @@ const SearchRecipes = ({filtersInitialValues, page}) => {
                     </a>
                 </header>
 
+                {recipes.length === 0 && (
+                    <div className="resultados__nada">
+                        <img className="nada__imagen" src={SadFaceLight} alt=":("/>
+                        <p className="nada__mensaje">Sorry, we couldn&#39;t find any recipes that match your search. Try using different ingredients
+                            or filters!</p>
+                    </div>
+                )}
+
                 {recipes.map((recipe, index) => (
                     cardSize === "small" ? (
                             <SmallCard
@@ -196,31 +207,33 @@ const SearchRecipes = ({filtersInitialValues, page}) => {
                         )
                 ))}
 
-                <nav className="resultados__paginacion">
-                    <button
-                        className="paginacion__boton"
-                        onClick={() => goToPreviousPage()}
-                        disabled={pagesList.length === 1}
-                    >
-                        Previous
-                    </button>
+                {recipes.length !== 0 && (
+                    <>
+                        <nav className="resultados__paginacion">
+                            <button
+                                className="paginacion__boton"
+                                onClick={() => goToPreviousPage()}
+                                disabled={pagesList.length === 1}
+                            >
+                                Previous
+                            </button>
 
-                    <span className="paginacion__texto">
+                            <span className="paginacion__texto">
                         {currentPage + 1} of {Math.ceil(recipesCounter / 20)}
                     </span>
-                    <button
-                        className="paginacion__boton"
-                        onClick={() => goToNextPage()}
-                        disabled={nextPage === null}
-                    >
-                        Next
-                    </button>
-                </nav>
-            </section>
+                            <button
+                                className="paginacion__boton"
+                                onClick={() => goToNextPage()}
+                                disabled={nextPage === null}
+                            >
+                                Next
+                            </button>
+                        </nav>
 
-            {recipes.length === 0 && (
-                <p>Nothing found :(</p>
-            )}
+                        <ButtonToTop/>
+                    </>
+                )}
+            </section>
         </main>
     );
 };

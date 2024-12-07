@@ -1,0 +1,20 @@
+.scroll {
+  background-color: var(--btn-secondary-bg-color);
+  border-radius: 2rem;
+  border: 0.25rem;
+
+  padding: 0.25rem 0.5rem;
+
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+
+  cursor: pointer;
+}
+
+.scroll img {
+  height: 2rem;
+}
