@@ -4,6 +4,8 @@ import {NavLink, useNavigate} from "react-router-dom";
 import {UserContext} from "../context/UserContext.jsx";
 import Loading from "../components/Loading.jsx";
 import {validateEmail, validatePassword} from "../utils/ValidateForms.jsx";
+import {ToastContainer} from "react-toastify";
+import {notifyError} from "../utils/Toast.jsx";
 
 /**
  * Formulario de registro de nuevos usuarios
@@ -25,12 +27,9 @@ const Register = () => {
         repeatPassword: ""
     }
 
-    const errorRegisterInitial = "";
-
     // Estados
     const [userAccount, setUserAccount] = useState(initialState)
     const [errorMessages, setErrorMessages] = useState(errorMessagesInitial)
-    const [errorRegister, setErrorRegister] = useState(errorRegisterInitial)
     const [loading, setLoading] = useState(false);
     const [disabledSubmit, setDisabledSubmit] = useState(true);
 
@@ -123,9 +122,9 @@ const Register = () => {
             await register({email: userAccount.email, password: userAccount.password})
         } catch (error) {
             if (error.code === "auth/email-already-in-use") {
-                setErrorRegister("Email is already in use")
+                notifyError("Email is already in use", "light")
             } else {
-                setErrorRegister(error.message);
+                notifyError("An error has occurred. Please try again later.", "light")
             }
         }
     }
@@ -149,7 +148,7 @@ const Register = () => {
             setLoading(false);
         } catch (error) {
             setLoading(false);
-            setErrorRegister("Error: " + error);
+            notifyError("An error has occurred. Please try again later.", "light")
         }
     }
 
@@ -180,7 +179,7 @@ const Register = () => {
                     </label>
                     {
                         errorMessages.userName !== ""
-                        && <p>{errorMessages.userName}</p>
+                        && <p className="formulario-registro__error">{errorMessages.userName}</p>
                     }
 
 
@@ -198,7 +197,7 @@ const Register = () => {
                     </label>
                     {
                         errorMessages.email !== ""
-                        && <p>{errorMessages.email}</p>
+                        && <p className="formulario-registro__error">{errorMessages.email}</p>
                     }
 
 
@@ -215,7 +214,7 @@ const Register = () => {
                     </label>
                     {
                         errorMessages.password !== ""
-                        && <p>{errorMessages.password}</p>
+                        && <p className="formulario-registro__error">{errorMessages.password}</p>
                     }
 
 
@@ -232,7 +231,7 @@ const Register = () => {
                     </label>
                     {
                         errorMessages.repeatPassword !== ""
-                        && <p>{errorMessages.repeatPassword}</p>
+                        && <p className="formulario-registro__error">{errorMessages.repeatPassword}</p>
                     }
 
                     <NavLink to="/login" className="formulario-registro__login">Already have an account? Sign in</NavLink>
@@ -257,6 +256,8 @@ const Register = () => {
 
                 <img className="ventana-registro__imagen" src="/src/assets/img_register.jpeg" alt="Img login"/>
             </section>
+
+            <ToastContainer/>
         </main>
     );
 };
