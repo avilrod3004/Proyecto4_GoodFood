@@ -5,6 +5,10 @@ import {notifySuccess, notifyWarning} from "../utils/Toast.jsx";
 import Loading from "../components/Loading.jsx";
 import ErrorMessage from "../components/ErrorMessage.jsx";
 import HealthLabelsList from "../components/HealthLabelsList.jsx";
+import BookMarkLight from "../assets/bookmark_light.svg";
+import BookMarkedLight from "../assets/bookmarked_light.svg"
+import BookMarkDark from "../assets/bookmark_dark.svg";
+import BookMarkedDark from "../assets/bookmarked_dark.svg"
 
 const RecipeInfo = () => {
 
@@ -145,17 +149,19 @@ const RecipeInfo = () => {
                 <img className="tarjeta-info__imagen" src={recipe.image} alt={recipe.label}/>
 
                 <aside className="tarjeta-info__texto-info">
-                    <button onClick={() => (recipeFavorite ? deteteFavorite() : addFavorite())}>
-                        {recipeFavorite ? "Remove from Favorites" : "Add to Favorites"}
-                    </button>
+                    <div className="tarjeta-info__encabezado-info">
+                        <h1 className="encabezado-info__nombre">{recipe.label}</h1>
 
-                    <p>
-                        {
-                            recipeFavorite ? "si" : "no"
-                        }
-                    </p>
-
-                    <h1 className="texto-info__nombre">{recipe.label}</h1>
+                        <a
+                            className="encabezado-info__favoritos"
+                            onClick={() => (recipeFavorite ? deteteFavorite() : addFavorite())}
+                        >
+                            <img
+                                className="favortios__imagen"
+                                src={recipeFavorite ? BookMarkedLight : BookMarkLight}
+                                alt={recipeFavorite ? "Favorite" : "No favorite"}/>
+                        </a>
+                    </div>
                     <ul className="texto-info__listado-datos">
                         <li className="listado-datos__dato">
                             <span className="dato__nombre">Cuisine type: </span>
@@ -173,8 +179,8 @@ const RecipeInfo = () => {
 
                     <HealthLabelsList healthLabels={recipe.healthLabels}/>
 
-                    <h2 className="texto-info__listado-ingredientes">Ingredients</h2>
-                    <ul>
+                    <h2 className="texto-info__ingredientes">Ingredients</h2>
+                    <ul className="texto-info__listado-ingredientes">
                         {
                             recipe.ingredientLines.map((ingredient, index) => (
                                 <li className="listado-ingredientes__ingrediente" key={index}>{ingredient}</li>

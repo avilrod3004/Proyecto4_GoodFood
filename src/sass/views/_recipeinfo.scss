@@ -1,0 +1,85 @@
+.info-receta {
+  display: flex;
+  //align-items: center;
+  //justify-content: center;
+
+  @include padding(3rem, 3rem, 0rem, 0rem)
+}
+
+.info-receta__tarjeta-info {
+  background-color: var(--page-containers-bg-color);
+
+  display: flex;
+  gap: 1rem;
+
+  width: 100%;
+  max-height: 80vh;
+  @include padding(4rem, 4rem, 6rem, 6rem)
+}
+
+.tarjeta-info__imagen {
+  flex: 1;
+
+  width: 100%;
+  object-fit: cover;
+
+}
+
+.tarjeta-info__texto-info {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.tarjeta-info__encabezado-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+
+  width: 100%;
+}
+
+.encabezado-info__nombre {
+  color: var(--h1-text-color);
+}
+
+.favortios__imagen {
+  height: 2rem;
+
+  cursor: pointer;
+}
+
+.texto-info__listado-datos {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.dato__nombre {
+  color: var(--h6-text-color);
+  font-weight: bold;
+}
+
+.texto-info__ingredientes {
+  color: var(--h2-text-color);
+}
+
+.texto-info__listado-ingredientes {
+  list-style: disc;
+  padding-left: 2rem;
+}
+
+.texto-info__detalles {
+  @extend %botones;
+  background-color: var(--btn-primary-bg-color);
+  color: var(--btn-primary-text-color);
+  border: 0.25rem solid var(--btn-primary-border-color);
+  //text-align: center;
+}
+
+.texto-info__detalles:hover {
+  background-color: var(--btn-primaty-bg-color-hover);
+}
