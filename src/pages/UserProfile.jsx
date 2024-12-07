@@ -49,26 +49,38 @@ const UserProfile = () => {
     if (loading) return <Loading />;
 
     return (
-        <>
-            <aside>
-                <h1>{userData.userName || "No hay usuario"}</h1>
-                <img src={userData.picture || ""} alt="Foto de perfil"/>
-                <p>{userData.biography || "No hay biografía"}</p>
-                <h2>Website</h2>
+        <main className="perfil">
+            <aside className="perfil__datos">
+                <h1 className="datos__nombre-usuario">{userData.userName || "No hay usuario"}</h1>
+                <img className="datos__foto" src={userData.picture || ""} alt="Foto de perfil"/>
+                <p className="datos__biografia">{userData.biography || "No hay biografía"}</p>
+
+                <h2 className="datos__web">Website</h2>
                 <p>
+                    <img src="" alt=""/>
                     <a href={userData.website || "#"} target="_blank">
                         {userData.website || "No hay website"}
                     </a>
                 </p>
+
                 <h2>Social accounts</h2>
                 <ul>
-                    <li>{userData.socialAccount1 || "No hay social account"}</li>
-                    <li>{userData.socialAccount2 || "No hay social account"}</li>
-                    <li>{userData.socialAccount3 || "No hay social account"}</li>
+                    <li>
+                        <img src="" alt=""/>
+                        <a href="">{userData.socialAccount1 || " No hay social account"}</a>
+                    </li>
+                    <li>
+                        <img src="" alt=""/>
+                        <a href="">{userData.socialAccount2 || " No hay social account"}</a>
+                    </li>
+                    <li>
+                        <img src="" alt=""/>
+                        <a href="">{userData.socialAccount3 || " No hay social account"}</a>
+                    </li>
                 </ul>
             </aside>
 
-            <section>
+            <section className="perfil__recetas">
                 <h1>My favorite recipes</h1>
                 <header>
                     <button onClick={() => {
@@ -103,7 +115,7 @@ const UserProfile = () => {
                     ))
                 }
             </section>
-        </>
+        </main>
     );
 };
 

@@ -198,7 +198,7 @@ const SearchRecipes = ({filtersInitialValues, page}) => {
                             <BigCard
                                 key={index}
                                 id={getRecipeId(recipe.recipe.uri)}
-                                image={recipe.recipe.images}
+                                image={recipe.recipe.image}
                                 title={recipe.recipe.label}
                                 mealType={recipe.recipe.mealType}
                                 cuisineType={recipe.recipe.cuisineType}

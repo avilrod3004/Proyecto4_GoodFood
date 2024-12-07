@@ -1,0 +1,99 @@
+/* --- ESTILOS COMUNES ENTRE LAS TARJETAS PEQUEÑAS Y GRANDES --- */
+
+.texto-receta__titulo {
+  color: var(--card-title-color);
+  font-size: 2.5rem;
+
+  // El titulo ocupa 2 lineas
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+}
+
+.texto-receta__listado {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.listado__dato {
+  font-size: 1.25rem;
+}
+
+
+/* --- TARJETAS PEQUEÑAS --- */
+
+.receta-pequenia {
+  background-color: var(--card-bg-color) ;
+
+  height: 24.5rem;
+  width: 19rem;
+
+  cursor: pointer;
+}
+
+.receta-paquenia__imagen {
+  width: 100%;
+  height: 12rem;
+  object-fit: cover;
+}
+
+.receta-paquenia__texto-receta {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  @include padding(0.5rem, 0.5rem, 1rem, 1rem)
+}
+
+
+/* --- TARJETAS GRANDES --- */
+
+.receta-grande {
+  background-color: var(--card-bg-color);
+
+  display: flex;
+
+  height: 16rem;
+  width: 100%;
+
+  cursor: pointer;
+}
+
+.receta-grande__imagen {
+  width: 18rem;
+  height: 16rem;
+  object-fit: cover;
+}
+
+.receta-grande__texto-receta {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  @include padding(0.5rem, 0.5rem, 1rem, 1rem)
+}
+
+.texto-receta__listado-etiquetas {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.etiqueta__imagen {
+  height: 2rem;
+}
+
+.texto-receta__tiempo {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tiempo__imagen {
+  height: 1.5rem;
+}
+
+.tiempo__numero {
+  font-size: 1.5rem;
+}
