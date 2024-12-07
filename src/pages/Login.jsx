@@ -176,7 +176,7 @@ const Login = () => {
                         && <p className="formulario-login__error">{errorMessages.password}</p>
                     }
 
-                    <NavLink to="/register" className="fomulario-login__registro">Create an account</NavLink>
+                    <NavLink to="/register" className="fomulario-login__registro">Don&#39;t have an account yet? Create one</NavLink>
 
                     <nav className="fomulario-login__navegacion-login">
                         <button
