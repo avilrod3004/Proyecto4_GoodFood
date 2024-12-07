@@ -9,6 +9,19 @@ export const validateEmail = email => {
 }
 
 /**
+ * Valida si la contraseña tiene un formato válido:
+ * - 8 caracteres como mínimo,
+ * - al menos una letra en mayúscula
+ * - al menos un caracter especial entre !@#$%^&*)
+ * @param password Contraseña ingresada por el usuario
+ * @returns {boolean} True si es válida // False si no es válida
+ */
+export const validatePassword = password => {
+    const regex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{8,})/;
+    return regex.test(password);
+}
+
+/**
  * Valida si el número de teléfono del formulario tiene un formato válido
  * @param phoneNumber {String} Teléfono dado por el usuario
  * @returns {boolean} True si es válido // False si no es válido

@@ -1,8 +1,9 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {getUserData, register, saveUserData} from "../config/Firebase.jsx";
-import {useNavigate} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import {UserContext} from "../context/UserContext.jsx";
 import Loading from "../components/Loading.jsx";
+import {validateEmail, validatePassword} from "../utils/ValidateForms.jsx";
 
 /**
  * Formulario de registro de nuevos usuarios
@@ -52,7 +53,7 @@ const Register = () => {
         if (!value.trim()) {
             setErrorMessages({
                 ...errorMessages,
-                [name]: `This field is required`
+                [name]: `* This field is required`
             })
         }
 
@@ -61,7 +62,7 @@ const Register = () => {
             if (!valido) {
                 setErrorMessages({
                     ...errorMessages,
-                    [name]: "The email format is invalid"
+                    [name]: "* The email format is invalid"
                 })
             }
         }
@@ -71,7 +72,7 @@ const Register = () => {
             if (!valido) {
                 setErrorMessages({
                     ...errorMessages,
-                    [name]: "The password format is invalid. It must contain at least: 8 characters, a capital letter and a special character."
+                    [name]: "* The password format is invalid. It must contain at least: 8 characters, a capital letter and a special character."
                 })
             }
         }
@@ -80,7 +81,7 @@ const Register = () => {
             if (userAccount.password !== value) {
                 setErrorMessages({
                     ...errorMessages,
-                    [name]: "Passwords do not match"
+                    [name]: "* Passwords do not match"
                 })
             }
         }
@@ -100,29 +101,6 @@ const Register = () => {
     const handleBlur = event => {
         validateInput(event);
     };
-
-    /**
-     * Valida si el email del formulario tiene un formato válido
-     * @param email {String} Email dado por el usuario
-     * @returns {boolean} True si es válido // False si no es válido
-     */
-    const validateEmail = email => {
-        const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-        return regex.test(email);
-    }
-
-    /**
-     * Valida si la contraseña tiene un formato válido:
-     * - 8 caracteres como mínimo,
-     * - al menos una letra en mayúscula
-     * - al menos un caracter especial entre !@#$%^&*)
-     * @param password Contraseña ingresada por el usuario
-     * @returns {boolean} True si es válida // False si no es válida
-     */
-    const validatePassword = password => {
-        const regex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{8,})/;
-        return regex.test(password);
-    }
 
     /**
      * Valida si el formulario ha sido completado correctamente y si no hay mensajes de error en los campos
@@ -184,64 +162,102 @@ const Register = () => {
     if (loading) return <Loading />;
 
     return (
-        <>
-            <img src="/src/assets/img_register.jpeg" alt="Img login"/>
-            <h1>Create account</h1>
+        <main className="registro">
+            <section className="registro__ventana-registro">
+                <form onSubmit={handleSubmit} className="ventana-registro__formulario-registro">
+                    <h1 className="formulario-registro__titulo">Create account</h1>
 
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="userName">
-                    User name:
-                    <input
-                        type="text"
-                        name="userName"
-                        value={userAccount.userName}
-                        onBlur={handleBlur}
-                        onChange={validateInput}
-                    />
-                    {errorMessages.userName !== "" ? <p>{errorMessages.userName}</p> : null}
-                </label>
+                    <label htmlFor="userName" className="formulario-registro__label-registro">
+                        User name:
+                        <input
+                            className={errorMessages.userName !== "" ? "label-registro__input label-registro__input-error" : "label-registro__input"}
+                            type="text"
+                            name="userName"
+                            value={userAccount.userName}
+                            onBlur={handleBlur}
+                            onChange={validateInput}
+                        />
+                    </label>
+                    {
+                        errorMessages.userName !== ""
+                        && <p>{errorMessages.userName}</p>
+                    }
 
-                <label htmlFor="email">
-                    Email:
-                    <input
-                        type="text"
-                        name="email"
-                        placeholder="email@example.com"
-                        value={userAccount.email}
-                        onBlur={handleBlur}
-                        onChange={validateInput}
-                    />
-                    {errorMessages.email !== "" ? <p>{errorMessages.email}</p> : null}
-                </label>
 
-                <label htmlFor="password">
-                    Password:
-                    <input
-                        type="password"
-                        name="password"
-                        value={userAccount.password}
-                        onBlur={handleBlur}
-                        onChange={validateInput}
-                    />
-                    {errorMessages.password !== "" ? <p>{errorMessages.password}</p> : null}
-                </label>
+                    <label htmlFor="email" className="formulario-registro__label-registro">
+                        Email:
+                        <input
+                            className={errorMessages.email !== "" ? "label-registro__input label-registro__input-error" : "label-registro__input"}
+                            type="text"
+                            name="email"
+                            placeholder="email@example.com"
+                            value={userAccount.email}
+                            onBlur={handleBlur}
+                            onChange={validateInput}
+                        />
+                    </label>
+                    {
+                        errorMessages.email !== ""
+                        && <p>{errorMessages.email}</p>
+                    }
 
-                <label htmlFor="repeatPassword">
-                    Repear password:
-                    <input
-                        type="password"
-                        name="repeatPassword"
-                        value={userAccount.repeatPassword}
-                        onBlur={handleBlur}
-                        onChange={validateInput}
-                    />
-                    {errorMessages.repeatPassword !== "" ? <p>{errorMessages.repeatPassword}</p> : null}
-                </label>
 
-                <button disabled={disabledSubmit} type="submit">Sign up</button>
-                {errorRegister && <p>{errorRegister}</p>}
-            </form>
-        </>
+                    <label htmlFor="password" className="formulario-registro__label-registro">
+                        Password:
+                        <input
+                            className={errorMessages.password !== "" ? "label-registro__input label-registro__input-error" : "label-registro__input"}
+                            type="password"
+                            name="password"
+                            value={userAccount.password}
+                            onBlur={handleBlur}
+                            onChange={validateInput}
+                        />
+                    </label>
+                    {
+                        errorMessages.password !== ""
+                        && <p>{errorMessages.password}</p>
+                    }
+
+
+                    <label htmlFor="repeatPassword" className="formulario-registro__label-registro">
+                        Repear password:
+                        <input
+                            className={errorMessages.repeatPassword !== "" ? "label-registro__input label-registro__input-error" : "label-registro__input"}
+                            type="password"
+                            name="repeatPassword"
+                            value={userAccount.repeatPassword}
+                            onBlur={handleBlur}
+                            onChange={validateInput}
+                        />
+                    </label>
+                    {
+                        errorMessages.repeatPassword !== ""
+                        && <p>{errorMessages.repeatPassword}</p>
+                    }
+
+                    <NavLink to="/login" className="formulario-registro__login">Already have an account? Sign in</NavLink>
+
+                    <nav className="formulario-registro__navegacion-registro">
+                        <button
+                            className="navegacion-registro__submit"
+                            disabled={disabledSubmit}
+                            type="submit"
+                        >
+                            Continue
+                        </button>
+
+                        <button
+                            className="navegacion-registro__cancel"
+                            onClick={() => navigate("/")}
+                        >
+                            Cancel
+                        </button>
+                    </nav>
+                </form>
+
+                <img className="ventana-registro__imagen" src="/src/assets/img_register.jpeg" alt="Img login"/>
+            </section>
+        </main>
     );
 };
 
