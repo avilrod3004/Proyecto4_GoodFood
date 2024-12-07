@@ -17,8 +17,9 @@
 /* --- RESULTADOS --- */
 
 .busqueda__resultados {
-  flex: 3;
+  flex: 4;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 1.25rem;
 
