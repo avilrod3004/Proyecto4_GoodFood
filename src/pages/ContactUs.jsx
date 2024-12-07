@@ -145,7 +145,10 @@ const ContactUs = () => {
                         onBlur={handleBlur}
                         onChange={validateInput}/>
                 </label>
-                {errorMessages.name !== "" ? <p className="formulario-contacto__error">{errorMessages.name}</p> : null}
+                {
+                    errorMessages.name !== ""
+                    && <p className="formulario-contacto__error">{errorMessages.name}</p>
+                }
 
                 <label htmlFor="phone" className="formulario-contacto__label-text">
                     Phone number:
@@ -157,9 +160,10 @@ const ContactUs = () => {
                         onBlur={handleBlur}
                         onChange={validateInput}/>
                 </label>
-                {errorMessages.phone !== "" ?
-                    <p className="formulario-contacto__error">{errorMessages.phone}</p> : null}
-
+                {
+                    errorMessages.phone !== ""
+                    && <p className="formulario-contacto__error">{errorMessages.phone}</p>
+                }
 
                 <label htmlFor="email" className="formulario-contacto__label-text">
                     Email:
@@ -171,9 +175,10 @@ const ContactUs = () => {
                         onBlur={handleBlur}
                         onChange={validateInput}/>
                 </label>
-                {errorMessages.email !== "" ?
-                    <p className="formulario-contacto__error">{errorMessages.email}</p> : null}
-
+                {
+                    errorMessages.email !== ""
+                    && <p className="formulario-contacto__error">{errorMessages.email}</p>
+                }
 
                 <label htmlFor="subject" className="formulario-contacto__label-text">
                     Subject:
@@ -185,9 +190,10 @@ const ContactUs = () => {
                         onBlur={handleBlur}
                         onChange={validateInput}/>
                 </label>
-                {errorMessages.subject !== "" ?
-                    <p className="formulario-contacto__error">{errorMessages.subject}</p> : null}
-
+                {
+                    errorMessages.subject !== ""
+                    && <p className="formulario-contacto__error">{errorMessages.subject}</p>
+                }
 
                 <label htmlFor="body" className="formulario-contacto__label-textarea">
                     Body:
@@ -201,8 +207,10 @@ const ContactUs = () => {
                         onBlur={handleBlur}
                         onChange={validateInput}/>
                 </label>
-                {errorMessages.body !== "" ? <p className="formulario-contacto__error">{errorMessages.body}</p> : null}
-
+                {
+                    errorMessages.body !== ""
+                    && <p className="formulario-contacto__error">{errorMessages.body}</p>
+                }
 
                 <label htmlFor="accept" className="formulario-contacto__label-checkbox">
                     <input
@@ -211,11 +219,13 @@ const ContactUs = () => {
                         name="accept"
                         checked={message.accept}
                         onBlur={handleBlur}
-                        onChange={validateInput}/>I accept the legal terms, the privacy policy, and the conditions od
+                        onChange={validateInput}/>I accept the legal terms, the privacy policy, and the conditions of
                     this website.
                 </label>
-                {errorMessages.accept !== "" ?
-                    <p className="formulario-contacto__error-checkbox">{errorMessages.accept}</p> : null}
+                {
+                    errorMessages.accept !== ""
+                    && <p className="formulario-contacto__error-checkbox">{errorMessages.accept}</p>
+                }
 
                 <button className="formulario-contacto__enviar" disabled={disabledSubmit} type="submit">Send</button>
                 <button className="formulario-contacto__limpiar" type="reset">Reset</button>
