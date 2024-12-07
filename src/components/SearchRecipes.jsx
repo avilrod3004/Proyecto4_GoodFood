@@ -10,6 +10,7 @@ import SmallCardDark from "../../src/assets/small_cards_dark.svg";
 import SadFaceDark from "../../src/assets/sad_face_dark.svg";
 import SadFaceLight from "../../src/assets/sad_face_light.svg";
 import ButtonToTop from "./ButtonToTop.jsx";
+import ErrorMessage from "./ErrorMessage.jsx";
 
 const SearchRecipes = ({filtersInitialValues, page}) => {
 
@@ -128,7 +129,7 @@ const SearchRecipes = ({filtersInitialValues, page}) => {
     }, [filters])
 
     if (loading) return <Loading/>;
-    if (error) return <p>Error: {error}</p>;
+    if (error) return <ErrorMessage />;
 
     return (
         <main className="busqueda">
