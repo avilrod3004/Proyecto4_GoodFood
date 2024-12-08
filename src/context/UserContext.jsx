@@ -1,6 +1,7 @@
 import {createContext, useEffect, useState} from "react";
 import { onAuthStateChanged } from 'firebase/auth'
 import {auth} from "../config/Firebase.jsx";
+import Loading from "../components/Loading.jsx";
 
 export const UserContext = createContext();
 
@@ -17,7 +18,7 @@ const UserProvider = ({ children }) => {
     }, [])
 
     if (user === null) {
-        return <p>Loading...</p>;
+        return <Loading/>;
     }
 
     return (
