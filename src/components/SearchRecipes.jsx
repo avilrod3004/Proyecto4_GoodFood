@@ -12,6 +12,15 @@ import SadFaceLight from "../../src/assets/sad_face_light.svg";
 import ButtonToTop from "./ButtonToTop.jsx";
 import ErrorMessage from "./ErrorMessage.jsx";
 
+/**
+ * Componente `SearchRecipes`
+ * Este componente permite buscar recetas mediante filtros personalizados, mostrando los resultados en tarjetas de tamaño configurable.
+ * Se conecta a una API para obtener los datos de las recetas y maneja la paginación, así como los errores que puedan surgir.
+ *
+ * @param {Object} filtersInitialValues - Valores iniciales de los filtros para la búsqueda (por ejemplo, ingredientes, tipos de comida, etc.).
+ * @param {String} page - Nombre de la página en la que se va a mostrar el componente, influye en los filtros que se visualizan
+ * @returns {JSX.Element} Componente que muestra los resultados de la búsqueda de recetas, con paginación y filtros aplicados.
+ */
 const SearchRecipes = ({filtersInitialValues, page}) => {
 
     // Datos API de recetas
@@ -44,12 +53,19 @@ const SearchRecipes = ({filtersInitialValues, page}) => {
     const [nextPage, setNextPage] = useState(null);
     const [currentPage, setCurrentPage] = useState(0);
 
-    // Saber si un objeto está vacío
+    /**
+     * Verifica si un objeto está vacío.
+     *
+     * @param {Object} obj - El objeto que se va a verificar.
+     * @returns {Boolean} `true` si el objeto está vacío, `false` en caso contrario.
+     */
     function isEmptyObject(obj) {
         return Object.keys(obj).length === 0;
     }
 
-    // Añadir los filtros a la url de la peticion
+    /**
+     * Añade los filtros seleccionados a la URL de la petición.
+     */
     const addFilters = () => {
         urlFilters = url
 
@@ -80,7 +96,12 @@ const SearchRecipes = ({filtersInitialValues, page}) => {
         }
     }
 
-    // Obtener las recetas según los filtros
+    /**
+     * Obtiene las recetas según los filtros aplicados y maneja la paginación.
+     *
+     * @param {String} request - La URL de la solicitud a la API.
+     * @param {Boolean} addToPagesList - Si se debe agregar la página actual a la lista de páginas.
+     */
     async function getRecipes(request, addToPagesList = true) {
         try {
             const response = await fetch(request)
@@ -102,15 +123,24 @@ const SearchRecipes = ({filtersInitialValues, page}) => {
         }
     }
 
-    // Obtener el id de una receta
+    /**
+     * Obtiene el ID de una receta a partir de su URI.
+     *
+     * @param {String} recipeUri - La URI completa de la receta.
+     * @returns {String} El ID de la receta.
+     */
     const getRecipeId = (recipeUri) => recipeUri.split('recipe_')[1]
 
-    // Pasar a la siguiente página de las recetas obtenidas
+    /**
+     * Cambia a la siguiente página de recetas.
+     */
     const goToNextPage = () => {
         getRecipes(nextPage)
     }
 
-    // Volver a la página anterior de las recetas obtenidas
+    /**
+     * Vuelve a la página anterior de recetas.
+     */
     const goToPreviousPage = () => {
         pagesList.pop()
         getRecipes(pagesList.at(pagesList.length - 1), false)

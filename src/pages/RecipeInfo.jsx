@@ -10,6 +10,11 @@ import BookMarkedLight from "../assets/bookmarked_light.svg"
 import BookMarkDark from "../assets/bookmark_dark.svg";
 import BookMarkedDark from "../assets/bookmarked_dark.svg"
 
+/**
+ * Este componente muestra la información detallada de una receta, obtenida desde una API externa,
+ * y permite a los usuarios agregar o eliminar esa receta de su lista de favoritos.
+ * Los usuarios pueden ver detalles como el nombre de la receta, tipo de comida, tiempo de preparación, ingredientes y etiquetas de salud.
+ * */
 const RecipeInfo = () => {
 
     // Datos API de recetas
@@ -41,7 +46,9 @@ const RecipeInfo = () => {
     const [error, setError] = useState("");
     const [userData, setUserData] = useState(userDataInitial);
 
-    // Llama a la API para obtener la información de la receta
+    /**
+     * Obtiene la información de la receta desde la API
+     */
     async function getRecipeInfo() {
         try {
             const response = await fetch(`https://api.edamam.com/api/recipes/v2/${id}?type=public&app_id=${api_data.id}&app_key=${api_data.key}`);
@@ -54,7 +61,9 @@ const RecipeInfo = () => {
         }
     }
 
-    // Obtener los datos del usuario de la base de datos
+    /**
+     * Obtiene los datos del usuario desde el almacenamiento local
+     */
     const getUserData = () => {
         const data = JSON.parse(localStorage.getItem("user"));
 
@@ -64,7 +73,12 @@ const RecipeInfo = () => {
         });
     };
 
-    // Actualizar los datos del usuario en la base de datos
+    /**
+     * Actualiza los datos del usuario en el almacenamiento local
+     *
+     * @param updatedData - Datos del usuario actualizados
+     * @param action - Acción que se está realizando (marcar o desmarcar receta)
+     */
     const updateUserData = (updatedData, action) => {
         localStorage.setItem("user", JSON.stringify(updatedData));
 
@@ -75,10 +89,17 @@ const RecipeInfo = () => {
         }
     }
 
-    // Obtener el id de la receta
+    /**
+     * Obtiene el id de la receta a partir de su URI
+     *
+     * @param recipeUri - URI de la receta
+     * @returns {string} - ID de la receta
+     */
     const getRecipeId = (recipeUri) => recipeUri.split('recipe_')[1]
 
-    // Agregar una receta a favoritos
+    /**
+     * Añade la receta a la lista de favoritos del usuario
+     */
     const addFavorite = () => {
         const recipesList = userData.favoriteRecipes || [];
         const recipeData = {
@@ -104,7 +125,9 @@ const RecipeInfo = () => {
         setRecipeFavorite(true);
     }
 
-    // Eliminar una receta de favoritos
+    /**
+     * Elimina la receta de la lista de favoritos del usuario
+     */
     const deteteFavorite = () => {
         const updateFavoriteRecipes = userData.favoriteRecipes.filter((recipeSaved) => recipeSaved.id !== getRecipeId(recipe.uri));
 
@@ -119,7 +142,11 @@ const RecipeInfo = () => {
         setRecipeFavorite(false);
     }
 
-    // ¿Está marcada como favorita?
+    /**
+     * Verifica si la receta está marcada como favorita
+     *
+     * @returns {boolean} - Retorna true si la receta está marcada, false si no
+     */
     const isMarked = () => {
         if (!recipe.uri || !userData.favoriteRecipes) return false;
         return userData.favoriteRecipes.some((item) => item.id === getRecipeId(recipe.uri))

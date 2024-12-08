@@ -3,6 +3,12 @@ import Navbar from "./Navbar.jsx";
 import UserMenu from "./UserMenu.jsx";
 import GoodFoodLogo from "../../assets/GoodFood_logo.svg";
 
+/**
+ * Componente que representa el encabezado de la aplicación.
+ * Incluye el logo de la marca, la barra de navegación y el menú de usuario.
+ *
+ * @returns {JSX.Element} El encabezado con el logo, la barra de navegación y el menú de usuario.
+ */
 const Header = () => {
     return (
         <header className="cabecera">

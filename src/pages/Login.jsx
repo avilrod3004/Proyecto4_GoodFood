@@ -9,8 +9,9 @@ import {notifyError} from "../utils/Toast.jsx";
 import LoginImagen from "../assets/img_login.jpeg"
 
 /**
- * Formulario de inicio de sesión
- * @returns {Element} Formulario
+ * Componente que muestra el formulario de inicio de sesión
+ *
+ * @returns {Element} - Un formulario de inicio de sesión
  */
 const Login = () => {
     // Estados inciales
@@ -33,10 +34,10 @@ const Login = () => {
     const {user} = useContext(UserContext);
     const navigate = useNavigate();
 
-    // Funciones
     /**
-     * Valida que las entradas del usuario sean válidas
-     * @param event Evento ocurrido en el formulario
+     * Valida que los campos del formulario estén correctamente rellenados
+     *
+     * @param event {Event} - Evento ocurrido al cambiar el valor de un campo
      */
     const validateInput = event => {
         const {name, value} = event.target;
@@ -73,14 +74,15 @@ const Login = () => {
 
     /**
      * Valida los campos del formulario cuando el campo pierde el foco
-     * @param event {Event} - Evento ocurrido en el formulario
+     *
+     * @param event {Event} - Evento ocurrido al perder el foco de un campo
      */
     const handleBlur = event => {
         validateInput(event);
     };
 
     /**
-     * Valida si el formulario ha sido completado correctamente y si no hay mensajes de error en los campos
+     * Verifica si el formulario está completo y sin errores
      */
     const validateMessage = () => {
         const completedInputs = Object.values(userAccount).every(value => value !== "" || value === true);
@@ -90,8 +92,9 @@ const Login = () => {
     }
 
     /**
-     * Inicia la sesión de usuario y lo redirige a su perfil
-     * @param event Evento onSubmit
+     * Maneja el envío del formulario de inicio de sesión
+     *
+     * @param event {Event} - Evento de envío del formulario
      */
     const handleSubmit = async event => {
         event.preventDefault();
@@ -108,7 +111,11 @@ const Login = () => {
         }
     }
 
-    // Obtener los datos del usuario de la base de datos
+    /**
+     * Recupera los datos del usuario desde Firebase
+     *
+     * @param uid {string} - ID del usuario
+     */
     const fetchUserData = async (uid) => {
         try {
             setLoading(true);

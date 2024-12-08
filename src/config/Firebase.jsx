@@ -1,9 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-
 import { doc, setDoc, getDoc } from "firebase/firestore";
 
+// Configuración de Firebase
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
     authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -13,27 +13,59 @@ const firebaseConfig = {
     appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
+// Inicialización de Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 
-// Función de login
+/**
+ * Iniciar sesión en Firebase.
+ *
+ * @param {Object} credentials - Objeto que contiene las credenciales del usuario.
+ * @param {string} credentials.email - Correo electrónico del usuario.
+ * @param {string} credentials.password - Contraseña del usuario.
+ * @returns {Promise<UserCredential>} La promesa de la autenticación del usuario.
+ */
 export const login = ({email, password}) => {
     return signInWithEmailAndPassword(auth, email, password)
 }
 
-// Función de registro
+/**
+ * Registrar un nuevo usuario en Firebase.
+ *
+ * @param {Object} credentials - Objeto que contiene las credenciales del usuario.
+ * @param {string} credentials.email - Correo electrónico del usuario.
+ * @param {string} credentials.password - Contraseña del usuario.
+ * @returns {Promise<UserCredential>} La promesa del registro del usuario.
+ */
 export const register = ({email, password}) => {
     return createUserWithEmailAndPassword(auth, email, password)
 }
 
-// Función de cerrar sesión
+/**
+ * Cerrar sesión en Firebase.
+ *
+ * @returns {Promise<void>} La promesa de cierre de sesión del usuario.
+ */
 export const logOut = () => signOut(auth);
 
 /**
- * Guardar o actualizar datos del usuario en Firestore.
- * @param {Object} user - Objeto con los datos del usuario.
- * @returns {Promise<void>}
+ * Guardar o actualizar los datos del usuario en Firestore.
+ *
+ * @param {Object} user - Objeto con los datos del usuario a guardar.
+ * @param {string} user.uid - El ID único del usuario.
+ * @param {string} [user.userName] - El nombre de usuario del usuario.
+ * @param {string} [user.picture] - URL de la imagen de perfil del usuario.
+ * @param {string} [user.biography] - Biografía del usuario.
+ * @param {string} [user.website] - Sitio web del usuario.
+ * @param {string} [user.socialAccount1] - Primera cuenta social del usuario.
+ * @param {string} [user.socialAccount2] - Segunda cuenta social del usuario.
+ * @param {string} [user.socialAccount3] - Tercera cuenta social del usuario.
+ * @param {string} [user.name] - Nombre del usuario.
+ * @param {string} [user.lastName] - Apellido del usuario.
+ * @param {string} [user.phone] - Teléfono del usuario.
+ * @param {Array} [user.favoriteRecipes] - Lista de recetas favoritas del usuario.
+ * @returns {Promise<void>} La promesa de la operación de guardar o actualizar los datos del usuario.
  */
 export const saveUserData = async (user) => {
     const userRef = doc(db, "users", user.uid); // Documento del usuario
@@ -57,9 +89,10 @@ export const saveUserData = async (user) => {
 };
 
 /**
- * Obtener datos del usuario desde Firestore.
- * @param {string} uid - UID del usuario.
- * @returns {Promise<Object|null>} Datos del usuario o null si no existen.
+ * Obtener los datos del usuario desde Firestore.
+ *
+ * @param {string} uid - UID del usuario para buscar los datos en Firestore.
+ * @returns {Promise<Object|null>} Los datos del usuario o `null` si no existen.
  */
 export const getUserData = async (uid) => {
     const userRef = doc(db, "users", uid);

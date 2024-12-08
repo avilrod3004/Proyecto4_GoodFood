@@ -15,6 +15,10 @@ import SadFaceLight from "../assets/sad_face_light.svg";
 import SadFaceDark from "../../src/assets/sad_face_dark.svg";
 import {ThemeContext} from "../context/ThemeContext.jsx";
 
+/**
+ * Muestra la información del usuario, incluyendo su nombre de usuario, foto, biografía, sitios web y redes sociales.
+ * También gestiona la visualización de recetas favoritas y permite alternar entre vistas pequeñas y grandes para las tarjetas de recetas.
+ */
 const UserProfile = () => {
     // Estados iniciales
     const userDataInitial = {
@@ -38,10 +42,9 @@ const UserProfile = () => {
     const [cardSize, setCardSize] = useState("small");
     const [loading, setLoading] = useState(true);
 
-    // Funciones
-
     /**
-     * Obtener los datos del usuario almacenados en localStorage
+     * Obtener los datos del usuario almacenados en localStorage.
+     * Se utiliza para cargar la información del usuario al cargar el componente.
      */
     const getUserData = () => {
         const data = JSON.parse(localStorage.getItem("user"));
@@ -51,6 +54,13 @@ const UserProfile = () => {
         setLoading(false);
     }
 
+    /**
+     * Obtiene el icono correspondiente a las tarjetas de recetas en función del tamaño y tema.
+     *
+     * @param {string} size - El tamaño de las tarjetas, puede ser "small" o "big".
+     * @param {string} theme - El tema actual, puede ser "light" o "dark".
+     * @returns {string} - La ruta al icono de la tarjeta correspondiente.
+     */
     const getIconCards = (size, theme) => {
         if (size === "small") {
             return theme === "light" ? SmallCardLight : SmallCardDark;
@@ -59,6 +69,7 @@ const UserProfile = () => {
         }
     };
 
+    // Asigna el icono de enlace según el tema
     const getIconLink = theme === "light" ? LinkLight : LinkDark;
 
     // Cuando el usuario logueado se haya cargado

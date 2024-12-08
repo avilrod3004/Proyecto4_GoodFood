@@ -5,8 +5,16 @@ import {ToastContainer} from "react-toastify";
 import {notifySuccess} from "../utils/Toast.jsx";
 import {validatePhoneNumber, validateUrl} from "../utils/ValidateForms.jsx";
 
+/**
+ * Componente para actualizar el perfil de usuario.
+ * Permite al usuario actualizar su nombre, imagen, biografía, enlaces a redes sociales, y más.
+ * Valida los campos del formulario y muestra mensajes de error si es necesario.
+ * Al enviar el formulario, guarda los cambios en el almacenamiento local y redirige al perfil del usuario.
+ *
+ * @returns {Element} Formulario de actualización de perfil.
+ */
 const UpdateUserProfile = () => {
-    // Estados iniciales
+    // Estados iniciales para los datos del usuario y los mensajes de error
     const userDataInitial = {
         userName: "",
         picture: "",
@@ -43,8 +51,12 @@ const UpdateUserProfile = () => {
     const navigate = useNavigate();
     const requiredInputs = ["userName", "picture", "biography"];
 
-    // Funciones
-
+    /**
+     * Función para validar la entrada del usuario en los campos del formulario.
+     * Valida el formato de la URL y el teléfono, y verifica si los campos obligatorios están completos.
+     *
+     * @param {Event} event - Evento del formulario.
+     */
     const validateInput = event => {
         const {name, value, type} = event.target
 
@@ -88,12 +100,17 @@ const UpdateUserProfile = () => {
         validateMessage();
     }
 
+    /**
+     * Función para verificar si el formulario es válido.
+     * Habilita o deshabilita el botón de envío según los errores presentes.
+     */
     const validateMessage = () => {
         setDisabledSend(!Object.values(errorMessages).every(value => value === ""));
     }
 
     /**
-     * Obtener los datos del usuario almacenados en localStorage
+     * Función para obtener los datos del usuario desde el almacenamiento local.
+     * Inicializa los datos del usuario en el estado.
      */
     const getUserData = () => {
         const data = JSON.parse(localStorage.getItem("user"));
@@ -103,6 +120,12 @@ const UpdateUserProfile = () => {
         setLoading(false);
     }
 
+    /**
+     * Función para actualizar los datos del usuario.
+     * Guarda los nuevos datos en el almacenamiento local y redirige al perfil.
+     *
+     * @param {Event} event - Evento del formulario.
+     */
     const updateUserData = event => {
         event.preventDefault();
 

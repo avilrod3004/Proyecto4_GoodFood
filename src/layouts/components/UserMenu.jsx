@@ -11,14 +11,19 @@ import EditIcon from "../../assets/edit.svg"
 import {ThemeContext} from "../../context/ThemeContext.jsx";
 
 /**
- * Menú de botones del usuario
- * Se muestran los botones para iniciar sesión y registrarse o cerrar sesión
- * @returns {Element} Menu de botones
+ * Menú de botones del usuario.
+ * Se muestran los botones para iniciar sesión y registrarse o cerrar sesión, además de un botón para cambiar el tema de la aplicación.
+ *
+ * @returns {Element} Menú de usuario con opciones según el estado de autenticación.
  */
 const UserMenu = () => {
     const {user, setUser} = useContext(UserContext);
     const {theme, toggleTheme} = useContext(ThemeContext);
 
+    /**
+     * Maneja el proceso de cierre de sesión.
+     * Guarda los datos del usuario en la base de datos antes de cerrar sesión y mostrar una notificación de éxito.
+     */
     const handleLogout = async () => {
         try {
             const userData = JSON.parse(localStorage.getItem("user"));
@@ -34,6 +39,7 @@ const UserMenu = () => {
             notifyError(`An error has ocurred, could not log out. ${error}`, "light")
         }
     }
+
     return (
         <nav className="navegacion__usuario">
             {

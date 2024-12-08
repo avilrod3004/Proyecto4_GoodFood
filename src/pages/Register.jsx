@@ -9,11 +9,15 @@ import {notifyError} from "../utils/Toast.jsx";
 import RegistroImagen from "../assets/img_register.jpeg"
 
 /**
- * Formulario de registro de nuevos usuarios
- * @returns {Element} Formulario
+ * Componente de formulario de registro de nuevos usuarios.
+ * Permite a los usuarios crear una cuenta proporcionando nombre de usuario, correo electrónico y contraseña.
+ * Valida los campos y muestra mensajes de error si es necesario.
+ * Redirige al perfil del usuario después de un registro exitoso.
+ *
+ * @returns {Element} Formulario de registro.
  */
 const Register = () => {
-    // Estados inciales
+    // Estado inicial para los datos del formulario
     const initialState = {
         userName: "",
         email: "",
@@ -21,6 +25,7 @@ const Register = () => {
         repeatPassword: ""
     }
 
+    // Estado inicial para los mensajes de error
     const errorMessagesInitial = {
         userName: "",
         email: "",
@@ -37,10 +42,12 @@ const Register = () => {
     const {user} = useContext(UserContext);
     const navigate = useNavigate();
 
-    // Funciones
     /**
-     * Valida las entradas del usuario
-     * @param event Evento ocurrido en el formulario
+     * Valida las entradas del formulario a medida que el usuario escribe.
+     * Se asegura de que el correo electrónico tenga un formato válido,
+     * que la contraseña cumpla con los requisitos y que las contraseñas coincidan.
+     *
+     * @param {Event} event - Evento del formulario.
      */
     const validateInput = event => {
         const {name, value} = event.target;
@@ -95,15 +102,18 @@ const Register = () => {
     }
 
     /**
-     * Valida los campos del formulario cuando el campo pierde el foco
-     * @param event {Event} - Evento ocurrido en el formulario
+     * Función que se ejecuta cuando un campo pierde el foco.
+     * Llama a la función de validación para el campo correspondiente.
+     *
+     * @param {Event} event - Evento ocurrido en el formulario.
      */
     const handleBlur = event => {
         validateInput(event);
     };
 
     /**
-     * Valida si el formulario ha sido completado correctamente y si no hay mensajes de error en los campos
+     * Verifica si el formulario está completo y si no hay errores.
+     * Habilita o deshabilita el botón de envío en función de la validez del formulario.
      */
     const validateMessage = () => {
         const completedInputs = Object.values(userAccount).every(value => value !== "" || value === true);
@@ -113,8 +123,9 @@ const Register = () => {
     }
 
     /**
-     * Registra al usuario y lo redirige a su perfil
-     * @param event Evento onSubmit
+     * Registra al usuario con los datos del formulario y maneja los errores si ocurren.
+     *
+     * @param {Event} event - Evento onSubmit del formulario.
      */
     const handleSubmit = async event => {
         event.preventDefault();
@@ -130,6 +141,9 @@ const Register = () => {
         }
     }
 
+    /**
+     * Guarda los datos del nuevo usuario en la base de datos y redirige a su perfil.
+     */
     const saveNewUser = async () => {
         try {
             setLoading(true);

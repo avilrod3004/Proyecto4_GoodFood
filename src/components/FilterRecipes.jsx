@@ -1,11 +1,33 @@
 import React from 'react';
 import {validateIngredients, validateMinutes} from "../utils/ValidateForms.jsx";
 
+/**
+ * Componente `FilterRecipes`
+ * Este componente permite filtrar recetas según diferentes criterios como los ingredientes, el tiempo máximo
+ * de preparación, el tipo de comida, el tipo de cocina y opciones relacionadas con la salud. Utiliza un conjunto de
+ * opciones predeterminadas y también realiza validaciones en los inputs proporcionados por el usuario.
+ *
+ * @param {Object} props - Propiedades pasadas al componente.
+ * @param {Object} props.filters - El estado actual de los filtros aplicados.
+ * @param {Function} props.setFilters - Función para actualizar los filtros.
+ * @param {Object} props.filterErrors - El estado actual de los errores de validación de los filtros.
+ * @param {Function} props.setFilterErrors - Función para actualizar los errores de validación.
+ * @param {string} props.page - La página actual que influye en qué filtros se mostrarán.
+ * @returns {JSX.Element} El formulario de filtros para buscar recetas.
+ */
 const FilterRecipes = ({filters, setFilters, filterErrors, setFilterErrors, page}) => {
+    // Opciones predeterminadas para los filtros
     const mealTypesOptions = ["Breakfast", "Dinner", "Lunch", "Snack", "Teatime"];
     const cuisineTypeOptions = ["American", "Asian", "British", "Caribbean", "Chinese", "French", "Indian", "Italian", "Japanese", "Mediterranean", "Nordic"]
     const healthOptions = ["Alcohol-free", "Celery-free", "Dairy-free", "Egg-free", "Fish-free", "Gluten-free", "Low-sugar", "Mustard-free", "Peanut-free", "Pork-free", "Soy-free", "Vegan", "Vegetarian"];
 
+    /**
+     * Manejar la validación y actualización de los filtros.
+     * Esta función maneja diferentes tipos de entradas, como texto y casillas de verificación.
+     * Además, realiza la validación de los ingredientes y del tiempo máximo de preparación.
+     *
+     * @param {Object} event - El evento de cambio generado por el input.
+     */
     const validateInput = event => {
         let {name, value, checked, type} = event.target
 
@@ -21,7 +43,7 @@ const FilterRecipes = ({filters, setFilters, filterErrors, setFilterErrors, page
             if (!valid) {
                 setFilterErrors({
                     ...filterErrors,
-                    [name]: `Separe los ingredientes con espacios`
+                    [name]: `* Separate ingredients with spaces`
                 })
             }
         }
@@ -31,7 +53,7 @@ const FilterRecipes = ({filters, setFilters, filterErrors, setFilterErrors, page
             if (!valid) {
                 setFilterErrors({
                     ...filterErrors,
-                    [name]: `El valor de los minutos debe ser un número entero y positivo`
+                    [name]: `* Must be an integer and positive`
                 })
             }
         }

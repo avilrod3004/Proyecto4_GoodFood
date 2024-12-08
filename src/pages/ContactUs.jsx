@@ -5,10 +5,12 @@ import {notifySuccess} from "../utils/Toast.jsx";
 import {validateEmail, validatePhoneNumber} from "../utils/ValidateForms.jsx";
 
 /**
- * Componente que muestra el formulario de contacto
+ * Componente que muestra el formulario de contacto.
+ * Permite al usuario enviar un mensaje de contacto proporcionando su nombre, teléfono, correo electrónico, asunto y mensaje.
+ * Además, valida los campos de entrada y muestra mensajes de error si es necesario.
  */
 const ContactUs = () => {
-    // Estados iniciales
+    // Estados iniciales para los campos del formulario y los mensajes de error.
     const initialValues = {
         name: "",
         phone: "",
@@ -27,14 +29,14 @@ const ContactUs = () => {
         accept: ""
     }
 
-    // Estados
+    // Estados del formulario
     const [message, setMessage] = useState(initialValues);
     const [errorMessages, setErrorMessages] = useState(errorMessagesInitial);
     const [disabledSubmit, setDisabledSubmit] = useState(true);
 
-    // Funciones
     /**
-     * Valida los campos del formulario
+     * Valida los campos del formulario según su tipo.
+     *
      * @param event {Event} - Evento ocurrido en el formulario
      */
     const validateInput = event => {
@@ -91,6 +93,7 @@ const ContactUs = () => {
 
     /**
      * Valida los campos del formulario cuando el campo pierde el foco
+     *
      * @param event {Event} - Evento ocurrido en el formulario
      */
     const handleBlur = event => {
@@ -98,7 +101,7 @@ const ContactUs = () => {
     };
 
     /**
-     * Valida si el formulario ha sido completado correctamente y si no hay mensajes de error en los campos
+     * Verifica si todos los campos requeridos están completos y sin errores.
      */
     const validateMessage = () => {
         const { phone, accept, ...fieldsToValidate } = message; // Excluimos el campo opcional (phone) y el checkbox para validarlo aparte
@@ -118,7 +121,8 @@ const ContactUs = () => {
 
 
     /**
-     * Envía el mensaje
+     * Envía el mensaje de contacto.
+     *
      * @param event {Event} - Evento ocurrido en el formulario
      */
     const send = event => {

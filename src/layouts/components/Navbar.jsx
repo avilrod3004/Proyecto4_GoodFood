@@ -2,8 +2,9 @@ import React, {useContext} from 'react';
 import {NavLink} from "react-router-dom";
 
 /**
- * Menú para navegar entre las páginas principales de la web
- * @returns {Element} Menú de navegación
+ * Menú para navegar entre las páginas principales de la web.
+ *
+ * @returns {Element} Menú de navegación con enlaces a las páginas principales de la aplicación.
  */
 const Navbar = () => {
     return (

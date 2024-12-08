@@ -5,6 +5,13 @@ import Apple from "../assets/apple.svg";
 import Chicken from "../assets/chicken.svg";
 import Shrimp from "../assets/shrimp.svg";
 
+/**
+ * Componente `Loading`
+ * Este componente se encarga de mostrar una serie de imágenes de alimentos mientras el contenido de la página se carga.
+ * Está diseñado para indicar que la aplicación está procesando datos y proporcionará una experiencia visual entretenida durante el proceso de carga.
+ *
+ * @returns {JSX.Element} Un conjunto de imágenes que representan diferentes alimentos, utilizadas como indicadores de carga.
+ */
 const Loading = () => {
     return (
         <main className="loading">

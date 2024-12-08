@@ -2,16 +2,23 @@ import React from 'react';
 import {useNavigate} from "react-router-dom";
 
 /**
- * Tarjeta vertical que muestra información básica de las recetas devueltas por la API
- * @param image Imagen de la receta
- * @param title Nombre de la receta
- * @param mealType Tipo de comida
- * @param cuisineType Tipo de cocina
- * @returns {Element} Tarjeta
+ * Componente `SmallCard`
+ * Este componente representa una tarjeta pequeña que muestra información básica de una receta.
+ * Al hacer clic en la tarjeta, el usuario es redirigido a la página de detalles de la receta seleccionada.
+ *
+ * @param {String} id - El identificador único de la receta.
+ * @param {String} image - La URL de la imagen de la receta.
+ * @param {String} title - El nombre de la receta.
+ * @param {String} mealType - El tipo de comida de la receta
+ * @param {String} cuisineType - El tipo de cocina de la receta
+ * @returns {JSX.Element} Una tarjeta que muestra la receta con su imagen, nombre, tipo de comida y tipo de cocina.
  */
 const SmallCard = ({id, image, title, mealType, cuisineType}) => {
     const navigate = useNavigate();
 
+    /**
+     * Redirige a la página de detalles de la receta.
+     */
     const consultarReceta = () => {
         navigate(`/recipe/${id}`);
     }

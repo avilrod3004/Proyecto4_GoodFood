@@ -26,7 +26,17 @@ import VeganLight from "../assets/vegan_light.png";
 import VegetarianDark from "../assets/vegetarian_dark.png";
 import VegetarianLight from "../assets/vegetarian_light.png";
 
+/**
+ * Componente `HealthLabelsList`
+ * Este componente recibe una lista de etiquetas de salud y las muestra en forma de íconos correspondientes.
+ * Dependiendo del nombre de la etiqueta, se renderiza un ícono que representa el tipo de dieta o restricción de salud.
+ *
+ * @param {Object} props - Propiedades pasadas al componente.
+ * @param {Array} props.healthLabels - Lista de etiquetas de salud a mostrar (por ejemplo, "Gluten-Free", "Vegan", etc.).
+ * @returns {JSX.Element} Una lista de imágenes (íconos) representando las restricciones o tipos de dieta.
+ */
 const HealthLabelsList = ({healthLabels}) => {
+    // Objetos que mapean cada etiqueta a su ícono correspondiente en dos versiones (oscuro y claro)
     const healthIconsLight = {
         "Alcohol-Free": AlcoholFreeLight,
         "Celery-Free": CeleryFreeLight,

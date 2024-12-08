@@ -5,6 +5,11 @@ import LogoTikTok from "../../assets/tiktok.svg"
 import LogoInstagram from "../../assets/instagram.svg"
 import LogoGitHub from "../../assets/github.svg"
 
+/**
+ * Componente que renderiza el pie de página con enlaces a redes sociales y términos.
+ *
+ * @returns {JSX.Element} El pie de página con enlaces a redes sociales y términos de servicio.
+ */
 const Footer = () => {
     return (
         <footer className="pie">

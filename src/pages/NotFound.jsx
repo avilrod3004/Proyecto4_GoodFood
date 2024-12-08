@@ -4,8 +4,9 @@ import errorImageLight from "../assets/error_404_modo_claro.png"
 import errorImageDark from "../assets/error_404_modo_oscuro.png"
 
 /**
- * Página de error 404
- * @returns {Element} Página de error
+ * Página de error 404 que se muestra cuando la ruta no existe
+ *
+ * @returns {Element} - Página que muestra un mensaje de error y un enlace a la página de inicio
  */
 const NotFound = () => {
     const error = useRouteError()

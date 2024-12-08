@@ -6,8 +6,10 @@ import Header from "./components/Header.jsx";
 
 /**
  * Esquema de las páginas privadas.
- * Simplifica la protección las rutas privadas
- * @returns {Element} Esquema
+ * Este componente protege las rutas privadas al verificar si el usuario está autenticado.
+ * Si el usuario no está logueado, será redirigido automáticamente al login.
+ *
+ * @returns {Element} Componente de esquema para páginas privadas
  */
 const LayoutPrivate = () => {
     const {user} = useContext(UserContext);
