@@ -4,7 +4,6 @@
   - [Descripción de la aplicación](https://github.com/avilrod3004/Proyecto4_GoodFood/tree/4_2_firestorage?tab=readme-ov-file#descripci%C3%B3n-de-la-aplicaci%C3%B3n)
   - [Tecnologías utilizadas](https://github.com/avilrod3004/Proyecto4_GoodFood/tree/4_2_firestorage?tab=readme-ov-file#tecnolog%C3%ADas-utilizadas)
   - [Instalación y configuración](https://github.com/avilrod3004/Proyecto4_GoodFood/tree/4_2_firestorage?tab=readme-ov-file#instalaci%C3%B3n-y-configuraci%C3%B3n)
-- [Documentación del código](https://github.com/avilrod3004/Proyecto4_GoodFood/tree/4_2_firestorage?tab=readme-ov-file#instalaci%C3%B3n-y-configuraci%C3%B3n)
 - [Reflexión](https://github.com/avilrod3004/Proyecto4_GoodFood/tree/4_2_firestorage?tab=readme-ov-file#reflexi%C3%B3n)
 - [Versión desplegada](https://github.com/avilrod3004/Proyecto4_GoodFood/tree/4_2_firestorage?tab=readme-ov-file#versi%C3%B3n-desplegada)
 
@@ -81,10 +80,18 @@ VITE_RECIPES_API_KEY=""
 ```
 5. Ejecutar el proyecto en local con este comando `npm run dev`.
 
-# Documentación del código
-aaa
-
 # Reflexión
+Me ha gustado mucho hacer este proyecto porque he aprendido a desarrollar una aplicación sin usar JavaScript Vanilla y ver como React facilita enormemente la creación de la interfaz de usuario.
+
+Después de usar React en pequeñas actividades de clase, usarlo en un proyecto me ha ayudado a terminar de comprenderlo y ver lo lejos que se puede llegar.
+
+Desafíos:
+
+**Componentes**: No estaba segura al principio de hasta cuando era necesario crear componentes pequeños. Pero al ir trabajando en el proyecto, la necesidad de crearlos fue surgiendo. Y es que al final, depende del proyecto y de lo reutilizable que podría ser un trozo de código siendo un componente.
+
+**Gestionar la asincronía**: Trabajar con la API externa, Firebase (para la autenticación y la base de datos) y descubrir que las funciones modificadoras de los estados también son asíncronas, me ha provocado algunos dolores de cabeza.
+
+Sobre todo por complicar innecesariamente el código anidando demasidas funciones asíncronas. Al final, lo más sencillo es usar variables intermedias para trabajar con la información asíncrona dentro de la función y dejar los estados para guardar esa información al terminar.
 
 # Versión desplegada
-[GoodFood desplegado de Netlify](fanciful-vacherin-2a3294.netlify.app/)
+[GoodFood desplegado de Netlify](https://fanciful-vacherin-2a3294.netlify.app/)
