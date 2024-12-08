@@ -6,7 +6,7 @@ import DarkModeIcon from "../../assets/moon.svg"
 import {ToastContainer} from "react-toastify";
 import {notifyError, notifySuccess} from "../../utils/Toast.jsx";
 import ProfileIcon from "../../assets/user.svg"
-import ConfigIcon from "../../assets/config.svg"
+import EditIcon from "../../assets/edit.svg"
 
 /**
  * Menú de botones del usuario
@@ -44,7 +44,7 @@ const UserMenu = () => {
                         </li>
                         <li className="listado__boton-user">
                             <NavLink to="/profile/update" className="boton-user__opcion">
-                                <img className="boton__imagen" src={ConfigIcon} alt="Edit profile" title="Edit profile"/>
+                                <img className="boton__imagen" src={EditIcon} alt="Edit profile" title="Edit profile"/>
                             </NavLink>
                         </li>
                         <li className="listado__boton">
