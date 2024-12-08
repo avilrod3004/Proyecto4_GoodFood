@@ -60,14 +60,39 @@ const FilterRecipes = ({filters, setFilters, filterErrors, setFilterErrors, page
                     <legend className="fieldset-filtros__leyenda-filtros">Ingredients</legend>
                     <label htmlFor="q" className="leyenda-filtros__label">
                         <input
+                            className={filterErrors.q !== "" ? "label-filtros__input label-filtros__input-error" : "label-filtros__input"}
                             type="text"
                             name="q"
                             value={filters.q}
                             onChange={validateInput}
                         />
-                        {filterErrors.q !== "" ? <p>{filterErrors.q}</p> : null}
                     </label>
+                    {
+                        filterErrors.q !== "" &&
+                        <p className="leyenda-filtros__error">{filterErrors.q}</p>
+                    }
                 </fieldset>
+
+                {
+                    page !== "quickRecipes" && (
+                        <fieldset className="formulario-filtros__fieldset-filtros">
+                            <legend className="fieldset-filtros__leyenda-filtros">Max. time</legend>
+                            <label className="leyenda-filtros__checkbox">
+                                <input
+                                    className={filterErrors.maxTime !== "" ? "label-filtros__input label-filtros__input-error" : "label-filtros__input"}
+                                    type="text"
+                                    name="maxTime"
+                                    value={filters.maxTime}
+                                    onChange={validateInput}
+                                />
+                            </label>
+                            {
+                                filterErrors.maxTime !== ""
+                                && <p className="leyenda-filtros__error">{filterErrors.maxTime}</p>
+                            }
+                        </fieldset>
+                    )
+                }
 
                 {
                     page !== "mealsTypes" && (
@@ -76,6 +101,7 @@ const FilterRecipes = ({filters, setFilters, filterErrors, setFilterErrors, page
                             {mealTypesOptions.map((option) => (
                                 <label key={option} className="leyenda-filtros__checkbox">
                                     <input
+                                        className="checkbox__opcion"
                                         type="checkbox"
                                         name="mealTypes"
                                         value={option}
@@ -94,6 +120,7 @@ const FilterRecipes = ({filters, setFilters, filterErrors, setFilterErrors, page
                     {cuisineTypeOptions.map((option) => (
                         <label key={option} className="leyenda-filtros__checkbox">
                             <input
+                                className="checkbox__opcion"
                                 type="checkbox"
                                 name="cuisineTypes"
                                 value={option}
@@ -110,6 +137,7 @@ const FilterRecipes = ({filters, setFilters, filterErrors, setFilterErrors, page
                     {healthOptions.map((option) => (
                         <label key={option} className="leyenda-filtros__checkbox">
                             <input
+                                className="checkbox__opcion"
                                 type="checkbox"
                                 name="health"
                                 value={option}
@@ -120,23 +148,6 @@ const FilterRecipes = ({filters, setFilters, filterErrors, setFilterErrors, page
                         </label>
                     ))}
                 </fieldset>
-
-                {
-                    page !== "quickRecipes" && (
-                        <fieldset className="formulario-filtros__fieldset-filtros">
-                            <legend className="fieldset-filtros__leyenda-filtros">Max. time</legend>
-                            <label className="leyenda-filtros__checkbox">
-                                <input
-                                    type="text"
-                                    name="maxTime"
-                                    value={filters.maxTime}
-                                    onChange={validateInput}
-                                />
-                                {filterErrors.maxTime !== "" ? <p>{filterErrors.maxTime}</p> : null}
-                            </label>
-                        </fieldset>
-                    )
-                }
             </form>
         </>
     );

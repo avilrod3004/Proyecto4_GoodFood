@@ -45,6 +45,7 @@
 
 .formulario-login__label-login {
   font-weight: bold;
+  color: var(--p-text-color);
 
   display: flex;
   flex-direction: column;
@@ -71,6 +72,7 @@
 
 .fomulario-login__registro {
   cursor: pointer;
+  color: var(--p-text-color);
 }
 
 .fomulario-login__registro:hover {

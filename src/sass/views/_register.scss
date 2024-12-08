@@ -46,6 +46,7 @@
 
 .formulario-registro__label-registro {
   font-weight: bold;
+  color: var(--p-text-color);
 
   display: flex;
   flex-direction: column;
@@ -72,6 +73,7 @@
 
 .formulario-registro__login {
   cursor: pointer;
+  color: var(--p-text-color);
 }
 
 .formulario-registro__login:hover {

@@ -37,6 +37,7 @@
 
 .formulario-contacto__label-text {
   font-weight: bold;
+  color: var(--p-text-color);
 
   display: flex;
   flex-direction: column;
@@ -66,6 +67,7 @@
 
 .formulario-contacto__label-textarea {
   font-weight: bold;
+  color: var(--p-text-color);
 
   display: flex;
   flex-direction: column;
@@ -92,6 +94,10 @@
 
 
 /* --- CHECKBOX --- */
+
+.formulario-contacto__label-checkbox {
+  color: var(--p-text-color);
+}
 .formulario-contacto__error-checkbox {
   color: var(--indian-red-400);
 }

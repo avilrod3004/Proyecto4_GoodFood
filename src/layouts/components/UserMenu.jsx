@@ -3,10 +3,12 @@ import {UserContext} from "../../context/UserContext.jsx";
 import {NavLink} from "react-router-dom";
 import {logOut, saveUserData} from "../../config/Firebase.jsx";
 import DarkModeIcon from "../../assets/moon.svg"
+import LightModeIcon from "../../assets/sun.svg"
 import {ToastContainer} from "react-toastify";
 import {notifyError, notifySuccess} from "../../utils/Toast.jsx";
 import ProfileIcon from "../../assets/user.svg"
 import EditIcon from "../../assets/edit.svg"
+import {ThemeContext} from "../../context/ThemeContext.jsx";
 
 /**
  * Menú de botones del usuario
@@ -15,6 +17,7 @@ import EditIcon from "../../assets/edit.svg"
  */
 const UserMenu = () => {
     const {user, setUser} = useContext(UserContext);
+    const {theme, toggleTheme} = useContext(ThemeContext);
 
     const handleLogout = async () => {
         try {
@@ -62,11 +65,15 @@ const UserMenu = () => {
                     </ul>
             }
 
-            <a href="#" className="usuario__tema">
-                <img src={DarkModeIcon} alt="Change dark mode" className="tema__imagen"/>
+            <a onClick={toggleTheme} className="usuario__tema">
+                {
+                    theme === "light"
+                        ? <img src={DarkModeIcon} alt="Change dark mode" className="tema__imagen"/>
+                        : <img src={LightModeIcon} alt="Change light mode" className="tema__imagen"/>
+                }
             </a>
 
-            <ToastContainer />
+            <ToastContainer/>
         </nav>
     );
 };

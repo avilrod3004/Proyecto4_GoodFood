@@ -13,6 +13,7 @@ import SmallCardLight from "../assets/small_cards_light.svg";
 import UserDefault from "../assets/user_profile_default.jpg"
 import SadFaceLight from "../assets/sad_face_light.svg";
 import SadFaceDark from "../../src/assets/sad_face_dark.svg";
+import {ThemeContext} from "../context/ThemeContext.jsx";
 
 const UserProfile = () => {
     // Estados iniciales
@@ -32,6 +33,7 @@ const UserProfile = () => {
 
     // Estados
     const {user, setUser} = useContext(UserContext);
+    const {theme, toggleTheme} = useContext(ThemeContext);
     const [userData, setUserData] = useState(userDataInitial);
     const [cardSize, setCardSize] = useState("small");
     const [loading, setLoading] = useState(true);
@@ -48,6 +50,16 @@ const UserProfile = () => {
 
         setLoading(false);
     }
+
+    const getIconCards = (size, theme) => {
+        if (size === "small") {
+            return theme === "light" ? SmallCardLight : SmallCardDark;
+        } else {
+            return theme === "light" ? BigCardLight : BigCardDark;
+        }
+    };
+
+    const getIconLink = theme === "light" ? LinkLight : LinkDark;
 
     // Cuando el usuario logueado se haya cargado
     useEffect(() => {
@@ -70,7 +82,7 @@ const UserProfile = () => {
                         <>
                             <h2 className="datos__titulo">Website</h2>
                             <p className="datos__website">
-                                <img className="website__icono" src={LinkLight} alt="Link"/>
+                                <img className="website__icono" src={getIconLink} alt="Link"/>
                                 <a className="website__enlace" href={userData.website} target="_blank">
                                     {userData.website}
                                 </a>
@@ -80,14 +92,14 @@ const UserProfile = () => {
                 }
 
                 {
-                    userData.socialAccount1 !== "" || userData.socialAccount2 !== "" || userData.socialAccount3 !== "" && (
+                    (userData.socialAccount1 !== "" || userData.socialAccount2 !== "" || userData.socialAccount3 !== "") && (
                         <>
                             <h2 className="datos__titulo">Social accounts</h2>
                             <ul className="datos__listado-redes">
                                 {
                                     userData.socialAccount1 !== "" && (
                                         <li className="listado-redes__cuenta">
-                                            <img className="cuenta__icono" src={LinkLight} alt="Link"/>
+                                            <img className="cuenta__icono" src={getIconLink} alt="Link"/>
                                             <a className="cuenta__enlace"
                                                href="">{userData.socialAccount1 || " No hay social account"}</a>
                                         </li>
@@ -96,7 +108,7 @@ const UserProfile = () => {
                                 {
                                     userData.socialAccount2 !== "" && (
                                         <li className="listado-redes__cuenta">
-                                            <img className="cuenta__icono" src={LinkLight} alt="Link"/>
+                                            <img className="cuenta__icono" src={getIconLink} alt="Link"/>
                                             <a className="cuenta__enlace"
                                                href="">{userData.socialAccount2 || " No hay social account"}</a>
                                         </li>
@@ -105,7 +117,7 @@ const UserProfile = () => {
                                 {
                                     userData.socialAccount3 !== "" && (
                                         <li className="listado-redes__cuenta">
-                                            <img className="cuenta__icono" src={LinkLight} alt="Link"/>
+                                            <img className="cuenta__icono" src={getIconLink} alt="Link"/>
                                             <a className="cuenta__enlace"
                                                href="">{userData.socialAccount3 || " No hay social account"}</a>
                                         </li>
@@ -124,25 +136,14 @@ const UserProfile = () => {
                     <a
                         className="encabezado__vista"
                         onClick={() => {
-                            cardSize === "small" ? setCardSize("big") : setCardSize("small")
+                            setCardSize(cardSize === "small" ? "big" : "small");
                         }}
                     >
-                        {
-                            cardSize === "small"
-                                ? (
-                                    <img
-                                        className="vista__imagen"
-                                        src={BigCardLight}
-                                        alt="Change cards size"
-                                    />
-                                ) : (
-                                    <img
-                                        className="vista__imagen"
-                                        src={SmallCardLight}
-                                        alt="Change cards size"
-                                    />
-                                )
-                        }
+                        <img
+                            className="vista__imagen"
+                            src={getIconCards(cardSize, theme)}
+                            alt="Change cards size"
+                        />
                     </a>
                 </header>
 

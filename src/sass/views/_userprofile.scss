@@ -25,6 +25,10 @@
   object-fit: cover;
 }
 
+.datos__biografia, .website__enlace, .cuenta__enlace {
+  color: var(--p-text-color);
+}
+
 .datos__titulo {
   color: var(--h2-text-color);
 }

@@ -18,3 +18,22 @@
 .leyenda__checkbox {
   display: flex;
 }
+
+.label-filtros__input {
+  background-color: var(--form-input-bg-color);
+  color: var(--form-text-color);
+
+  @extend %campos-formulario;
+  @include padding(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+
+  height: 2.5rem;
+  width: 100%;
+}
+
+.label-filtros__input-error {
+  border-color: var(--indian-red-400);
+}
+
+.leyenda-filtros__checkbox {
+  color: var(--p-text-color);
+}
