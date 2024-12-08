@@ -208,7 +208,7 @@ const SearchRecipes = ({filtersInitialValues, page}) => {
                         )
                 ))}
 
-                {recipes.length !== 0 && (
+                {recipes.length === 20 && (
                     <>
                         <nav className="resultados__paginacion">
                             <button
