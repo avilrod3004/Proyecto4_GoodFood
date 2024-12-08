@@ -6,6 +6,7 @@ import Loading from "../components/Loading.jsx";
 import {validateEmail, validatePassword} from "../utils/ValidateForms.jsx";
 import {ToastContainer} from "react-toastify";
 import {notifyError} from "../utils/Toast.jsx";
+import RegistroImagen from "../assets/img_register.jpeg"
 
 /**
  * Formulario de registro de nuevos usuarios
@@ -254,7 +255,7 @@ const Register = () => {
                     </nav>
                 </form>
 
-                <img className="ventana-registro__imagen" src="/src/assets/img_register.jpeg" alt="Img login"/>
+                <img className="ventana-registro__imagen" src={RegistroImagen} alt="Img login"/>
             </section>
 
             <ToastContainer/>

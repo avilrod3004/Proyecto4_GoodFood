@@ -6,6 +6,7 @@ import Loading from "../components/Loading.jsx";
 import {validateEmail} from "../utils/ValidateForms.jsx";
 import {ToastContainer} from "react-toastify";
 import {notifyError} from "../utils/Toast.jsx";
+import LoginImagen from "../assets/img_login.jpeg"
 
 /**
  * Formulario de inicio de sesión
@@ -138,7 +139,7 @@ const Login = () => {
     return (
         <main className="login">
             <section className="login__ventana-login">
-                <img className="ventana-login__imagen" src="/src/assets/img_login.jpeg" alt="Img login"/>
+                <img className="ventana-login__imagen" src={LoginImagen} alt="Img login"/>
 
                 <form onSubmit={handleSubmit} className="ventana-login__formulario-login">
                     <h1 className="formulario-login__titulo">Log in</h1>
