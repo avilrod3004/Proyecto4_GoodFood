@@ -1,12 +1,12 @@
 # GoodFood
 
-- Guia detallada
+- [Guia detallada](https://github.com/avilrod3004/Proyecto4_GoodFood/tree/4_2_firestorage?tab=readme-ov-file#gu%C3%ADa-detallada)
   - [Descripción de la aplicación](https://github.com/avilrod3004/Proyecto4_GoodFood/tree/4_2_firestorage?tab=readme-ov-file#descripci%C3%B3n-de-la-aplicaci%C3%B3n)
-  - Tecnologías utilizadas
-  - Instalación y configuración
-- Documentación del código
-- Reflexión
-- Versión desplegada
+  - [Tecnologías utilizadas](https://github.com/avilrod3004/Proyecto4_GoodFood/tree/4_2_firestorage?tab=readme-ov-file#tecnolog%C3%ADas-utilizadas)
+  - [Instalación y configuración](https://github.com/avilrod3004/Proyecto4_GoodFood/tree/4_2_firestorage?tab=readme-ov-file#instalaci%C3%B3n-y-configuraci%C3%B3n)
+- [Documentación del código](https://github.com/avilrod3004/Proyecto4_GoodFood/tree/4_2_firestorage?tab=readme-ov-file#instalaci%C3%B3n-y-configuraci%C3%B3n)
+- [Reflexión](https://github.com/avilrod3004/Proyecto4_GoodFood/tree/4_2_firestorage?tab=readme-ov-file#reflexi%C3%B3n)
+- [Versión desplegada](https://github.com/avilrod3004/Proyecto4_GoodFood/tree/4_2_firestorage?tab=readme-ov-file#versi%C3%B3n-desplegada)
 
 # Guía detallada
 ## Descripción de la aplicación
