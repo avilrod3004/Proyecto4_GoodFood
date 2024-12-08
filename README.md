@@ -14,40 +14,40 @@ GoodFood es una aplicación web SPA diseñada para facilitar la búsqueda de rec
 
 ## Pantallas y funcionalidades
 1. **Pantalla de inicio**: Da la bienvenida al usuario y lo invita a descubrir nuevas recetas. Un poco más abajo de la portada se muestran 20 recetas aletorias paginadas.
-![Inicio 1](./doc/inicio_1.png)
-![Inicio 2](./doc/inicio_2.png)
+![Inicio 1](images/inicio_1.png)
+![Inicio 2](images/inicio_2.png)
 
 2. **Pantallas de inicio de sesión y de registro**: Estas páginas son accesibles desde el encabezado de la web. Permiten a usurio crear una cuenta o iniciar sesión si ya tiene una cuenta.
-![Login](./doc/login.png)
-![Registro](./doc/registro.png)
+![Login](images/login.png)
+![Registro](images/registro.png)
 
 3. **Perfil del usuario**: Después de entrar en su cuenta el usuario es dirigido a su perfil. Desde esta pantalla puede añadir información a su perfil, como: biografiá y enlaces a sus redes sociales, etc. También puede consultar sus recetas guardadas en favoritos. Las recetas se pueden visualizar en dos formatos: tarjetas pequeñas y tarjetas grandes (contienen más información).
-![Perfil del usuario](./doc/perfil_usuario.png)
-![Perfil del usuario con recetas detalladas](./doc/perfil_usuario_2.png)
+![Perfil del usuario](images/perfil_usuario.png)
+![Perfil del usuario con recetas detalladas](images/perfil_usuario_2.png)
 
 4. **Actualizar los datos del usuario**: Desde el encabezado de la página el usuario puede modificar la información que se muestra en su perfil, como: su nombre de usuario, su biografiá, enlaces de sus redes sociales. Y también la información privada del usuario, como: su nombre y apellido, y su número de teléfono. 
 De los datos públicos son obligatorios: el nombre del usuario y la biografía. La información que se muestra en el perfil dependerá los campos que haya rellenado.
-![Modificar la información del perfil del usuario](./doc/modificar_perfil.png)
+![Modificar la información del perfil del usuario](images/modificar_perfil.png)
 
 5. **Buscar recetas por filtros** (solo para usuarios registrados): Hay 4 pantallas que permiten buscar recetas aplicando filtros: "Quick recipes", "Breakfast", "Lunch/dinner" y "All recipes". Las 3 primeras tienen aplicados unos filtros predeterminados y la última no tiene ningun filtro por defecto.
 Todas las busquedas estan paginadas en grupos de 20 recetas por página.
-![Paginación](./doc/paginacion.png)
+![Paginación](images/paginacion.png)
 
    - **Quick recipes**: Muestra recetas que duran menos de 15 minutos. Aparte el usuario puede añadir más filtros a la busqueda.
-![Recetas de menos de 15 minutos](./doc/quickrecipes.png)
+![Recetas de menos de 15 minutos](images/quickrecipes.png)
     - **Breakfast**: Muestra recetas de desayunos.
-![Recetas de desayunos](./doc/breakfast.png)
+![Recetas de desayunos](images/breakfast.png)
     - **Lunch/dinner**: Muestra recetas para la hora de comer o cenar.
-![Recetas para comer o cenar](./doc/lunch-dinner.png)
+![Recetas para comer o cenar](images/lunch-dinner.png)
     - **All recipes**: No aplica filtros por defecto. La que muestre recetas el usuario debe aplicar como mínimo un filtro.
-![Sin aplicar filtros por defecto](./doc/all_recipes_1.png)
-![Aplicando un filtro](./doc/all_recipes_2.png)
+![Sin aplicar filtros por defecto](images/all_recipes_1.png)
+![Aplicando un filtro](images/all_recipes_2.png)
 
 6. **Información de las recetas** (solo para usuarios registrados): Al pinchar en alguna de las recetas el usuario es redirigido a una página donde puede consultar más información sobre la receta. Desde esta pantalla el usuario puede agregar (o quitar) la receta a favoritos.
-![Información sobre una receta](./doc/info_receta.png)
+![Información sobre una receta](images/info_receta.png)
 
 7. **Formulario de contacto**: La web ofrece un formulario de contacto para todos los usuarios:
-![Formulario de contacto](./doc/contacto.png)
+![Formulario de contacto](images/contacto.png)
 
 ## Tecnologías utilizadas
 - ![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white) -> Para la estructura básica de la aplicación web.
