@@ -91,7 +91,7 @@ Desafíos:
 
 **Gestionar la asincronía**: Trabajar con la API externa, Firebase (para la autenticación y la base de datos) y descubrir que las funciones modificadoras de los estados también son asíncronas, me ha provocado algunos dolores de cabeza.
 
-Sobre todo por complicar innecesariamente el código anidando demasidas funciones asíncronas. Al final, lo más sencillo es usar variables intermedias para trabajar con la información asíncrona dentro de la función y dejar los estados para guardar esa información al terminar.
+Sobre todo por complicar innecesariamente el código anidando demasiadas funciones asíncronas. Al final, lo más sencillo es usar variables intermedias. También, me solucionó muchos problemas almacenar temporalmente los datos del usuario en localStorage y no hacer transacciones a la base de datos cada vez que el usuario hacía un cambio.
 
 # Versión desplegada
 [GoodFood desplegado de Netlify](https://fanciful-vacherin-2a3294.netlify.app/)
