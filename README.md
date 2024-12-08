@@ -1,30 +1,7 @@
 # GoodFood
 
-## Tercera entrega. Integración y avance
-### Progreso
-Nuevas funcionalidades:
-- **Inicio de sesión y registro**: Autenticación de usuarios mediante Firebase.
-- **Protección de rutas**: Las rutas privadas (usan un layout privado) solo son accesibles si un usuario está logueado. En caso de que no este logueado al intentar acceder a las páginas privadas el usuario es redirigido al formulario de login.
-- **LazyLoad**: Se cargan solo los componentes principales cuando el usuario accede a la web. Componentes que no se cargan: páginas de búsqueda de recetas, el perfil de usuario y la página de error 404.
-- **Petición a la API**: Llamada a la API en la página de inicio. En la página `/home` se muestran 20 recetas aleatorias. Las recetas están paginadas en grupos de 10 recetas.
-
-Objeto con los datos para hacer la petición:
-https://github.com/avilrod3004/Proyecto4_GoodFood/blob/bc5f2a7bd4c920e6cc2ba91268b2f2127ea75415/src/pages/Home.jsx#L12-L16
-
-Hacer la petición al cargar la página:
-https://github.com/avilrod3004/Proyecto4_GoodFood/blob/bc5f2a7bd4c920e6cc2ba91268b2f2127ea75415/src/pages/Home.jsx#L23-L40
-
-La llamada es asíncrona, así que si todavía no hay respuesta se muestra un mensaje "Loading..."
-https://github.com/avilrod3004/Proyecto4_GoodFood/blob/b95648e98e47522f60ec69ddccc97340ab5c584c/src/pages/Home.jsx#L61-L95
-
-### Demostración llamada a la API
-Llamada a la API al cargar la página y se actualiza la interfaz:
-![Demostración llamada API](./doc/prueba_llamada_api.gif)
-
-iconos de health -> <a target="_blank" href="https://icons8.com/icon/96736/no-celery">App</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
-
 - Guia detallada
-  - Descripción de la aplicación
+  - [Descripción de la aplicación](https://github.com/avilrod3004/Proyecto4_GoodFood/tree/4_2_firestorage?tab=readme-ov-file#descripci%C3%B3n-de-la-aplicaci%C3%B3n)
   - Tecnologías utilizadas
   - Instalación y configuración
 - Documentación del código
@@ -87,4 +64,27 @@ Todas las busquedas estan paginadas en grupos de 20 recetas por página.
 - ![WebStorm](https://img.shields.io/badge/WebStorm-21D789?logo=webstorm&logoColor=white) -> IDE usado para desarrollar el proyecto.
 - ![API](https://img.shields.io/badge/Edaman_recipe_API-0088CC?logo=api&logoColor=white) -> API externa para obtener las recetas. Permite hacer consultas sobre más de 2 millones de recetas. [Edamam recipe API](https://developer.edamam.com/edamam-recipe-api)
 
+## Instalación y configuración
+1. Instalar node, comprobar si esta instalado con el comando `node --version`
+2. Clonar el repositorio.
+3. Abrir la carpeta del proyecto y ejecutar el comando `npm install` para instalar todas las dependencias.
+4. Añadir las variables de entorno de firebase y de la API en un fichero `.env.local`, siguiendo esta estructura:
+```
+VITE_FIREBASE_API_KEY=""
+VITE_FIREBASE_AUTH_DOMAIN=""
+VITE_FIREBASE_PROJECT_ID=""
+VITE_FIREBASE_STORAGE_BUCKET=""
+VITE_FIREBASE_MESSAGING_SENDER_ID=""
+VITE_FIREBASE_APP_ID=""
+VITE_RECIPES_API_ID=""
+VITE_RECIPES_API_KEY=""
+```
+5. Ejecutar el proyecto en local con este comando `npm run dev`.
 
+# Documentación del código
+aaa
+
+# Reflexión
+
+# Versión desplegada
+[GoodFood desplegado de Netlify](fanciful-vacherin-2a3294.netlify.app/)
