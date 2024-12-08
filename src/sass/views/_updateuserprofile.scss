@@ -1,0 +1,143 @@
+.actualizar-perfil {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include padding(3.5rem, 3.5rem, 6rem, 6rem)
+}
+
+.actualizar-perfil__formulario-actualizar {
+  background-color: var(--page-containers-bg-color);
+
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: start;
+
+  @include padding(4rem, 4rem, 4rem, 4rem);
+  width: 70%;
+}
+
+.formulario-actualizar__apartado {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  width: 100%;
+}
+
+.apartado__titulo {
+  color: var(--form-legend_text-color);
+  font-family: "Medula One", Helvetica, Arial, sans-serif;
+  font-size: 4.5rem;
+
+  display: flex;
+  align-items: flex-start;
+}
+
+.apartado__privacidad {
+  font-family: "Asap", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+
+}
+
+.apartado__error {
+  color: var(--indian-red-400);
+  width: 100%;
+}
+
+/* --- INPUTS DE TIPO TEXTO --- */
+.apartado__label-actualizar {
+  font-weight: bold;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+
+  width: 100%;
+}
+
+.label-actualizar__input {
+  background-color: var(--form-input-bg-color);
+  color: var(--form-text-color);
+
+  @extend %campos-formulario;
+  @include padding(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+
+  height: 2.5rem;
+  width: 100%;
+}
+
+.label-actualizar__input-error {
+  border-color: var(--indian-red-400);
+}
+
+/* --- TEXTAREA --- */
+
+.apartado__label-actualizar-textarea {
+  font-weight: bold;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+
+  width: 100%;
+}
+
+.label-actualizar-textarea__textarea {
+  background-color: var(--form-input-bg-color);
+  color: var(--form-text-color);
+
+  @extend %campos-formulario;
+  @include padding(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+
+  width: 100%;
+}
+
+.label-actualizar-textarea__textarea-error {
+  border-bottom: 2px solid var(--indian-red-400);
+}
+
+
+/* --- NAVEGACION: BOTONES --- */
+
+.formulario-actualizar__navegacion-actualizar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+
+  width: 100%;
+}
+
+.navegacion-actualizar__guardar {
+  @extend %botones;
+
+  background-color: var(--btn-primary-bg-color);
+  border: 0.25rem solid var(--btn-primary-border-color);
+  color: var(--btn-primary-text-color);
+}
+
+.navegacion-actualizar__guardar:hover {
+  background-color: var(--btn-primaty-bg-color-hover);
+}
+
+.navegacion-actualizar__guardar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.navegacion-actualizar__cancelar {
+  @extend %botones;
+
+  background-color: var(--btn-cancel-bg-color);
+  border: 0.25rem solid var(--btn-cancel-border-color);
+  color: var(--btn-cancel-text-color);
+}
+
+.navegacion-actualizar__cancelar:hover {
+  border: 0.25rem solid var(--btn-cancel-border-color-hover);
+  color: var(--btn-cancel-text-color-hover)
+}

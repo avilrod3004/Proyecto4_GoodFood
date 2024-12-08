@@ -40,3 +40,8 @@ export const validateMinutes = minutes => {
     const regex = /^[1-9]\d*$/;
     return regex.test(minutes);
 }
+
+export const validateUrl = url => {
+    const regex = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+    return regex.test(url)
+}

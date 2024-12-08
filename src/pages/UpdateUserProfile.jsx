@@ -3,6 +3,7 @@ import {UserContext} from "../context/UserContext.jsx";
 import {useNavigate} from "react-router-dom";
 import {ToastContainer} from "react-toastify";
 import {notifySuccess} from "../utils/Toast.jsx";
+import {validatePhoneNumber, validateUrl} from "../utils/ValidateForms.jsx";
 
 const UpdateUserProfile = () => {
     // Estados iniciales
@@ -55,7 +56,7 @@ const UpdateUserProfile = () => {
         if (!value.trim() && requiredInputs.includes(name)) {
             setErrorMessages({
                 ...errorMessages,
-                [name]: "This field is required"
+                [name]: "* This field is required"
             })
         }
 
@@ -64,7 +65,7 @@ const UpdateUserProfile = () => {
             if (!valid) {
                 setErrorMessages({
                     ...errorMessages,
-                    [name]: `The URL format is invalid. Example: https://domain.com`
+                    [name]: `* The URL format is invalid. Example: https://domain.com`
                 })
             }
         }
@@ -74,7 +75,7 @@ const UpdateUserProfile = () => {
             if (!valido) {
                 setErrorMessages({
                     ...errorMessages,
-                    [name]: "The phone format is invalid"
+                    [name]: "* The phone format is invalid"
                 })
             }
         }
@@ -85,21 +86,6 @@ const UpdateUserProfile = () => {
         })
 
         validateMessage();
-    }
-
-    const validateUrl = url => {
-        const regex = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
-        return regex.test(url)
-    }
-
-    /**
-     * Valida si el número de teléfono del formulario tiene un formato válido
-     * @param phoneNumber {String} Teléfono dado por el usuario
-     * @returns {boolean} True si es válido // False si no es válido
-     */
-    const validatePhoneNumber = phoneNumber => {
-        const regex = /^(\d{3}\s?\d{3}\s?\d{3}|\d{9})$/;
-        return regex.test(phoneNumber);
     }
 
     const validateMessage = () => {
@@ -133,135 +119,185 @@ const UpdateUserProfile = () => {
     }, [])
 
     return (
-        <>
-            <form action="" onSubmit={updateUserData}>
-                <fieldset>
-                    <legend>Profile <span>(public)</span></legend>
+        <main className="actualizar-perfil">
+            <form className="actualizar-perfil__formulario-actualizar" action="" onSubmit={updateUserData}>
+                <fieldset className="formulario-actualizar__apartado">
+                    <legend className="apartado__titulo">Profile: <span className="apartado__privacidad">(public)</span></legend>
 
-                    <label htmlFor="userName">
+                    <label className="apartado__label-actualizar" htmlFor="userName">
                         User name:
                         <input
+                            className={errorMessages.userName !== "" ? "label-actualizar__input label-actualizar__input-error" : "label-actualizar__input"}
                             type="text"
                             name="userName"
                             value={userData.userName}
                             onChange={validateInput}
                         />
-                        {errorMessages.userName !== "" && <p>{errorMessages.userName}</p>}
                     </label>
+                    {
+                        errorMessages.userName !== ""
+                        && <p className="apartado__error">{errorMessages.userName}</p>
+                    }
 
-                    <label htmlFor="picture">
+                    <label className="apartado__label-actualizar" htmlFor="picture">
                         Picture:
                         <input
+                            className={errorMessages.picture !== "" ? "label-actualizar__input label-actualizar__input-error" : "label-actualizar__input"}
                             type="text"
                             name="picture"
                             value={userData.picture}
                             onChange={validateInput}
                         />
-                        {errorMessages.picture !== "" && <p>{errorMessages.picture}</p>}
-
                     </label>
+                    {
+                        errorMessages.picture !== ""
+                        && <p className="apartado__error">{errorMessages.picture}</p>
+                    }
 
-                    <label htmlFor="biography">
+
+                    <label className="apartado__label-actualizar-textarea" htmlFor="biography">
                         Biography:
                         <textarea
+                            className={errorMessages.biography !== "" ? "label-actualizar-textarea__textarea label-actualizar-textarea__textarea-error" : "label-actualizar-textarea__textarea"}
                             name="biography"
                             cols="30"
                             rows="10"
                             value={userData.biography}
                             onChange={validateInput}
                         />
-                        {errorMessages.biography !== "" && <p>{errorMessages.biography}</p>}
                     </label>
+                    {
+                        errorMessages.biography !== ""
+                        && <p className="apartado__error">{errorMessages.biography}</p>
+                    }
 
-                    <label htmlFor="website">
+
+                    <label className="apartado__label-actualizar" htmlFor="website">
                         Website:
                         <input
+                            className={errorMessages.website !== "" ? "label-actualizar__input label-actualizar__input-error" : "label-actualizar__input"}
                             type="text"
                             name="website"
                             value={userData.website}
                             onChange={validateInput}
                         />
-                        {errorMessages.website !== "" && <p>{errorMessages.website}</p>}
                     </label>
+                    {
+                        errorMessages.website !== ""
+                        && <p className="apartado__error">{errorMessages.website}</p>
+                    }
 
-                    <label htmlFor="socialAccount1">
+
+                    <label className="apartado__label-actualizar" htmlFor="socialAccount1">
                         Social Account:
                         <input
+                            className={errorMessages.socialAccount1 !== "" ? "label-actualizar__input label-actualizar__input-error" : "label-actualizar__input"}
                             type="text"
                             name="socialAccount1"
                             value={userData.socialAccount1}
                             onChange={validateInput}
                         />
-                        {errorMessages.socialAccount1 !== "" && <p>{errorMessages.socialAccount1}</p>}
                     </label>
+                    {
+                        errorMessages.socialAccount1 !== ""
+                        && <p className="apartado__error">{errorMessages.socialAccount1}</p>
+                    }
 
-                    <label htmlFor="socialAccount2">
+
+                    <label className="apartado__label-actualizar" htmlFor="socialAccount2">
                         Social Account:
                         <input
+                            className={errorMessages.socialAccount2 !== "" ? "label-actualizar__input label-actualizar__input-error" : "label-actualizar__input"}
                             type="text"
                             name="socialAccount2"
                             value={userData.socialAccount2}
                             onChange={validateInput}
                         />
-                        {errorMessages.socialAccount2 !== "" && <p>{errorMessages.socialAccount2}</p>}
                     </label>
+                    {
+                        errorMessages.socialAccount2 !== ""
+                        && <p className="apartado__error">{errorMessages.socialAccount2}</p>
+                    }
 
-                    <label htmlFor="socialAccount3">
+
+                    <label className="apartado__label-actualizar" htmlFor="socialAccount3">
                         Social Account:
                         <input
+                            className={errorMessages.socialAccount3 !== "" ? "label-actualizar__input label-actualizar__input-error" : "label-actualizar__input"}
                             type="text"
                             name="socialAccount3"
                             value={userData.socialAccount3}
                             onChange={validateInput}
                         />
-                        {errorMessages.socialAccount3 !== "" && <p>{errorMessages.socialAccount3}</p>}
                     </label>
+                    {
+                        errorMessages.socialAccount3 !== ""
+                        && <p className="apartado__error">{errorMessages.socialAccount3}</p>
+                    }
+
                 </fieldset>
 
-                <fieldset>
-                    <legend>User <span>(private)</span></legend>
+                <fieldset className="formulario-actualizar__apartado">
+                    <legend className="apartado__titulo">User: <span className="apartado__privacidad">(private)</span></legend>
 
-                    <label htmlFor="name">
+                    <label className="apartado__label-actualizar" htmlFor="name">
                         Name:
                         <input
+                            className={errorMessages.name !== "" ? "label-actualizar__input label-actualizar__input-error" : "label-actualizar__input"}
                             type="text"
                             name="name"
                             value={userData.name}
                             onChange={validateInput}
                         />
-                        {errorMessages.name !== "" && <p>{errorMessages.name}</p>}
                     </label>
+                    {
+                        errorMessages.name !== ""
+                        && <p className="apartado__error">{errorMessages.name}</p>
+                    }
 
-                    <label htmlFor="lastName">
+
+                    <label className="apartado__label-actualizar" htmlFor="lastName">
                         Last Name:
                         <input
+                            className={errorMessages.lastName !== "" ? "label-actualizar__input label-actualizar__input-error" : "label-actualizar__input"}
                             type="text"
                             name="lastName"
-                            value={userData.name}
+                            value={userData.lastName}
                             onChange={validateInput}
                         />
-                        {errorMessages.lastName !== "" && <p>{errorMessages.lastName}</p>}
                     </label>
+                    {
+                        errorMessages.lastName !== ""
+                        && <p className="apartado__error">{errorMessages.lastName}</p>
+                    }
 
-                    <label htmlFor="phone">
+
+                    <label className="apartado__label-actualizar" htmlFor="phone">
                         Phone:
                         <input
+                            className={errorMessages.phone !== "" ? "label-actualizar__input label-actualizar__input-error" : "label-actualizar__input"}
                             type="tel"
                             name="phone"
                             value={userData.phone}
                             onChange={validateInput}
                         />
-                        {errorMessages.phone !== "" && <p>{errorMessages.phone}</p>}
                     </label>
+                    {
+                        errorMessages.phone !== ""
+                        && <p className="apartado__error">{errorMessages.phone}</p>
+                    }
+
                 </fieldset>
 
-                <button disabled={disabledSend} type="submit">Save</button>
-                <button onClick={() => navigate("/profile")}>Cancel</button>
+                <nav className="formulario-actualizar__navegacion-actualizar">
+                    <button className="navegacion-actualizar__guardar" disabled={disabledSend} type="submit">Save</button>
+                    <button className="navegacion-actualizar__cancelar" onClick={() => navigate("/profile")}>Cancel</button>
+                </nav>
 
             </form>
 
-            <ToastContainer />
-        </>
+            <ToastContainer/>
+        </main>
     );
 };
 
