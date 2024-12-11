@@ -28,7 +28,9 @@
 
 .nada__mensaje {
   text-align: center;
+  color: var(--p-text-color);
 }
+
 
 /* --- RESULTADOS --- */
 
@@ -61,7 +63,7 @@
 }
 
 .contador__numero {
-  color: var(--black);
+  color: var(--p-text-color);
   font-size: 1.25rem;
   font-family: "Asap", Helvetica, Arial, sans-serif;
   font-weight: bold;

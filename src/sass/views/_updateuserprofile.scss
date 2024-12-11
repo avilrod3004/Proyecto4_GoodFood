@@ -49,6 +49,7 @@
 /* --- INPUTS DE TIPO TEXTO --- */
 .apartado__label-actualizar {
   font-weight: bold;
+  color: var(--form-text-color);
 
   display: flex;
   flex-direction: column;
@@ -77,6 +78,7 @@
 
 .apartado__label-actualizar-textarea {
   font-weight: bold;
+  color: var(--form-text-color);
 
   display: flex;
   flex-direction: column;

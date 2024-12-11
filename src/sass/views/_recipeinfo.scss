@@ -58,6 +58,10 @@
   gap: 0.25rem;
 }
 
+.listado-datos__dato {
+  color: var(--p-text-color);
+}
+
 .dato__nombre {
   color: var(--h6-text-color);
   font-weight: bold;
@@ -70,6 +74,7 @@
 .texto-info__listado-ingredientes {
   list-style: disc;
   padding-left: 2rem;
+  color: var(--p-text-color);
 }
 
 .texto-info__detalles {

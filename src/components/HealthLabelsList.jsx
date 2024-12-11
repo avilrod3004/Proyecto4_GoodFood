@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import AlcoholFreeDark from "../assets/alcohol-free_dark.png";
 import AlcoholFreeLight from "../assets/alcohol-free_light.png";
 import CeleryFreeDark from "../assets/celery-free_dark.png";
@@ -25,6 +25,7 @@ import VeganDark from "../assets/vegan_dark.png";
 import VeganLight from "../assets/vegan_light.png";
 import VegetarianDark from "../assets/vegetarian_dark.png";
 import VegetarianLight from "../assets/vegetarian_light.png";
+import {ThemeContext} from "../context/ThemeContext.jsx";
 
 /**
  * Componente `HealthLabelsList`
@@ -69,10 +70,12 @@ const HealthLabelsList = ({healthLabels}) => {
         "Vegetarian": VegetarianDark
     };
 
+    const {theme, toggleTheme} = useContext(ThemeContext);
+
     return (
         <ul className="texto-receta__listado-etiquetas">
             {healthLabels.map((label) => {
-                const icon = healthIconsLight[label]; // Busca la imagen correspondiente
+                const icon = theme === "light" ? healthIconsLight[label] : healthIconsDark[label]; // Busca la imagen correspondiente
                 if (icon) {
                     return (
                         <li className="listado-etiquetas__etiqueta" key={label}>

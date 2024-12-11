@@ -9,6 +9,7 @@ import BookMarkLight from "../assets/bookmark_light.svg";
 import BookMarkedLight from "../assets/bookmarked_light.svg"
 import BookMarkDark from "../assets/bookmark_dark.svg";
 import BookMarkedDark from "../assets/bookmarked_dark.svg"
+import {ThemeContext} from "../context/ThemeContext.jsx";
 
 /**
  * Este componente muestra la información detallada de una receta, obtenida desde una API externa,
@@ -45,6 +46,8 @@ const RecipeInfo = () => {
     const [loadingRecipe, setLoadingRecipe] = useState(true);
     const [error, setError] = useState("");
     const [userData, setUserData] = useState(userDataInitial);
+    const {theme, toggleTheme} = useContext(ThemeContext);
+
 
     /**
      * Obtiene la información de la receta desde la API
@@ -152,6 +155,21 @@ const RecipeInfo = () => {
         return userData.favoriteRecipes.some((item) => item.id === getRecipeId(recipe.uri))
     }
 
+    /**
+     * Obtiene el icono correspondiente a si la receta está marcada como favorita y el tema.
+     *
+     * @param {boolean} marked - Si la receta está en favoritos.
+     * @param {string} theme - El tema actual, puede ser "light" o "dark".
+     * @returns {string} - La ruta al icono de marcado correspondiente.
+     */
+    const getIconFavorite = (marked, theme) => {
+        if (marked) {
+            return theme === "light" ? BookMarkedLight : BookMarkedDark;
+        } else {
+            return theme === "light" ? BookMarkLight : BookMarkDark;
+        }
+    }
+
     // Al cargar la página
     useEffect(() => {
         getRecipeInfo();
@@ -185,7 +203,7 @@ const RecipeInfo = () => {
                         >
                             <img
                                 className="favortios__imagen"
-                                src={recipeFavorite ? BookMarkedLight : BookMarkLight}
+                                src={getIconFavorite(recipeFavorite, theme)}
                                 alt={recipeFavorite ? "Favorite" : "No favorite"}/>
                         </a>
                     </div>

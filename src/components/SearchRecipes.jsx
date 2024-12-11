@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import FilterRecipes from "../components/FilterRecipes.jsx";
 import SmallCard from "../components/SmallCard.jsx";
 import BigCard from "../components/BigCard.jsx";
@@ -11,6 +11,7 @@ import SadFaceDark from "../../src/assets/sad_face_dark.svg";
 import SadFaceLight from "../../src/assets/sad_face_light.svg";
 import ButtonToTop from "./ButtonToTop.jsx";
 import ErrorMessage from "./ErrorMessage.jsx";
+import {ThemeContext} from "../context/ThemeContext.jsx";
 
 /**
  * Componente `SearchRecipes`
@@ -38,6 +39,8 @@ const SearchRecipes = ({filtersInitialValues, page}) => {
     }
 
     // Estados
+    const {theme, toggleTheme} = useContext(ThemeContext);
+
     const [filters, setFilters] = useState(filtersInitialValues)
     const [filterErrors, setFilterErrors] = useState(errorFiltersInitial)
 
@@ -146,6 +149,21 @@ const SearchRecipes = ({filtersInitialValues, page}) => {
         getRecipes(pagesList.at(pagesList.length - 1), false)
     }
 
+    /**
+     * Obtiene el icono correspondiente a las tarjetas de recetas en función del tamaño y tema.
+     *
+     * @param {string} size - El tamaño de las tarjetas, puede ser "small" o "big".
+     * @param {string} theme - El tema actual, puede ser "light" o "dark".
+     * @returns {string} - La ruta al icono de la tarjeta correspondiente.
+     */
+    const getIconCards = (size, theme) => {
+        if (size === "small") {
+            return theme === "light" ? SmallCardLight : SmallCardDark;
+        } else {
+            return theme === "light" ? BigCardLight : BigCardDark;
+        }
+    };
+
     useEffect(() => {
         addFilters()
 
@@ -183,32 +201,22 @@ const SearchRecipes = ({filtersInitialValues, page}) => {
                     <a
                         className="encabezado__vista"
                         onClick={() => {
-                            cardSize === "small" ? setCardSize("big") : setCardSize("small")
+                            setCardSize(cardSize === "small" ? "big" : "small");
                         }}
                     >
-                        {
-                            cardSize === "small"
-                                ? (
-                                    <img
-                                        className="vista__imagen"
-                                        src={BigCardLight}
-                                        alt="Change cards size"
-                                    />
-                                ) : (
-                                    <img
-                                        className="vista__imagen"
-                                        src={SmallCardLight}
-                                        alt="Change cards size"
-                                    />
-                                )
-                        }
+                        <img
+                            className="vista__imagen"
+                            src={getIconCards(cardSize, theme)}
+                            alt="Change cards size"
+                        />
                     </a>
                 </header>
 
                 {recipes.length === 0 && (
                     <div className="resultados__nada">
-                        <img className="nada__imagen" src={SadFaceLight} alt=":("/>
-                        <p className="nada__mensaje">Sorry, we couldn&#39;t find any recipes that match your search. Try using different ingredients
+                        <img className="nada__imagen" src={theme === "light" ? SadFaceLight : SadFaceDark} alt=":("/>
+                        <p className="nada__mensaje">Sorry, we couldn&#39;t find any recipes that match your search. Try
+                            using different ingredients
                             or filters!</p>
                     </div>
                 )}
@@ -238,32 +246,26 @@ const SearchRecipes = ({filtersInitialValues, page}) => {
                         )
                 ))}
 
-                {recipes.length === 20 && (
-                    <>
-                        <nav className="resultados__paginacion">
-                            <button
-                                className="paginacion__boton"
-                                onClick={() => goToPreviousPage()}
-                                disabled={pagesList.length === 1}
-                            >
-                                Previous
-                            </button>
+                <nav className="resultados__paginacion">
+                    <button
+                        className="paginacion__boton"
+                        onClick={() => goToPreviousPage()}
+                        disabled={pagesList.length === 1}
+                    >
+                        Previous
+                    </button>
 
-                            <span className="paginacion__texto">
+                    <span className="paginacion__texto">
                         {currentPage + 1} of {Math.ceil(recipesCounter / 20)}
                     </span>
-                            <button
-                                className="paginacion__boton"
-                                onClick={() => goToNextPage()}
-                                disabled={nextPage === null}
-                            >
-                                Next
-                            </button>
-                        </nav>
-
-                        <ButtonToTop/>
-                    </>
-                )}
+                    <button
+                        className="paginacion__boton"
+                        onClick={() => goToNextPage()}
+                        disabled={nextPage === null}
+                    >
+                        Next
+                    </button>
+                </nav>
             </section>
         </main>
     );

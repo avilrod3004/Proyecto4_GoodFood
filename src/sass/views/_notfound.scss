@@ -1,4 +1,6 @@
 .not-found {
+  background: var(--page-containers-bg-color);
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,6 +20,7 @@
 
 .not-found__mensaje {
   font-weight: bold;
+  color: var(--p-text-color);
 }
 
 .not-found__enlace {

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {useNavigate} from "react-router-dom";
 import RelojLight from "../assets/reloj_light.svg"
 import RelojDark from "../assets/reloj_dark.svg"
 import HealthLabelsList from "./HealthLabelsList.jsx";
+import {ThemeContext} from "../context/ThemeContext.jsx";
 
 /**
  * Componente `BigCard`
@@ -22,6 +23,7 @@ import HealthLabelsList from "./HealthLabelsList.jsx";
  */
 const BigCard = ({id, image, title, mealType, cuisineType, healthLabels, totalTime}) => {
     const navigate = useNavigate();
+    const {theme, toggleTheme} = useContext(ThemeContext);
 
     /**
      * Navega a la página de detalles de la receta.
@@ -44,7 +46,7 @@ const BigCard = ({id, image, title, mealType, cuisineType, healthLabels, totalTi
                 <HealthLabelsList healthLabels={healthLabels}/>
 
                 <div className="texto-receta__tiempo">
-                    <img className="tiempo__imagen" src={RelojLight} alt="Time: "/>
+                    <img className="tiempo__imagen" src={theme === "light" ? RelojLight : RelojDark} alt="Time: "/>
                     <p className="tiempo__numero">{totalTime}&#39;</p>
                 </div>
             </div>
