@@ -161,7 +161,7 @@ const UserProfile = () => {
                 {
                     userData.favoriteRecipes.length === 0 && (
                         <div className="recetas-perfil__nada-perfil">
-                            <img className="nada-perfil__imagen" src={SadFaceLight} alt=":("/>
+                            <img className="nada-perfil__imagen" src={theme === "light" ? SadFaceLight : SadFaceDark} alt=":("/>
                             <p className="nada-perfil__mensaje">
                                 You don&#39;t have any recipes saved as favorites yet.
                             </p>
