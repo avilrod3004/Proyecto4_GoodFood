@@ -1,4 +1,4 @@
-import {createContext, useEffect, useState} from "react";
+import {createContext, useContext, useEffect, useState} from "react";
 
 // Contexto para gestionar el tema de la aplicación
 export const ThemeContext = createContext();
@@ -10,10 +10,18 @@ export const ThemeContext = createContext();
  * @returns {JSX.Element} El proveedor de contexto con los valores del tema.
  */
 const ThemeProvider = ({ children }) => {
-    // Estado que almacena el tema actual, 'light' o 'dark'.
-    const [theme, setTheme] = useState(() => {
-        return localStorage.getItem('theme') || 'light';
-    });
+    // Función para obtener la preferencia inicial del tema
+    const getInitialTheme = () => {
+        const storedTheme = localStorage.getItem("theme");
+        if (storedTheme) {
+            return storedTheme; // Usa el tema almacenado si existe.
+        }
+        const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        return prefersDarkScheme ? "dark" : "light";
+    };
+
+    // Estado que almacena el tema actual.
+    const [theme, setTheme] = useState(getInitialTheme);
 
     /**
      * Alternar entre los modos de tema: claro y oscuro.
