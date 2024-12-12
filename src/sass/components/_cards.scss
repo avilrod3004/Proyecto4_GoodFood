@@ -26,14 +26,87 @@
 
 /* --- TARJETAS PEQUEÑAS --- */
 
-.receta-pequenia {
+/* Contenedor principal */
+//.spinner {
+//  perspective: 1000px; /* Permite el efecto 3D */
+//  width: 19rem;
+//  height: 24.5rem;
+//}
+
+/* Contenedor interno de la tarjeta */
+//.card-inner {
+//  position: relative;
+//  width: 100%;
+//  height: 100%;
+//  transform-style: preserve-3d;
+//  transition: transform 0.6s; /* Suavizado de la rotación */
+//}
+
+/* Activar el giro con hover */
+//.spinner:hover .card-inner {
+//  transform: rotateY(180deg); /* Rota 180° en el eje Y */
+//}
+
+//.receta-pequenia-back {
+//  background-color: var(--card-bg-color);
+//  cursor: pointer;
+//  //display: flex;
+//  //flex-direction: column;
+//  //align-items: center;
+//  justify-content: center;
+//  border: 1px solid black;
+//}
+
+
+.receta-pequenia-back {
   background-color: var(--card-bg-color) ;
 
   height: 24.5rem;
   width: 19rem;
 
   cursor: pointer;
+
+  backface-visibility: hidden;
 }
+
+@media (max-width: 1370px) {
+  .receta-pequenia-back {
+    width: 18rem;
+  }
+}
+
+@media (max-width: 330px) {
+  .receta-pequenia-back {
+    width: 17rem;
+  }
+}
+
+/* Cara trasera */
+//.receta-pequenia-front {
+//  background-color: beige;
+//  transform: rotateY(180deg); /* Inicia girada para estar "detrás" */
+//
+//  display: flex;
+//  align-items: center;
+//  justify-content: center;
+//  font-size: 1.5rem;
+//  border: 1px solid black;
+//}
+
+/* Ambas caras de la tarjeta */
+//.receta-pequenia-front,
+//.receta-pequenia-back {
+//  position: absolute;
+//  top: 0;
+//  left: 0;
+//  width: 100%;
+//  height: 100%;
+//  backface-visibility: hidden; /* Oculta la cara trasera cuando no está activa */
+//}
+
+
+
+
 
 .receta-paquenia__imagen {
   width: 100%;
@@ -47,6 +120,15 @@
   gap: 1rem;
 
   @include padding(0.5rem, 0.5rem, 1rem, 1rem)
+}
+
+@keyframes spin {
+  0% {
+    transform: rotateY(0);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
 }
 
 
