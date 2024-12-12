@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, {useContext, useState} from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import {notifySuccess} from "../utils/Toast.jsx";
 import {validateEmail, validatePhoneNumber} from "../utils/ValidateForms.jsx";
+import {ThemeContext} from "../context/ThemeContext.jsx";
 
 /**
  * Componente que muestra el formulario de contacto.
@@ -30,6 +31,7 @@ const ContactUs = () => {
     }
 
     // Estados del formulario
+    const {theme, toggleTheme} = useContext(ThemeContext);
     const [message, setMessage] = useState(initialValues);
     const [errorMessages, setErrorMessages] = useState(errorMessagesInitial);
     const [disabledSubmit, setDisabledSubmit] = useState(true);
@@ -127,7 +129,7 @@ const ContactUs = () => {
      */
     const send = event => {
         event.preventDefault();
-        notifySuccess("Message send!", "light");
+        notifySuccess("Message send!", theme);
         reset();
     }
 

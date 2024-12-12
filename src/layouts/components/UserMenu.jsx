@@ -34,10 +34,10 @@ const UserMenu = () => {
             })
 
             await logOut();
-            notifySuccess("Bye bye!", "light")
+            notifySuccess("Bye bye!", theme)
             setUser(false)
         } catch (error) {
-            notifyError(`An error has ocurred, could not log out. ${error}`, "light")
+            notifyError(`An error has ocurred, could not log out. ${error}`, theme)
         }
     }
 

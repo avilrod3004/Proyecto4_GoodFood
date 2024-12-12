@@ -86,9 +86,9 @@ const RecipeInfo = () => {
         localStorage.setItem("user", JSON.stringify(updatedData));
 
         if (action === "marked") {
-            notifySuccess("Added to favorites", "light")
+            notifySuccess("Added to favorites", theme)
         } else {
-            notifyWarning("Removed from favorites", "light");
+            notifyWarning("Removed from favorites", theme);
         }
     }
 

@@ -24,17 +24,26 @@ const SmallCard = ({id, image, title, mealType, cuisineType}) => {
     }
 
     return (
-        <article className="receta-pequenia" onClick={() => {consultarReceta()}}>
-            <img className="receta-paquenia__imagen" src={image} alt={title}/>
-            <div className="receta-paquenia__texto-receta">
-                <h1 className="texto-receta__titulo">{title}</h1>
-                <ul className="texto-receta__listado">
-                    <li className="listado__dato">{mealType}</li>
-                    <li className="listado__dato">{cuisineType}</li>
-                </ul>
+        <div className="spinner">
+            <div className="card-inner">
+                {/*<article className="receta-pequenia-front">*/}
+                {/*    <img className="receta-paquenia__imagen" src={image} alt={title}/>*/}
+                {/*    <h1>Pepe</h1>*/}
+                {/*</article>*/}
+                <article className="receta-pequenia-back" onClick={() => {
+                    consultarReceta()
+                }}>
+                    <img className="receta-paquenia__imagen" src={image} alt={title}/>
+                    <div className="receta-paquenia__texto-receta">
+                        <h1 className="texto-receta__titulo">{title}</h1>
+                        <ul className="texto-receta__listado">
+                            <li className="listado__dato">{mealType}</li>
+                            <li className="listado__dato">{cuisineType}</li>
+                        </ul>
+                    </div>
+                </article>
             </div>
-
-        </article>
+        </div>
     );
 };
 

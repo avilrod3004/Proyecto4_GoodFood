@@ -7,6 +7,7 @@ import {validateEmail, validatePassword} from "../utils/ValidateForms.jsx";
 import {ToastContainer} from "react-toastify";
 import {notifyError} from "../utils/Toast.jsx";
 import RegistroImagen from "../assets/img_register.jpeg"
+import {ThemeContext} from "../context/ThemeContext.jsx";
 
 /**
  * Componente de formulario de registro de nuevos usuarios.
@@ -40,6 +41,7 @@ const Register = () => {
     const [disabledSubmit, setDisabledSubmit] = useState(true);
 
     const {user} = useContext(UserContext);
+    const {theme, toggleTheme} = useContext(ThemeContext);
     const navigate = useNavigate();
 
     /**
@@ -134,7 +136,7 @@ const Register = () => {
             await register({email: userAccount.email, password: userAccount.password})
         } catch (error) {
             if (error.code === "auth/email-already-in-use") {
-                notifyError("Email is already in use", "light")
+                notifyError("Email is already in use", theme)
             } else {
                 notifyError("An error has occurred. Please try again later.", "light")
             }

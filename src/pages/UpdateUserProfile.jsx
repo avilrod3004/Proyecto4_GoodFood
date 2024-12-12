@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {ToastContainer} from "react-toastify";
 import {notifySuccess} from "../utils/Toast.jsx";
 import {validatePhoneNumber, validateUrl} from "../utils/ValidateForms.jsx";
+import {ThemeContext} from "../context/ThemeContext.jsx";
 
 /**
  * Componente para actualizar el perfil de usuario.
@@ -43,6 +44,8 @@ const UpdateUserProfile = () => {
 
     // Estados
     const {user, setUser} = useContext(UserContext);
+    const {theme, toggleTheme} = useContext(ThemeContext);
+
     const [userData, setUserData] = useState(userDataInitial);
     const [errorMessages, setErrorMessages] = useState(errorMessagesInitial);
     const [loading, setLoading] = useState(true);
@@ -131,7 +134,7 @@ const UpdateUserProfile = () => {
 
         localStorage.setItem("user", JSON.stringify(userData));
         navigate("/profile");
-        notifySuccess("Updated profile", "light")
+        notifySuccess("Updated profile", theme)
     }
 
     // Cuando el usuario logueado se haya cargado
