@@ -48,3 +48,20 @@
 .opcion-terminos__separador {
   color: var(--footer-text-color);
 }
+
+/* --- @MEDIAS --- */
+@media (max-width: 718px) {
+  .pie {
+    @include padding(4rem, 4rem, 3rem, 3rem);
+  }
+
+  .menu-terminos__listado-terminos, .menu-cuentas__listado-cuentas {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 520px) {
+  .enlace-cuentas__nombre {
+    display: none;
+  }
+}
