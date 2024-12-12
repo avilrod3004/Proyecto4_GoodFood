@@ -8,10 +8,11 @@
   gap: 1rem;
 
   height: 100vh;
+  @include padding(2rem, 2rem, 2rem, 2rem);
 }
 
 .not-found__imagen {
-  width: 50%;
+  width: 70%;
 }
 
 .not-found__titulo {
@@ -21,6 +22,7 @@
 .not-found__mensaje {
   font-weight: bold;
   color: var(--p-text-color);
+  text-align: center;
 }
 
 .not-found__enlace {
