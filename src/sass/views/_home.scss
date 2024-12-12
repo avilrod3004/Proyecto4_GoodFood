@@ -54,6 +54,52 @@
   transition: width 0.3s ease, height 0.3s ease, max-width 0.3s ease;
 }
 
+
+/* --- RECETAS ALEATORIAS --- */
+
+.entrada__aletatorias {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  @include padding(4rem, 4rem, 6rem, 6rem);
+}
+
+@media(max-width: 1468px) {
+  .entrada__aletatorias {
+    @include padding(4rem, 4rem, 3rem, 3rem);
+  }
+}
+
+/* --- PAGINACIÓN --- */
+
+.entrada__paginacion {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.paginacion__boton {
+  @extend %botones;
+  background-color: var(--btn-primary-bg-color);
+  color: var(--btn-primary-text-color);
+  border: 0.25rem solid var(--btn-primary-border-color);
+}
+
+.paginacion__boton:hover {
+  background-color: var(--btn-primaty-bg-color-hover);
+}
+
+.paginacion__boton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.paginacion__texto {
+  color: var(--p-text-color);
+}
+
 /* --- @MEDIAS --- */
 @media (max-width: 1330px) {
   .texto__titulo {
@@ -125,50 +171,4 @@
     @include padding(4rem, 4rem, 2rem, 2rem);
 
   }
-}
-
-
-/* --- RECETAS ALEATORIAS --- */
-
-.entrada__aletatorias {
-  display: flex;
-  gap: 1.25rem;
-  flex-wrap: wrap;
-  justify-content: center;
-
-  @include padding(4rem, 4rem, 6rem, 6rem);
-}
-
-@media(max-width: 1468px) {
-  .entrada__aletatorias {
-    @include padding(4rem, 4rem, 3rem, 3rem);
-  }
-}
-
-/* --- PAGINACIÓN --- */
-
-.entrada__paginacion {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.paginacion__boton {
-  @extend %botones;
-  background-color: var(--btn-primary-bg-color);
-  color: var(--btn-primary-text-color);
-  border: 0.25rem solid var(--btn-primary-border-color);
-}
-
-.paginacion__boton:hover {
-  background-color: var(--btn-primaty-bg-color-hover);
-}
-
-.paginacion__boton:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.paginacion__texto {
-  color: var(--p-text-color);
 }
