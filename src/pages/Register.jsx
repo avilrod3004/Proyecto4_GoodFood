@@ -138,7 +138,7 @@ const Register = () => {
             if (error.code === "auth/email-already-in-use") {
                 notifyError("Email is already in use", theme)
             } else {
-                notifyError("An error has occurred. Please try again later.", "light")
+                notifyError("An error has occurred. Please try again later.", theme)
             }
         }
     }
