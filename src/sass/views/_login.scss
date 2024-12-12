@@ -22,64 +22,6 @@
   object-fit: cover;
 }
 
-@media (max-width: 1478px) {
-  .ventana-login__imagen {
-    width: 35rem;
-  }
-
-  .ventana-login__formulario-login {
-    width: 35rem;
-  }
-}
-
-@media (max-width: 1318px) {
-  .ventana-login__imagen {
-    width: 30rem;
-  }
-
-  .ventana-login__formulario-login {
-    width: 30rem;
-    @include padding(4rem, 4rem, 4rem, 4rem);
-  }
-}
-
-@media (max-width: 1174px) {
-  .login__ventana-login {
-    flex-direction: column;
-  }
-
-  .ventana-login__imagen {
-    display: none;
-  }
-}
-
-@media (max-width: 720px) {
-  .ventana-login__formulario-login {
-    width: 35rem;
-    @include padding(2rem, 2rem, 2rem, 2rem);
-  }
-}
-
-@media (max-width: 686px) {
-
-  .ventana-login__formulario-login {
-    width: 25rem;
-    @include padding(4rem, 4rem, 4rem, 4rem);
-  }
-}
-
-@media (max-width: 540px) {
-
-  .login__ventana-login {
-    width: 100%;
-    @include padding(2rem, 2rem, 2rem, 2rem);
-  }
-
-  .ventana-login__formulario-login {
-    width: 100%;
-  }
-}
-
 
 /* --- FORMULARIO --- */
 
@@ -181,4 +123,63 @@
 .navegacion-login__cancel:hover {
   border: 0.25rem solid var(--btn-cancel-border-color-hover);
   color: var(--btn-cancel-text-color-hover)
+}
+
+/* --- @MEDIAS --- */
+@media (max-width: 1478px) {
+  .ventana-login__imagen {
+    width: 35rem;
+  }
+
+  .ventana-login__formulario-login {
+    width: 35rem;
+  }
+}
+
+@media (max-width: 1318px) {
+  .ventana-login__imagen {
+    width: 30rem;
+  }
+
+  .ventana-login__formulario-login {
+    width: 30rem;
+    @include padding(4rem, 4rem, 4rem, 4rem);
+  }
+}
+
+@media (max-width: 1174px) {
+  .login__ventana-login {
+    flex-direction: column;
+  }
+
+  .ventana-login__imagen {
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .ventana-login__formulario-login {
+    width: 35rem;
+    @include padding(2rem, 2rem, 2rem, 2rem);
+  }
+}
+
+@media (max-width: 686px) {
+
+  .ventana-login__formulario-login {
+    width: 25rem;
+    @include padding(4rem, 4rem, 4rem, 4rem);
+  }
+}
+
+@media (max-width: 540px) {
+
+  .login__ventana-login {
+    width: 100%;
+    @include padding(2rem, 2rem, 2rem, 2rem);
+  }
+
+  .ventana-login__formulario-login {
+    width: 100%;
+  }
 }
