@@ -18,6 +18,44 @@
   width: 70%;
 }
 
+@media (max-width: 1660px) {
+  .actualizar-perfil__formulario-actualizar {
+    width: 80%;
+  }
+}
+
+@media (max-width: 1100px) {
+  .actualizar-perfil__formulario-actualizar {
+    width: 90%;
+  }
+}
+
+@media (max-width: 900px) {
+  .actualizar-perfil {
+    @include padding(3.5rem, 3.5rem, 4rem, 4rem)
+  }
+}
+
+@media (max-width: 900px) {
+  .actualizar-perfil {
+    @include padding(3.5rem, 3.5rem, 2rem, 2rem)
+  }
+
+  .actualizar-perfil__formulario-actualizar {
+    @include padding(4rem, 4rem, 2rem, 2rem);
+  }
+}
+
+@media (max-width: 450px) {
+  .formulario-actualizar__navegacion-actualizar {
+    flex-direction: column;
+  }
+
+  .navegacion-actualizar__guardar, .navegacion-actualizar__cancelar {
+    width: 100%;
+  }
+}
+
 .formulario-actualizar__apartado {
   display: flex;
   flex-direction: column;
