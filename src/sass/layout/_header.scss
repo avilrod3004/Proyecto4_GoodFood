@@ -8,6 +8,8 @@
 
   width: 100%;
   @include padding(2rem, 2rem, 6rem, 6rem);
+
+  transition: all 0.3s ease;
 }
 
 .cabecera__nombre {

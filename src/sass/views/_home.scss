@@ -16,7 +16,6 @@
 
   display: flex;
   gap: 2.5rem;
-  //flex-wrap: wrap;
 
   width: 100%;
   @include padding(4rem, 4rem, 6rem, 6rem);
@@ -37,17 +36,22 @@
   color: var(--h1-text-color);
   font-size: 9rem;
   line-height: 7rem;
+
+  transition: font-size 0.3s ease, line-height 0.3s ease;
 }
 
 .texto__subtitulo {
   color: var(--h2-text-color);
   font-size: 4rem;
+
+  transition: font-size 0.3s ease;
 }
 
 .portada__imagen {
   object-fit: cover;
-  //flex: 1;
   max-width: 50%;
+
+  transition: width 0.3s ease, height 0.3s ease, max-width 0.3s ease;
 }
 
 /* --- @MEDIAS --- */
