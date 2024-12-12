@@ -25,6 +25,10 @@
   object-fit: cover;
 }
 
+.datos__biografia {
+  line-height: 1.25rem;
+}
+
 .datos__biografia, .website__enlace, .cuenta__enlace {
   color: var(--p-text-color);
 }
