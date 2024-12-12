@@ -112,7 +112,7 @@ const UserProfile = () => {
                                         <li className="listado-redes__cuenta">
                                             <img className="cuenta__icono" src={getIconLink} alt="Link"/>
                                             <a className="cuenta__enlace"
-                                               href="">{userData.socialAccount1 || " No hay social account"}</a>
+                                               href="">{userData.socialAccount1}</a>
                                         </li>
                                     )
                                 }
@@ -121,7 +121,7 @@ const UserProfile = () => {
                                         <li className="listado-redes__cuenta">
                                             <img className="cuenta__icono" src={getIconLink} alt="Link"/>
                                             <a className="cuenta__enlace"
-                                               href="">{userData.socialAccount2 || " No hay social account"}</a>
+                                               href="">{userData.socialAccount2}</a>
                                         </li>
                                     )
                                 }
@@ -130,7 +130,7 @@ const UserProfile = () => {
                                         <li className="listado-redes__cuenta">
                                             <img className="cuenta__icono" src={getIconLink} alt="Link"/>
                                             <a className="cuenta__enlace"
-                                               href="">{userData.socialAccount3 || " No hay social account"}</a>
+                                               href="">{userData.socialAccount3}</a>
                                         </li>
                                     )
                                 }

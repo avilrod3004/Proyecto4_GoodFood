@@ -21,7 +21,6 @@
 
 .datos__foto {
   width: 30rem;
-  //height: 30rem;
   object-fit: cover;
 }
 
@@ -75,7 +74,7 @@
   flex-wrap: wrap;
   gap: 1.25rem;
 
-  @include padding(2rem, 2rem, 2rem, 6rem)
+  @include padding(2rem, 2rem, 2rem, 3rem)
 }
 
 .recetas-perfil__encabezado {
@@ -87,4 +86,101 @@
 
 .encabezado__titulo {
   color: var(--h1-text-color);
+}
+
+
+/* --- @MEDIAS --- */
+@media (max-width: 1850px) {
+  .perfil__datos {
+    @include padding(2rem, 2rem, 4rem, 2rem)
+  }
+}
+
+@media (max-width: 1660px) {
+  .perfil__datos {
+    flex: 1.5;
+  }
+
+  .perfil__recetas-perfil {
+    flex: 3.5;
+  }
+}
+
+@media (max-width: 1500px) {
+  .perfil__datos {
+    @include padding(2rem, 2rem, 3rem, 2rem)
+  }
+}
+
+@media (max-width: 1384px) {
+  .perfil__datos {
+    flex: 1;
+  }
+
+  .perfil__recetas-perfil {
+    flex: 4;
+  }
+}
+
+@media (max-width: 1276px) {
+  .perfil__datos {
+    flex: 2;
+  }
+
+  .perfil__recetas-perfil {
+    flex: 3;
+  }
+}
+
+@media (max-width: 1054px) {
+  .perfil__datos {
+    flex: 1.5;
+  }
+
+  .perfil__recetas-perfil {
+    flex: 1;
+  }
+}
+
+@media (max-width: 983px) {
+  .perfil {
+    @include padding(2rem, 2rem, 2rem, 2rem)
+  }
+
+  .perfil__datos {
+    flex: 3;
+  }
+
+  .perfil__recetas-perfil {
+    flex: 1;
+    justify-content: center;
+    @include padding(2rem, 2rem, 2rem, 2rem)
+  }
+
+  .datos__nombre-usuario, .encabezado__titulo {
+    font-size: 3rem;
+  }
+
+  .datos__titulo {
+    font-size: 2.5rem;
+  }
+
+  .datos__foto {
+    width: 100%;
+  }
+}
+
+@media (max-width: 660px) {
+  .perfil {
+    flex-direction: column;
+    align-content: center;
+  }
+
+  .perfil__datos {
+    @include padding(2rem, 2rem, 2rem, 2rem)
+  }
+
+  .perfil__recetas-perfil {
+    @include padding(2rem, 2rem, 2rem, 2rem)
+  }
 }
