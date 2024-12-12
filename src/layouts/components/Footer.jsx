@@ -29,12 +29,6 @@ const Footer = () => {
                         </a>
                     </li>
                     <li className="listado-cuentas__opcion-cuentas">
-                        <a href="https://x.com/" target="_blank" className="opcion-cuentas__enlace-cuentas">
-                            <img src={LogoTwitter} alt="Logo Twitter/X" className="enlace-cuentas__logo"/>
-                            <span className="enlace-cuentas__nombre">X</span>
-                        </a>
-                    </li>
-                    <li className="listado-cuentas__opcion-cuentas">
                         <a href="https://www.tiktok.com/" target="_blank" className="opcion-cuentas__enlace-cuentas">
                             <img src={LogoTikTok} alt="Logo TikTok" className="enlace-cuentas__logo"/>
                             <span className="enlace-cuentas__nombre">TikTok</span>
@@ -44,6 +38,12 @@ const Footer = () => {
                         <a href="https://www.instagram.com/" target="_blank" className="opcion-cuentas__enlace-cuentas">
                             <img src={LogoInstagram} alt="Logo Instagram" className="enlace-cuentas__logo"/>
                             <span className="enlace-cuentas__nombre">Instagram</span>
+                        </a>
+                    </li>
+                    <li className="listado-cuentas__opcion-cuentas">
+                        <a href="https://x.com/" target="_blank" className="opcion-cuentas__enlace-cuentas">
+                            <img src={LogoTwitter} alt="Logo Twitter/X" className="enlace-cuentas__logo"/>
+                            <span className="enlace-cuentas__nombre">X</span>
                         </a>
                     </li>
                 </ul>
