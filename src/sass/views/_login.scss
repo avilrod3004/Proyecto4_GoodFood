@@ -2,8 +2,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 
-  @include padding(3.5rem, 3.5rem, 2rem, 2rem);
+  @include padding(3.5rem, 3.5rem, 6rem, 6rem);
+  min-height: 80vh;
 }
 
 .login__ventana-login {
@@ -20,18 +22,78 @@
   object-fit: cover;
 }
 
+@media (max-width: 1478px) {
+  .ventana-login__imagen {
+    width: 35rem;
+  }
+
+  .ventana-login__formulario-login {
+    width: 35rem;
+  }
+}
+
+@media (max-width: 1318px) {
+  .ventana-login__imagen {
+    width: 30rem;
+  }
+
+  .ventana-login__formulario-login {
+    width: 30rem;
+    @include padding(4rem, 4rem, 4rem, 4rem);
+  }
+}
+
+@media (max-width: 1174px) {
+  .login__ventana-login {
+    flex-direction: column;
+  }
+
+  .ventana-login__imagen {
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .ventana-login__formulario-login {
+    width: 35rem;
+    @include padding(2rem, 2rem, 2rem, 2rem);
+  }
+}
+
+@media (max-width: 686px) {
+
+  .ventana-login__formulario-login {
+    width: 25rem;
+    @include padding(4rem, 4rem, 4rem, 4rem);
+  }
+}
+
+@media (max-width: 540px) {
+
+  .login__ventana-login {
+    width: 100%;
+    @include padding(2rem, 2rem, 2rem, 2rem);
+  }
+
+  .ventana-login__formulario-login {
+    width: 100%;
+  }
+}
+
 
 /* --- FORMULARIO --- */
 
 .ventana-login__formulario-login {
+  height: 40rem;
   width: 40rem;
 
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 1rem;
   align-items: start;
 
-  @include padding(0rem, 0rem, 6rem, 6rem);
+  @include padding(6rem, 6rem, 6rem, 6rem);
 }
 
 .formulario-login__error {

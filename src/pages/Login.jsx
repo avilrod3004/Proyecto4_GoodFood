@@ -7,6 +7,7 @@ import {validateEmail} from "../utils/ValidateForms.jsx";
 import {ToastContainer} from "react-toastify";
 import {notifyError} from "../utils/Toast.jsx";
 import LoginImagen from "../assets/img_login.jpeg"
+import {ThemeContext} from "../context/ThemeContext.jsx";
 
 /**
  * Componente que muestra el formulario de inicio de sesión
@@ -32,6 +33,7 @@ const Login = () => {
     const [disabledSubmit, setDisabledSubmit] = useState(true);
 
     const {user} = useContext(UserContext);
+    const {theme, toggleTheme} = useContext(ThemeContext);
     const navigate = useNavigate();
 
     /**
@@ -131,7 +133,7 @@ const Login = () => {
             navigate("/profile");
         } catch (error) {
             setLoading(false);
-            notifyError("An error has occurred. Please try again later.", "light")
+            notifyError("An error has occurred. Please try again later.", theme)
         }
     };
 
