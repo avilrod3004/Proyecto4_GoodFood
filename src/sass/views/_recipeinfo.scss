@@ -1,7 +1,5 @@
 .info-receta {
   display: flex;
-  //align-items: center;
-  //justify-content: center;
 
   @include padding(3rem, 3rem, 0rem, 0rem)
 }
@@ -13,7 +11,7 @@
   gap: 1rem;
 
   width: 100%;
-  max-height: 80vh;
+  min-height: 80vh;
   @include padding(4rem, 4rem, 6rem, 6rem)
 }
 
@@ -32,6 +30,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 1rem;
+  width: 100%;
 }
 
 .tarjeta-info__encabezado-info {
@@ -44,6 +43,68 @@
 
 .encabezado-info__nombre {
   color: var(--h1-text-color);
+}
+
+@media (max-width: 1460px) {
+  .encabezado-info__nombre {
+    font-size: 4rem;
+  }
+
+  .texto-info__ingredientes {
+    font-size: 3.5rem;
+  }
+}
+
+@media (max-width: 1320px) {
+  .encabezado-info__nombre {
+    font-size: 3.5rem;
+  }
+
+  .texto-info__ingredientes {
+    font-size: 3rem;
+  }
+
+  .info-receta__tarjeta-info {
+    @include padding(4rem, 4rem, 4rem, 4rem)
+  }
+}
+
+@media (max-width: 1070px) {
+  .info-receta__tarjeta-info {
+    @include padding(4rem, 4rem, 2rem, 2rem)
+  }
+}
+
+@media (max-width: 900px) {
+  .encabezado-info__nombre {
+    font-size: 3rem;
+  }
+
+  .texto-info__ingredientes {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .info-receta__tarjeta-info {
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .tarjeta-info__texto-info {
+    height: 100%;
+  }
+
+  .tarjeta-info__imagen {
+    height: 20rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .texto-info__detalles {
+    width: 100%;
+    text-align: center;
+  }
 }
 
 .favortios__imagen {
@@ -83,7 +144,6 @@
   background-color: var(--btn-primary-bg-color);
   color: var(--btn-primary-text-color);
   border: 0.25rem solid var(--btn-primary-border-color);
-  //text-align: center;
 }
 
 .texto-info__detalles:hover {
