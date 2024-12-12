@@ -13,6 +13,73 @@
   @include padding(2rem, 2rem, 6rem, 2rem)
 }
 
+@media (max-width: 1690px) {
+  .busqueda__filtros {
+    flex: 1.5;
+  }
+
+  .busqueda__resultados {
+    flex: 3.5;
+  }
+}
+
+@media (max-width: 1433px) {
+  .busqueda__filtros {
+    flex: 2;
+    @include padding(2rem, 2rem, 4rem, 2rem)
+  }
+
+  .busqueda__resultados {
+    flex: 3;
+    @include padding(2rem, 2rem, 2rem, 4rem);
+
+  }
+}
+
+@media (max-width: 1070px) {
+  .busqueda__filtros {
+    flex: 3;
+    @include padding(2rem, 2rem, 4rem, 2rem);
+  }
+
+  .busqueda__resultados {
+    flex: 2;
+    @include padding(2rem, 2rem, 2rem, 4rem);
+    justify-content: center;
+  }
+}
+
+@media (max-width: 784px) {
+  .resultados__paginacion {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 680px) {
+  .busqueda {
+    flex-direction: column;
+  }
+
+  .busqueda__filtros {
+    flex: 3;
+  }
+
+  .busqueda__resultados {
+    flex: 2;
+    @include padding(2rem, 2rem, 2rem, 2rem);
+  }
+
+  .resultados__paginacion {
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 420px) {
+  .resultados__paginacion {
+    flex-direction: column;
+  }
+}
+
 
 /* --- BUSQUEDA SIN RESULTADOS --- */
 .resultados__nada {
@@ -43,7 +110,7 @@
   flex-wrap: wrap;
   gap: 1.25rem;
 
-  @include padding(2rem, 2rem, 2rem, 6rem)
+  @include padding(2rem, 2rem, 2rem, 2rem)
 }
 
 .resultados__encabezado {
