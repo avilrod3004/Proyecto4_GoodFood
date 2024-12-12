@@ -9,6 +9,7 @@ import {notifyError, notifySuccess} from "../../utils/Toast.jsx";
 import ProfileIcon from "../../assets/user.svg"
 import EditIcon from "../../assets/edit.svg"
 import {ThemeContext} from "../../context/ThemeContext.jsx";
+import IconMenu from "../../assets/menu.svg"
 
 /**
  * Menú de botones del usuario.
@@ -77,6 +78,10 @@ const UserMenu = () => {
                         ? <img src={DarkModeIcon} alt="Change dark mode" className="tema__imagen"/>
                         : <img src={LightModeIcon} alt="Change light mode" className="tema__imagen"/>
                 }
+            </a>
+
+            <a className="usuario__menu">
+                <img src={IconMenu} alt="Menu" className="menu__icono"/>
             </a>
 
             <ToastContainer/>

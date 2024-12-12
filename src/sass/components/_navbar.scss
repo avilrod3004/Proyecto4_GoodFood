@@ -17,3 +17,26 @@
 .listado__opcion:hover {
   text-decoration: underline;
 }
+
+@media (max-width: 1380px) {
+  .navegacion__menu {
+    display: flex;
+    align-items: center;
+  }
+
+  .menu__listado {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .menu__nombre {
+    font-size: 4rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .menu__nombre {
+    font-size: 3.5rem;
+  }
+}

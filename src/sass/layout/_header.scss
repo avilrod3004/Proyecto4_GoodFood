@@ -10,7 +10,70 @@
   @include padding(2rem, 2rem, 6rem, 6rem);
 }
 
+.cabecera__nombre {
+  display: none;
+}
+
 .cabecera__navegacion {
   display: flex;
   gap: 1rem;
+}
+
+.logo__imagen {
+  height: 7rem;
+  min-height: 1rem;
+}
+
+@media (max-width: 1380px) {
+  .cabecera__navegacion {
+    justify-content: center;
+  }
+
+  .navegacion__logo {
+    width: 4.5rem;
+  }
+}
+
+@media (max-width: 1015px) {
+  .cabecera {
+    @include padding(1rem, 1rem, 4rem, 4rem);
+  }
+}
+
+@media (max-width: 728px) {
+  .cebecera {
+    @include padding(1rem, 1rem, 3rem, 3rem);
+  }
+}
+
+@media (max-width: 700px) {
+  .navegacion__logo {
+    width: 3.5rem;
+  }
+}
+
+@media (max-width: 620px) {
+  .cabecera {
+    @include padding(1rem, 1rem, 2rem, 2rem);
+  }
+}
+
+@media (max-width: 600px) {
+  .cebecera {
+    @include padding(1rem, 1rem, 2rem, 2rem);
+
+  }
+}
+
+@media (max-width: 500px) {
+  .cebecera {
+    @include padding(0.5rem, 0.5rem, 2rem, 2rem);
+
+  }
+}
+
+@media (max-width: 400px) {
+  .navegacion__logo {
+    font-size: 0.5rem;
+  }
 }

@@ -28,3 +28,21 @@
 .boton__imagen {
   height: 2rem;
 }
+
+.usuario__menu {
+  display: none;
+}
+
+.menu__icono {
+  height: 2rem;
+}
+
+@media (max-width: 1380px) {
+  .usuario__listado, .usuario__tema {
+    display: none;
+  }
+
+  .usuario__menu {
+    display: block;
+  }
+}
