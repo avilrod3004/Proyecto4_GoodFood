@@ -168,15 +168,29 @@
 
   .ventana-login__formulario-login {
     width: 25rem;
-    @include padding(4rem, 4rem, 4rem, 4rem);
+    @include padding(1.5rem, 1.5rem, 1.5rem, 1.5rem);
+  }
+}
+
+@media (max-width: 645px) {
+  .fomulario-login__navegacion-login {
+    flex-direction: column;
+  }
+
+  .navegacion-login__submit, .navegacion-login__cancel {
+    width: 100%;
   }
 }
 
 @media (max-width: 540px) {
 
+  .login {
+    @include padding(3.5rem, 3.5rem, 2rem, 2rem);
+  }
+
   .login__ventana-login {
     width: 100%;
-    @include padding(2rem, 2rem, 2rem, 2rem);
+    @include padding(1.5rem, 1.5rem, 1.5rem, 1.5rem);
   }
 
   .ventana-login__formulario-login {
