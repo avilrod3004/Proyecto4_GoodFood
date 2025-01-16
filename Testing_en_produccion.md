@@ -91,4 +91,4 @@ Elementos de mejora y recomendaciones:
 
 ## Evaluación con Ghost Inspector
 
-Enlace al video generado -> (vídeo)[https://github.com/avilrod3004/Proyecto4_GoodFood/blob/main/images/test_produccion/ghost_inspector.mp4]
+Enlace al video generado -> [vídeo](https://github.com/avilrod3004/Proyecto4_GoodFood/blob/main/images/test_produccion/ghost_inspector.mp4)
